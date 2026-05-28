@@ -1,0 +1,337 @@
+[
+  {
+    "id": "goal-a-road-stable",
+    "name": "A级公路/街头稳定向",
+    "summary": "适合新手或追求稳定完赛的玩家，优先抓地、刹车、悬挂和可调项目。",
+    "confidence": "medium",
+    "sourceIds": ["sample-general-principles"],
+    "sample": true,
+    "scope": {
+      "class": ["A"],
+      "eventType": ["road", "street", "touge"],
+      "drivetrain": ["RWD", "AWD"]
+    },
+    "priorities": [
+      "tire_compound",
+      "tire_width",
+      "brakes",
+      "suspension",
+      "antiroll_bars",
+      "differential",
+      "transmission",
+      "weight_reduction",
+      "power"
+    ],
+    "upgradePlan": [
+      {
+        "id": "a-foundation-grip",
+        "phase": "1. 基础抓地与制动",
+        "candidateParts": ["tire_compound", "tire_width", "brakes"],
+        "purpose": "先让原厂车具备稳定刹车、入弯和出弯基础。",
+        "reason": "新手稳定向构建的第一目标不是最快直线，而是把车辆变成可预测、可重复测试。",
+        "expectedBenefits": ["braking_control", "cornering_grip", "exit_traction"],
+        "expectedCosts": ["pi_budget", "possible_top_speed_loss"],
+        "grantsCapabilities": ["tunable_brakes"],
+        "knownFacts": ["brakes_can_unlock_brake_bias_and_pressure_when_race_level_is_installed"],
+        "askWhenNeeded": [
+          {
+            "key": "is_available",
+            "prompt": "游戏里这些抓地/刹车升级是否可安装？",
+            "requiredWhen": ["availability_unknown"],
+            "choices": [
+              { "value": "yes", "label": "可以" },
+              { "value": "partial", "label": "只能装一部分" },
+              { "value": "no", "label": "不能装" }
+            ]
+          },
+          {
+            "key": "pi_delta",
+            "prompt": "如果装完接近或超过目标等级，PI 变化大约是多少？",
+            "requiredWhen": ["pi_budget_tight"]
+          }
+        ],
+        "keepWhen": ["handling_or_braking_improves", "pi_delta_within_budget"],
+        "skipWhen": ["pi_over_limit_and_no_core_symptom_improvement"],
+        "fallbackParts": ["antiroll_bars", "suspension"],
+        "handoffSymptoms": ["entry_understeer", "braking_instability", "launch_wheelspin"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      },
+      {
+        "id": "a-control-tools",
+        "phase": "2. 可调控制工具",
+        "candidateParts": ["suspension", "antiroll_bars", "differential", "transmission"],
+        "purpose": "补齐基础调校入口，让后续问诊可以真的执行。",
+        "reason": "默认调校很难适配每台车；可调悬挂、防倾杆、差速器和变速箱提供稳定向基线与症状修正能力。",
+        "expectedBenefits": ["unlock_tuning", "balance_control", "gear_control"],
+        "expectedCosts": ["pi_budget", "needs_testing"],
+        "grantsCapabilities": ["tunable_suspension", "tunable_antiroll_bars", "tunable_differential", "adjustable_gearing"],
+        "knownFacts": ["race_differential_unlocks_differential_tuning", "adjustable_transmission_unlocks_gear_ratio_tuning"],
+        "askWhenNeeded": [
+          {
+            "key": "is_available",
+            "prompt": "游戏里是否能安装可调差速器、可调变速箱和可调防倾杆/悬挂？",
+            "requiredWhen": ["availability_unknown"],
+            "choices": [
+              { "value": "yes", "label": "都可以" },
+              { "value": "partial", "label": "只能装一部分" },
+              { "value": "no", "label": "暂时不装" }
+            ]
+          }
+        ],
+        "keepWhen": ["unlocks_tuning", "pi_delta_reasonable"],
+        "skipWhen": ["pi_over_limit_and_no_symptom_to_fix"],
+        "fallbackParts": ["brakes", "tire_width"],
+        "handoffSymptoms": ["exit_understeer", "exit_oversteer", "frequent_shifting", "curb_bounce"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      },
+      {
+        "id": "a-finish-speed",
+        "phase": "3. 剩余 PI 再分配",
+        "candidateParts": ["weight_reduction", "power", "aero_front", "aero_rear"],
+        "purpose": "在车辆已经可控后，用剩余 PI 补速度、响应或高速稳定。",
+        "reason": "动力和空力都容易带来副作用，应该在抓地与调校能力建立后再做取舍。",
+        "expectedBenefits": ["top_speed", "acceleration", "high_speed_stability", "direction_change"],
+        "expectedCosts": ["wheelspin", "understeer", "drag", "pi_budget"],
+        "grantsCapabilities": ["tunable_front_aero", "tunable_rear_aero"],
+        "askWhenNeeded": [
+          {
+            "key": "pi_after",
+            "prompt": "加入这一阶段候选后是否超过目标等级？",
+            "requiredWhen": ["pi_budget_unknown"],
+            "choices": [
+              { "value": "within", "label": "没有超" },
+              { "value": "over", "label": "超了" }
+            ]
+          },
+          {
+            "key": "symptom_after_install",
+            "prompt": "装完后最明显副作用是什么？",
+            "requiredWhen": ["new_symptom_detected"],
+            "choices": [
+              { "value": "exit_oversteer", "label": "出弯甩尾" },
+              { "value": "mid_corner_understeer", "label": "弯中推头" },
+              { "value": "too_slow_on_straights", "label": "直线仍慢" }
+            ]
+          }
+        ],
+        "keepWhen": ["main_goal_improves_without_major_symptom"],
+        "skipWhen": ["creates_uncontrolled_wheelspin", "aero_drag_hurts_primary_goal"],
+        "fallbackParts": ["transmission", "tire_width"],
+        "handoffSymptoms": ["too_slow_on_straights", "high_speed_float", "exit_oversteer"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      }
+    ],
+    "baselineTunePlan": [
+      {
+        "id": "baseline-gearing",
+        "tuningArea": "gearing",
+        "title": "先校准终传，不追求极限齿比",
+        "purpose": "让最长直线末端不过早顶转，常用弯角尽量少发生无意义换挡。",
+        "requiresCapabilities": ["adjustable_gearing"],
+        "knownFacts": ["adjustable_transmission_unlocks_gear_ratio_tuning"],
+        "baselineAction": "用最长直线检查最高档是否过早顶转；如果频繁换挡，先略拉长终传。",
+        "safeRange": "每次只小幅移动，优先保证可控和档位稳定。",
+        "doNotOptimizeYet": ["不要一开始逐档追求极限加速", "不要同时改动力和齿比"],
+        "handoffSymptoms": ["frequent_shifting", "too_slow_on_straights", "launch_wheelspin"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      },
+      {
+        "id": "baseline-diff",
+        "tuningArea": "differential",
+        "title": "给差速器一个保守稳定基线",
+        "purpose": "避免默认差速让出弯推头或甩尾过强，同时保留问诊调整空间。",
+        "requiresCapabilities": ["tunable_differential"],
+        "knownFacts": ["race_differential_unlocks_differential_tuning"],
+        "baselineAction": "先使用保守设置，只确认出弯是否稳定；AWD 先观察前轴是否被动力拖着推头，RWD 先观察后轮是否容易突破抓地。",
+        "safeRange": "每次 3%~5% 小步调整，构建阶段不做极限值。",
+        "doNotOptimizeYet": ["不要在没有症状前连续大幅调整差速", "不要同时改差速和防倾杆来判断同一症状"],
+        "handoffSymptoms": ["exit_understeer", "exit_oversteer", "launch_wheelspin"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      },
+      {
+        "id": "baseline-balance",
+        "tuningArea": "balance",
+        "title": "建立防倾杆 / 空力 / 刹车的安全平衡",
+        "purpose": "让车先可预测，再把具体推头或甩尾交给问诊模块处理。",
+        "requiresCapabilities": ["tunable_antiroll_bars", "tunable_brakes"],
+        "baselineAction": "防倾杆先保持前后不要极端；刹车先用稳定方向；如果有前后空力，避免只拉满后空力。",
+        "safeRange": "每个项目先改一小格或小比例，测试后再决定是否继续。",
+        "doNotOptimizeYet": ["不要为了高速稳定单独堆后空力", "不要为了入弯灵活把刹车过度后移"],
+        "handoffSymptoms": ["entry_understeer", "mid_corner_understeer", "braking_instability", "high_speed_float"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      }
+    ],
+    "firstTestPlan": [
+      {
+        "id": "baseline-road-test",
+        "title": "第一次基线测试",
+        "method": "选择同一段路线跑 2~3 次，只记录最大问题发生在入弯、弯中、出弯、刹车、高速还是直线。",
+        "observe": ["是否能稳定刹进弯", "弯中是否越推越外", "出弯能否逐步给油", "是否频繁换挡", "高速是否发飘"],
+        "nextIfProblem": [
+          { "symptomId": "entry_understeer", "label": "入弯推头" },
+          { "symptomId": "exit_understeer", "label": "出弯给油推头" },
+          { "symptomId": "exit_oversteer", "label": "出弯甩尾" },
+          { "symptomId": "braking_instability", "label": "刹车时车尾不稳" }
+        ]
+      }
+    ],
+    "escalationRules": [
+      {
+        "when": ["clear_symptom_after_baseline_test"],
+        "targetModule": "diagnostic",
+        "message": "基础构建完成后，如果出现明确症状，进入问诊模块做局部修正。"
+      }
+    ],
+    "avoidFirst": [
+      "blind_power_upgrade",
+      "sacrificing_brakes_for_power",
+      "max_rear_aero_without_front_balance"
+    ],
+    "ifOverPI": [
+      "remove_forced_induction_first",
+      "downgrade_engine_power_parts",
+      "downgrade_weight_reduction",
+      "downgrade_front_tire_width",
+      "avoid_removing_core_handling_parts_first"
+    ],
+    "notes": "starter 规则，后续需要继续细化到更多赛事类型、驱动形式和风格。"
+  },
+  {
+    "id": "goal-s1-road-balance",
+    "name": "S1公路平衡向",
+    "summary": "S1 更强调稳定与抓地的平衡，避免只堆马力导致难以控制。",
+    "confidence": "medium",
+    "sourceIds": ["sample-general-principles"],
+    "sample": true,
+    "scope": {
+      "class": ["S1"],
+      "eventType": ["road", "street", "touge"],
+      "drivetrain": ["RWD", "AWD"]
+    },
+    "priorities": [
+      "tire_compound",
+      "brakes",
+      "suspension",
+      "antiroll_bars",
+      "differential",
+      "aero_balance",
+      "weight_reduction",
+      "power"
+    ],
+    "upgradePlan": [
+      {
+        "id": "s1-foundation-control",
+        "phase": "1. 高速抓地与控制入口",
+        "candidateParts": ["tire_compound", "brakes", "suspension", "antiroll_bars", "differential"],
+        "purpose": "S1 速度更高，先确保刹车、前后平衡和差速器可调。",
+        "reason": "S1 稳定向最怕动力已经够强但车不能稳定刹、转、出弯。",
+        "expectedBenefits": ["high_speed_grip", "braking_control", "corner_exit_balance"],
+        "expectedCosts": ["pi_budget", "needs_testing"],
+        "grantsCapabilities": ["tunable_brakes", "tunable_suspension", "tunable_antiroll_bars", "tunable_differential"],
+        "knownFacts": ["race_differential_unlocks_differential_tuning"],
+        "askWhenNeeded": [
+          {
+            "key": "pi_delta",
+            "prompt": "装完核心控制件后是否已经接近 S1 上限？",
+            "requiredWhen": ["pi_budget_unknown"],
+            "choices": [
+              { "value": "safe", "label": "还有空间" },
+              { "value": "tight", "label": "很接近" },
+              { "value": "over", "label": "已经超了" }
+            ]
+          }
+        ],
+        "keepWhen": ["control_improves", "pi_delta_within_budget"],
+        "skipWhen": ["pi_over_limit_and_part_does_not_unlock_tuning"],
+        "fallbackParts": ["tire_width", "aero_front", "aero_rear"],
+        "handoffSymptoms": ["high_speed_float", "mid_corner_understeer", "exit_oversteer"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      },
+      {
+        "id": "s1-aero-speed-tradeoff",
+        "phase": "2. 空力与速度取舍",
+        "candidateParts": ["aero_front", "aero_rear", "transmission", "weight_reduction", "power"],
+        "purpose": "在稳定基础上决定高速弯信心、直线速度和剩余 PI 的分配。",
+        "reason": "S1 的空力和动力副作用都更明显，需要用最小必要反馈来判断保留还是回退。",
+        "expectedBenefits": ["high_speed_stability", "top_speed", "acceleration"],
+        "expectedCosts": ["drag", "understeer", "wheelspin", "pi_budget"],
+        "grantsCapabilities": ["tunable_front_aero", "tunable_rear_aero", "adjustable_gearing"],
+        "askWhenNeeded": [
+          {
+            "key": "symptom_after_install",
+            "prompt": "加入空力/动力后最明显变化是什么？",
+            "requiredWhen": ["new_symptom_detected"],
+            "choices": [
+              { "value": "better_stability", "label": "高速更稳" },
+              { "value": "more_understeer", "label": "更推头" },
+              { "value": "slower_straight", "label": "直线慢了" },
+              { "value": "more_wheelspin", "label": "更打滑" }
+            ]
+          }
+        ],
+        "keepWhen": ["main_goal_improves_without_major_symptom"],
+        "skipWhen": ["creates_major_understeer", "drag_hurts_primary_goal"],
+        "fallbackParts": ["transmission", "weight_reduction"],
+        "handoffSymptoms": ["too_slow_on_straights", "high_speed_float", "mid_corner_understeer"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      }
+    ],
+    "baselineTunePlan": [
+      {
+        "id": "s1-baseline-aero",
+        "tuningArea": "aero",
+        "title": "先做前后空力平衡，不只堆后下压力",
+        "purpose": "S1 高速弯更依赖空力，但后端过稳会加重推头。",
+        "requiresCapabilities": ["tunable_front_aero", "tunable_rear_aero"],
+        "baselineAction": "前后空力先保持平衡方向；如果高速发飘再优先加后空力，如果弯中推头再补前端。",
+        "safeRange": "一小格一测，先不要追求最大下压力。",
+        "doNotOptimizeYet": ["不要只拉满后空力", "不要用低速弯判断空力效果"],
+        "handoffSymptoms": ["high_speed_float", "mid_corner_understeer", "too_slow_on_straights"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      },
+      {
+        "id": "s1-baseline-diff-gearing",
+        "tuningArea": "diff_gearing",
+        "title": "差速器和齿比先保证可控出弯",
+        "purpose": "让高动力构建不会因为低档过暴躁而丢失出弯稳定。",
+        "requiresCapabilities": ["tunable_differential", "adjustable_gearing"],
+        "baselineAction": "先确认出弯能渐进给油；如果低档太暴躁，优先小幅拉长齿比，不急着继续加动力。",
+        "safeRange": "差速 3%~5%，齿比小幅移动。",
+        "doNotOptimizeYet": ["不要同时加动力和缩短齿比", "不要把出弯问题全归因于油门技术"],
+        "handoffSymptoms": ["exit_oversteer", "exit_understeer", "frequent_shifting"],
+        "sourceIds": ["sample-general-principles"],
+        "confidence": "medium"
+      }
+    ],
+    "firstTestPlan": [
+      {
+        "id": "s1-baseline-test",
+        "title": "S1 基线测试",
+        "method": "用一段有高速弯、低速出弯和长直线的路线测试，不要只看单一极速。",
+        "observe": ["高速是否稳定", "弯中是否推头", "出弯是否能逐步给油", "最长直线是否顶转", "刹车是否安定"],
+        "nextIfProblem": [
+          { "symptomId": "high_speed_float", "label": "高速发飘" },
+          { "symptomId": "mid_corner_understeer", "label": "弯中推头" },
+          { "symptomId": "exit_oversteer", "label": "出弯甩尾" },
+          { "symptomId": "too_slow_on_straights", "label": "直线太慢" }
+        ]
+      }
+    ],
+    "avoidFirst": ["all_power_no_control", "removing_brakes_before_power"],
+    "ifOverPI": [
+      "reduce_nonessential_power_parts",
+      "check_aero_balance_before_removing_brakes_or_diff",
+      "downgrade_weight_reduction_if_handling_parts_are_required"
+    ],
+    "notes": "starter 规则，后续需要加入更多场景和细分风格。"
+  }
+]

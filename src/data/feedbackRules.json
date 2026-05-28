@@ -1,0 +1,44 @@
+[
+  {
+    "id": "feedback-improved",
+    "name": "建议后改善",
+    "summary": "用户反馈问题明显改善或稍微改善。",
+    "confidence": "high",
+    "sourceIds": ["sample-structured-coaching"],
+    "sample": true,
+    "trigger": { "feedback": ["greatly_improved", "slightly_improved"] },
+    "response": {
+      "type": "keep_and_continue",
+      "message": "建议保留当前调整，并只做小幅微调。如果问题仍未完全解决，再进入下一条更轻微的优化建议。",
+      "nextMode": "optional_refinement"
+    }
+  },
+  {
+    "id": "feedback-no-change",
+    "name": "建议后无变化",
+    "summary": "用户反馈调完后几乎没有感受到改善。",
+    "confidence": "high",
+    "sourceIds": ["sample-structured-coaching"],
+    "sample": true,
+    "trigger": { "feedback": ["no_change"] },
+    "response": {
+      "type": "move_to_next_step",
+      "message": "当前调整没有明显效果，建议恢复或保留原值后，进入下一条建议。",
+      "nextMode": "next_recommendation"
+    }
+  },
+  {
+    "id": "feedback-worse",
+    "name": "建议后变差",
+    "summary": "用户反馈调整后车辆手感或成绩更差。",
+    "confidence": "high",
+    "sourceIds": ["sample-structured-coaching"],
+    "sample": true,
+    "trigger": { "feedback": ["worse"] },
+    "response": {
+      "type": "rollback_and_branch",
+      "message": "建议恢复刚才的设置，并尝试替代路径。不要连续叠加多个会让同一特性更极端的调整。",
+      "nextMode": "alternative_path"
+    }
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sample-general-principles",
+    "title": "通用改装原则（sample）",
+    "type": "sample",
+    "confidence": "medium",
+    "sample": true,
+    "notes": "初始示例来源，用于演示规则系统结构，不代表 FH6 完整或官方数据。"
+  },
+  {
+    "id": "sample-user-observation",
+    "title": "用户游戏内观察（sample）",
+    "type": "user_input",
+    "confidence": "variable",
+    "sample": true,
+    "notes": "来自用户当前在游戏界面看到的信息，例如 PI 变化、零件是否可选、车辆手感反馈。"
+  },
+  {
+    "id": "sample-structured-coaching",
+    "title": "调车问诊逻辑（sample）",
+    "type": "sample",
+    "confidence": "medium",
+    "sample": true,
+    "notes": "用于演示症状 -> 调整 -> 反馈 -> 下一步的引导流程。"
+  }
+]

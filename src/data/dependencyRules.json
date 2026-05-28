@@ -1,0 +1,58 @@
+[
+  {
+    "id": "dep-aero-balance-understeer",
+    "name": "前后空力平衡与推头",
+    "summary": "后下压力过高而前下压力过低时，车辆可能更容易推头。",
+    "confidence": "medium",
+    "sourceIds": ["sample-general-principles"],
+    "sample": true,
+    "appliesWhen": { "hasFrontAero": true, "hasRearAero": true },
+    "interaction": {
+      "parts": ["aero_front", "aero_rear"],
+      "effect": "rear_too_stable_can_increase_understeer"
+    },
+    "guidance": [
+      "如果主要问题是推头，优先检查前后空力平衡，而不是单独继续增加后下压力。",
+      "如果主要问题是高速尾部不稳，才优先增加后下压力。"
+    ],
+    "weightModifier": 0.15,
+    "notes": "后续可扩展成根据症状和赛道速度区间动态改变建议权重。"
+  },
+  {
+    "id": "dep-diff-arb-awd-understeer",
+    "name": "AWD推头与差速器/防倾杆交叉影响",
+    "summary": "AWD 推头通常不只由一个参数造成，差速器和防倾杆常常需要结合考虑。",
+    "confidence": "medium",
+    "sourceIds": ["sample-general-principles"],
+    "sample": true,
+    "appliesWhen": { "drivetrain": ["AWD"] },
+    "interaction": {
+      "parts": ["differential", "antiroll_bars"],
+      "effect": "diff_and_arb_can_both_change_front_load_and_rotation"
+    },
+    "guidance": [
+      "如果降低前差速加速没有效果，可继续通过前软后硬的防倾杆方向改善推头。",
+      "如果调整防倾杆后车辆变得太活，再回头微调中央差速。"
+    ],
+    "weightModifier": 0.2,
+    "notes": "后续需要做成更结构化的依赖系统，而不仅是说明文本。"
+  },
+  {
+    "id": "dep-tire-width-speed-tradeoff",
+    "name": "胎宽与速度/手感取舍",
+    "summary": "更宽胎通常改善牵引和制动稳定，但也可能使车辆变钝或损失直线表现。",
+    "confidence": "medium",
+    "sourceIds": ["sample-general-principles"],
+    "sample": true,
+    "interaction": {
+      "parts": ["tire_width", "weight_reduction", "power"],
+      "effect": "more_width_can_help_grip_but_change_feel_and_speed"
+    },
+    "guidance": [
+      "一旦加宽胎后 PI 下降或变化异常，不要立刻下结论，应该进行同赛段前后对照测试。",
+      "如果加宽后解决了出弯打滑，但长直道明显变慢，应考虑退一级胎宽。"
+    ],
+    "weightModifier": 0.1,
+    "notes": "后续可扩展为前后胎宽比例规则。"
+  }
+]

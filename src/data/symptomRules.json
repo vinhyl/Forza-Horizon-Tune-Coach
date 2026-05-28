@@ -1,0 +1,605 @@
+[
+  {
+    "id": "entry_understeer",
+    "name": "入弯推头",
+    "summary": "车辆转入弯心前不愿意进弯，通常和刹车释放、前轴抓地、前后防倾杆平衡有关。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["problem_happens_before_apex"],
+    "likelyCauses": ["front_tire_overloaded", "front_roll_balance_too_stiff", "too_much_entry_speed"],
+    "followUpQuestions": [
+      { "id": "speed_zone", "label": "主要发生在哪种弯？", "type": "single", "options": [{ "value": "slow", "label": "低速弯" }, { "value": "medium_fast", "label": "中高速弯" }] },
+      { "id": "braking", "label": "是否还在刹车时就开始推头？", "type": "single", "options": [{ "value": "yes", "label": "是" }, { "value": "no", "label": "不是很明显" }] }
+    ],
+    "entryStepId": "arb-front-softer",
+    "steps": [
+      {
+        "stepId": "arb-front-softer",
+        "action": "前防倾杆软一点，或后防倾杆硬一点",
+        "amount": "先调 1~2 格",
+        "reason": "让前轴在入弯和弯中更愿意咬住路面。",
+        "sideEffects": ["后轴可能更活", "高速稳定感可能下降"],
+        "testMethod": "同一处中速弯，比较是否更容易指向弯心。",
+        "relatedParts": ["antiroll_bars"],
+        "next": { "onImproved": "front-tire-check", "onNoChange": "brake-bias-rear", "onWorse": "rollback-front-arb" }
+      },
+      {
+        "stepId": "brake-bias-rear",
+        "action": "刹车平衡略向后移",
+        "amount": "1%~2%",
+        "reason": "减少入弯时前轮同时承担转向和过多制动力的压力。",
+        "sideEffects": ["后轮可能更容易锁或不稳"],
+        "testMethod": "只测试重刹入弯，不要同时改其他项目。",
+        "relatedParts": ["brakes"],
+        "next": { "onImproved": "finish", "onNoChange": "front-tire-check", "onWorse": "rollback-front-arb" }
+      },
+      {
+        "stepId": "front-tire-check",
+        "action": "检查前胎胶料/胎宽是否过弱",
+        "amount": "优先小幅升级前轴抓地",
+        "reason": "如果基础前轴抓地不足，调校只能缓解，不能根治。",
+        "sideEffects": ["PI 成本可能较高", "直线速度可能下降"],
+        "testMethod": "同赛段前后对照，不只看 PI。",
+        "relatedParts": ["tire_compound", "tire_width"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      },
+      {
+        "stepId": "rollback-front-arb",
+        "action": "恢复刚才的防倾杆变化，改查刹车或轮胎",
+        "amount": "回到上一个可控设置",
+        "reason": "变差说明车身平衡可能已越过可控区间。",
+        "sideEffects": ["需要多一次对照测试"],
+        "testMethod": "恢复后跑同一弯，确认问题回到原状。",
+        "relatedParts": ["antiroll_bars", "brakes", "tire_width"],
+        "next": { "onImproved": "finish", "onNoChange": "front-tire-check", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "mid_corner_understeer",
+    "name": "弯中推头",
+    "summary": "进弯后稳定转向阶段车辆越推越外，常见于前轴抓地不足、后轴过稳或空力平衡偏后。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["problem_happens_mid_corner"],
+    "likelyCauses": ["front_grip_low", "rear_too_stable", "aero_balance_rear_biased"],
+    "followUpQuestions": [
+      { "id": "has_aero", "label": "是否装了前后可调空力？", "type": "single", "options": [{ "value": "both", "label": "前后都有" }, { "value": "rear_only", "label": "只有后空力" }, { "value": "none", "label": "没有或不确定" }] }
+    ],
+    "entryStepId": "front-aero-or-arb",
+    "steps": [
+      {
+        "stepId": "front-aero-or-arb",
+        "action": "增加前下压力，或前防倾杆软一点",
+        "amount": "前下压力一小格；防倾杆 1~2 格",
+        "reason": "提高中高速弯的前轴抓地和持续转向能力。",
+        "sideEffects": ["极速可能下降", "后轴可能更活"],
+        "testMethod": "用一个稳定油门的中高速弯测试，不要用出弯全油阶段判断。",
+        "relatedParts": ["aero_front", "antiroll_bars"],
+        "next": { "onImproved": "finish", "onNoChange": "rear-aero-less", "onWorse": "rollback-balance" }
+      },
+      {
+        "stepId": "rear-aero-less",
+        "action": "如果后空力很高，略降后下压力",
+        "amount": "一小格",
+        "reason": "尾部过稳会让车更不愿意转。",
+        "sideEffects": ["高速尾部稳定性下降"],
+        "testMethod": "只测试高速弯稳定性和弯中线位。",
+        "relatedParts": ["aero_rear"],
+        "next": { "onImproved": "finish", "onNoChange": "front-tire-upgrade", "onWorse": "rollback-balance" }
+      },
+      {
+        "stepId": "front-tire-upgrade",
+        "action": "升级前轴抓地来源",
+        "amount": "胶料或胎宽优先二选一",
+        "reason": "持续弯中推头常常需要基础抓地修正。",
+        "sideEffects": ["PI 预算紧张", "可能影响直线速度"],
+        "testMethod": "用同一段弯中最小速度和出弯路线对比。",
+        "relatedParts": ["tire_compound", "tire_width"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      },
+      {
+        "stepId": "rollback-balance",
+        "action": "恢复刚才的空力/防倾杆变化",
+        "amount": "回到上一组设置",
+        "reason": "变差说明不是简单增加前端或减少后端就能解决。",
+        "sideEffects": ["需要改查轮胎或驾驶线"],
+        "testMethod": "恢复后再跑一次确认。",
+        "relatedParts": ["aero_front", "aero_rear", "antiroll_bars"],
+        "next": { "onImproved": "front-tire-upgrade", "onNoChange": "front-tire-upgrade", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "exit_understeer",
+    "name": "出弯给油推头",
+    "summary": "出弯加油后车辆向外推，AWD 常和前差速/中央差速有关，RWD 则常和后轮牵引及油门时机有关。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["problem_happens_on_throttle_exit"],
+    "likelyCauses": ["front_diff_too_locked", "center_diff_too_front", "rear_too_stable_or_front_grip_low"],
+    "followUpQuestions": [
+      { "id": "drivetrain_confirm", "label": "当前驱动形式？", "type": "single", "options": [{ "value": "AWD", "label": "AWD" }, { "value": "RWD", "label": "RWD" }] },
+      { "id": "throttle", "label": "半油也推，还是全油才推？", "type": "single", "options": [{ "value": "partial", "label": "半油也推" }, { "value": "full", "label": "全油才明显" }] }
+    ],
+    "entryStepId": "front-diff-less-lock",
+    "steps": [
+      {
+        "stepId": "front-diff-less-lock",
+        "action": "AWD：降低前差速加速锁止",
+        "amount": "3%~5%",
+        "reason": "减少前轮在出弯给油时被动力牵着往外推的倾向。",
+        "sideEffects": ["可能降低牵引", "前轮拉出弯的感觉会弱一点"],
+        "testMethod": "同一个低速弯，固定入弯速度，只比较给油后的车头指向。",
+        "relatedParts": ["differential"],
+        "next": { "onImproved": "refine-small", "onNoChange": "center-diff-rear", "onWorse": "center-diff-rear" }
+      },
+      {
+        "stepId": "center-diff-rear",
+        "action": "AWD：中央差速更偏后",
+        "amount": "3%~5%",
+        "reason": "让后轮承担更多动力，减少前轴被动力占用。",
+        "sideEffects": ["车尾可能更活", "湿滑路面更需要油门控制"],
+        "testMethod": "同一低速弯出弯，观察是否更愿意转出弯心。",
+        "relatedParts": ["differential"],
+        "next": { "onImproved": "refine-small", "onNoChange": "front-aero-small", "onWorse": "rear-grip-check" }
+      },
+      {
+        "stepId": "front-aero-small",
+        "action": "增加前下压力或前轴抓地",
+        "amount": "前下压力一小格，或检查前胎",
+        "reason": "如果差速变化无效，可能是前轴基础抓地或中高速前端不足。",
+        "sideEffects": ["极速可能下降", "PI 预算可能受影响"],
+        "testMethod": "区分低速发夹和中高速弯，确认哪类弯改善。",
+        "relatedParts": ["aero_front", "tire_width", "tire_compound"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      },
+      {
+        "stepId": "rear-grip-check",
+        "action": "恢复中央差速变化，检查后轮牵引",
+        "amount": "回退 3%~5%",
+        "reason": "变差可能说明后轮承受动力后已经接近失控。",
+        "sideEffects": ["会回到原本推头感"],
+        "testMethod": "恢复后测试是否甩尾减少但推头回来。",
+        "relatedParts": ["differential", "tire_width"],
+        "next": { "onImproved": "front-aero-small", "onNoChange": "finish", "onWorse": "finish" }
+      },
+      {
+        "stepId": "refine-small",
+        "action": "保留改善方向，只做半步微调",
+        "amount": "刚才幅度的一半",
+        "reason": "已经找到有效方向，继续大幅调整容易把问题推到另一边。",
+        "sideEffects": ["过调会变成甩尾或牵引不足"],
+        "testMethod": "跑 2~3 次同一弯，确认不是偶然。",
+        "relatedParts": ["differential"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "exit_oversteer",
+    "name": "出弯甩尾",
+    "summary": "出弯给油后车尾滑动，通常和后轮牵引、后差速加速锁止、动力输出和油门齿比有关。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["problem_happens_on_throttle_exit"],
+    "likelyCauses": ["rear_diff_too_locked", "rear_tire_grip_low", "power_too_aggressive"],
+    "entryStepId": "rear-diff-less-lock",
+    "steps": [
+      {
+        "stepId": "rear-diff-less-lock",
+        "action": "降低后差速加速锁止",
+        "amount": "3%~5%",
+        "reason": "降低给油时后轮一起突破抓地的倾向。",
+        "sideEffects": ["出弯牵引感可能变弱", "单轮空转风险增加"],
+        "testMethod": "固定二档或三档同一出弯点给油。",
+        "relatedParts": ["differential"],
+        "next": { "onImproved": "refine-rear", "onNoChange": "rear-tire-more", "onWorse": "rollback-power-delivery" }
+      },
+      {
+        "stepId": "rear-tire-more",
+        "action": "优先增加后轮牵引来源",
+        "amount": "后胎宽或胶料小幅升级",
+        "reason": "如果差速不能解决，可能是后轴基础抓地不足。",
+        "sideEffects": ["PI 成本上升", "车可能变钝"],
+        "testMethod": "比较能否更早全油。",
+        "relatedParts": ["tire_width", "tire_compound"],
+        "next": { "onImproved": "finish", "onNoChange": "gear-longer", "onWorse": "finish" }
+      },
+      {
+        "stepId": "gear-longer",
+        "action": "略拉长低档齿比或终传",
+        "amount": "小幅调整，避免低档过暴躁",
+        "reason": "降低出弯瞬间扭矩冲击。",
+        "sideEffects": ["低速加速可能变慢"],
+        "testMethod": "只看同一档位出弯稳定性。",
+        "relatedParts": ["transmission", "power"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      },
+      {
+        "stepId": "rollback-power-delivery",
+        "action": "恢复差速变化，改查动力输出是否过激",
+        "amount": "回到上一个稳定值",
+        "reason": "变差说明差速方向不适合当前车。",
+        "sideEffects": ["需要通过齿比或轮胎解决"],
+        "testMethod": "恢复后再比较甩尾出现时机。",
+        "relatedParts": ["differential", "transmission", "power"],
+        "next": { "onImproved": "gear-longer", "onNoChange": "rear-tire-more", "onWorse": "finish" }
+      },
+      {
+        "stepId": "refine-rear",
+        "action": "保留改善方向，小幅回调找牵引上限",
+        "amount": "1%~2%",
+        "reason": "避免把车调得太没有出弯效率。",
+        "sideEffects": ["过低会影响加速"],
+        "testMethod": "比较出弯速度而不只看手感。",
+        "relatedParts": ["differential"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "braking_instability",
+    "name": "刹车时车尾不稳",
+    "summary": "重刹时车尾摆动或想掉头，常与刹车平衡、后轴稳定、悬挂和后空力相关。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["problem_happens_under_braking"],
+    "likelyCauses": ["brake_bias_too_rear", "rear_grip_low", "rear_platform_unstable"],
+    "entryStepId": "brake-bias-front",
+    "steps": [
+      {
+        "stepId": "brake-bias-front",
+        "action": "刹车平衡略向前移",
+        "amount": "1%~2%",
+        "reason": "减少后轮制动负担，提升重刹直线稳定。",
+        "sideEffects": ["可能增加入弯推头", "刹车距离不一定更短"],
+        "testMethod": "同一刹车点，保持方向盘尽量直。",
+        "relatedParts": ["brakes"],
+        "next": { "onImproved": "finish", "onNoChange": "rear-stability", "onWorse": "rollback-brake" }
+      },
+      {
+        "stepId": "rear-stability",
+        "action": "增加后轴稳定来源",
+        "amount": "后胎、后空力或略软后悬挂方向",
+        "reason": "后轴在重量前移时需要保留足够稳定余量。",
+        "sideEffects": ["可能加重推头", "极速可能下降"],
+        "testMethod": "重刹后再轻微转向，观察车尾是否安定。",
+        "relatedParts": ["tire_width", "aero_rear", "suspension"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "rollback-brake" }
+      },
+      {
+        "stepId": "rollback-brake",
+        "action": "恢复刹车平衡，降低刹车压力",
+        "amount": "压力降 2%~4%",
+        "reason": "如果向前移仍变差，可能是锁死或输入过激。",
+        "sideEffects": ["刹车脚感会变软"],
+        "testMethod": "确认 ABS/锁死感是否减少。",
+        "relatedParts": ["brakes"],
+        "next": { "onImproved": "finish", "onNoChange": "rear-stability", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "high_speed_float",
+    "name": "高速发飘",
+    "summary": "高速直线或高速弯方向不稳，通常与空力、车高、悬挂平台和后轴稳定有关。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["problem_happens_high_speed"],
+    "likelyCauses": ["rear_aero_low", "ride_height_or_damping_unstable", "too_much_power_for_grip"],
+    "entryStepId": "rear-aero-up",
+    "steps": [
+      {
+        "stepId": "rear-aero-up",
+        "action": "增加后下压力",
+        "amount": "一小格",
+        "reason": "优先提升高速尾部稳定和信心。",
+        "sideEffects": ["极速下降", "可能增加推头"],
+        "testMethod": "高速弯或高速变线对照，避免用低速弯判断。",
+        "relatedParts": ["aero_rear"],
+        "next": { "onImproved": "front-balance-check", "onNoChange": "suspension-platform", "onWorse": "rollback-aero" }
+      },
+      {
+        "stepId": "front-balance-check",
+        "action": "如开始推头，补一点前下压力",
+        "amount": "一小格",
+        "reason": "保持前后空力平衡，避免只稳尾部。",
+        "sideEffects": ["极速继续下降"],
+        "testMethod": "同一高速弯比较入弯和弯中线位。",
+        "relatedParts": ["aero_front", "aero_rear"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      },
+      {
+        "stepId": "suspension-platform",
+        "action": "检查车高和悬挂是否过低过硬",
+        "amount": "车高升一小格或软化阻尼",
+        "reason": "高速压缩或路面起伏会让过低过硬的车失去稳定平台。",
+        "sideEffects": ["响应可能变慢"],
+        "testMethod": "在相同高速路面起伏处测试。",
+        "relatedParts": ["suspension"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      },
+      {
+        "stepId": "rollback-aero",
+        "action": "恢复后空力变化，检查是否是前后失衡",
+        "amount": "回到上一格",
+        "reason": "变差可能来自空力平衡被破坏。",
+        "sideEffects": ["需要转向悬挂排查"],
+        "testMethod": "恢复后对比高速稳定感。",
+        "relatedParts": ["aero_front", "aero_rear", "suspension"],
+        "next": { "onImproved": "suspension-platform", "onNoChange": "suspension-platform", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "too_slow_on_straights",
+    "name": "直线太慢",
+    "summary": "直线速度不足不一定只靠加马力，先确认空力、齿比和 PI 预算。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["problem_happens_on_straight"],
+    "likelyCauses": ["too_much_aero", "gearing_too_short", "power_low"],
+    "entryStepId": "gear-top-speed",
+    "steps": [
+      {
+        "stepId": "gear-top-speed",
+        "action": "检查终传是否过短",
+        "amount": "略拉长终传",
+        "reason": "如果频繁顶转，马力没有被有效转成速度。",
+        "sideEffects": ["低速加速可能变弱"],
+        "testMethod": "看最长直线末端是否仍有转速空间。",
+        "relatedParts": ["transmission"],
+        "next": { "onImproved": "finish", "onNoChange": "aero-drag-check", "onWorse": "power-budget" }
+      },
+      {
+        "stepId": "aero-drag-check",
+        "action": "检查前后下压力是否过高",
+        "amount": "各降一小格，优先不要破坏稳定",
+        "reason": "过高空力会牺牲直线速度。",
+        "sideEffects": ["高速稳定和弯中抓地下降"],
+        "testMethod": "最长直线和高速弯都要测。",
+        "relatedParts": ["aero_front", "aero_rear"],
+        "next": { "onImproved": "finish", "onNoChange": "power-budget", "onWorse": "finish" }
+      },
+      {
+        "stepId": "power-budget",
+        "action": "在稳定不丢失的前提下加动力",
+        "amount": "优先轻量、低副作用动力件",
+        "reason": "确认不是齿比和空力后，再用动力解决直线。",
+        "sideEffects": ["出弯打滑", "PI 超标"],
+        "testMethod": "同时看直线末速和出弯可控性。",
+        "relatedParts": ["power", "tire_width", "differential"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "launch_wheelspin",
+    "name": "起步打滑",
+    "summary": "起步轮胎空转通常与后轮牵引、低档齿比、差速锁止和动力输出有关。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["problem_happens_launch"],
+    "likelyCauses": ["first_gear_too_short", "rear_grip_low", "diff_too_aggressive"],
+    "entryStepId": "first-gear-longer",
+    "steps": [
+      {
+        "stepId": "first-gear-longer",
+        "action": "略拉长一档或终传",
+        "amount": "小幅调整",
+        "reason": "降低起步瞬间扭矩冲击。",
+        "sideEffects": ["低速响应变慢"],
+        "testMethod": "重复三次起步，比较轮胎空转长度。",
+        "relatedParts": ["transmission"],
+        "next": { "onImproved": "finish", "onNoChange": "rear-grip-launch", "onWorse": "finish" }
+      },
+      {
+        "stepId": "rear-grip-launch",
+        "action": "增加驱动轮抓地或降低差速加速锁止",
+        "amount": "胎宽/胶料，或差速 3%~5%",
+        "reason": "让驱动轮更温和地建立牵引。",
+        "sideEffects": ["PI 成本", "出弯性格改变"],
+        "testMethod": "同路面同辅助设置起步测试。",
+        "relatedParts": ["tire_width", "tire_compound", "differential"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "frequent_shifting",
+    "name": "频繁换挡",
+    "summary": "弯中或短直频繁换挡会打断车辆平衡，通常先查齿比。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["gear_ratio_problem"],
+    "likelyCauses": ["gears_too_short", "final_drive_too_short"],
+    "entryStepId": "final-drive-longer",
+    "steps": [
+      {
+        "stepId": "final-drive-longer",
+        "action": "略拉长终传或问题档位",
+        "amount": "小幅调整",
+        "reason": "让常用弯角减少无意义升降档。",
+        "sideEffects": ["加速响应可能变慢"],
+        "testMethod": "用同一个弯，目标是一个档位稳定通过。",
+        "relatedParts": ["transmission"],
+        "next": { "onImproved": "finish", "onNoChange": "gear-spacing", "onWorse": "finish" }
+      },
+      {
+        "stepId": "gear-spacing",
+        "action": "拉开相邻档位间距",
+        "amount": "只改发生问题的两个档位",
+        "reason": "减少弯前或弯中来回换挡。",
+        "sideEffects": ["某些速度段可能掉转速"],
+        "testMethod": "记录通过弯心时的档位和转速。",
+        "relatedParts": ["transmission"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "curb_bounce",
+    "name": "压路肩弹跳",
+    "summary": "压路肩或起伏路面弹跳，常见于车高过低、弹簧/阻尼过硬或悬挂行程不足。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["problem_happens_on_curbs"],
+    "likelyCauses": ["ride_height_too_low", "springs_too_stiff", "damping_too_stiff"],
+    "entryStepId": "raise-ride-height",
+    "steps": [
+      {
+        "stepId": "raise-ride-height",
+        "action": "车高升一小格",
+        "amount": "一小格",
+        "reason": "给悬挂留出压缩空间，减少触底和弹跳。",
+        "sideEffects": ["重心略高", "响应可能稍慢"],
+        "testMethod": "同一路肩用同速度通过。",
+        "relatedParts": ["suspension"],
+        "next": { "onImproved": "finish", "onNoChange": "soften-damping", "onWorse": "finish" }
+      },
+      {
+        "stepId": "soften-damping",
+        "action": "软化回弹/压缩阻尼",
+        "amount": "1~2 格",
+        "reason": "让轮胎更快回到路面并吸收路肩冲击。",
+        "sideEffects": ["车身动作变多"],
+        "testMethod": "看压路肩后是否更快恢复稳定。",
+        "relatedParts": ["suspension"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "unknown_next_part",
+    "name": "不知道下一步装什么",
+    "summary": "没有明确症状时，不建议盲目堆动力，先按赛事、等级和稳定目标建立升级优先级。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["no_clear_symptom"],
+    "likelyCauses": ["build_goal_unclear", "pi_budget_unknown"],
+    "entryStepId": "use-goal-priority",
+    "steps": [
+      {
+        "stepId": "use-goal-priority",
+        "action": "先用改装目标向导确定升级顺序",
+        "amount": "选择赛事、等级、驱动和偏好",
+        "reason": "没有症状时，最稳的策略是先补通用抓地和可调基础。",
+        "sideEffects": ["不会给出所谓最优解，需要你用实测反馈收敛"],
+        "testMethod": "每装一个关键部件后跑同一路段，记录是否更稳或更快。",
+        "relatedParts": ["tire_compound", "brakes", "suspension", "differential"],
+        "next": { "onImproved": "finish", "onNoChange": "identify-symptom", "onWorse": "identify-symptom" }
+      },
+      {
+        "stepId": "identify-symptom",
+        "action": "先选一个最明显症状再继续问诊",
+        "amount": "只选一个最大问题",
+        "reason": "结构化问诊需要明确车辆在哪个阶段出问题。",
+        "sideEffects": ["可能需要多跑一圈观察"],
+        "testMethod": "把问题归类为入弯、弯中、出弯、刹车、高速或直线。",
+        "relatedParts": ["brakes", "suspension", "transmission"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "pi_over_limit",
+    "name": "PI 超等级",
+    "summary": "PI 超标时优先拆副作用大或非核心目标的项目，不要先拆掉解决核心症状的部件。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["pi_over_target"],
+    "likelyCauses": ["too_many_power_parts", "expensive_weight_or_tire_parts", "aero_or_drivetrain_budget"],
+    "entryStepId": "remove-power-first",
+    "steps": [
+      {
+        "stepId": "remove-power-first",
+        "action": "优先下调非必要动力件",
+        "amount": "从最高 PI 成本或最难控制的动力件开始",
+        "reason": "稳定向构建里，动力最容易制造牵引和刹车副作用。",
+        "sideEffects": ["直线速度下降"],
+        "testMethod": "看圈速是否真的变慢，还是更稳后反而更快。",
+        "relatedParts": ["power"],
+        "next": { "onImproved": "finish", "onNoChange": "trim-weight-or-width", "onWorse": "trim-weight-or-width" }
+      },
+      {
+        "stepId": "trim-weight-or-width",
+        "action": "再考虑减重等级或胎宽退一级",
+        "amount": "只退一个项目",
+        "reason": "如果动力不能拆，再动 PI 成本高的非必须项目。",
+        "sideEffects": ["手感可能变钝或抓地下降"],
+        "testMethod": "退一级后跑同一路段，确认核心症状没有回来。",
+        "relatedParts": ["weight_reduction", "tire_width"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      }
+    ]
+  },
+  {
+    "id": "part_drops_pi",
+    "name": "某个零件反而降 PI，不知道值不值得装",
+    "summary": "单个零件降 PI 不代表一定亏或赚，需要看它是否解决当前症状、是否带来可测试收益。",
+    "confidence": "medium",
+    "sourceIds": ["sample-structured-coaching", "sample-user-observation"],
+    "sample": true,
+    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
+    "conditions": ["part_changes_pi_unexpectedly"],
+    "likelyCauses": ["tradeoff_between_grip_weight_drag_power", "game_pi_model_not_explained"],
+    "entryStepId": "test-before-judging",
+    "steps": [
+      {
+        "stepId": "test-before-judging",
+        "action": "先把它当作取舍项做 A/B 测试",
+        "amount": "只装/拆这个零件，其他不变",
+        "reason": "工具不精确计算 PI，实际价值要看它对症状和赛段的影响。",
+        "sideEffects": ["需要多跑一次对照"],
+        "testMethod": "同车、同路段、同天气，比较稳定性、末速和弯心速度。",
+        "relatedParts": ["tire_width", "widebody_kit", "aero_front", "aero_rear", "weight_reduction"],
+        "next": { "onImproved": "keep-observed", "onNoChange": "remove-if-no-purpose", "onWorse": "remove-if-no-purpose" }
+      },
+      {
+        "stepId": "keep-observed",
+        "action": "保留并记录用户实测结果",
+        "amount": "写入备注",
+        "reason": "实测改善比表面 PI 更能说明它是否适合这台车。",
+        "sideEffects": ["对其他车辆不可直接套用"],
+        "testMethod": "后续只在同类赛道参考这条记录。",
+        "relatedParts": ["tire_width", "widebody_kit"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      },
+      {
+        "stepId": "remove-if-no-purpose",
+        "action": "没有明确收益就先拆掉",
+        "amount": "恢复原零件",
+        "reason": "MVP 不把 PI 异常视为隐藏最优，只按可解释收益判断。",
+        "sideEffects": ["可能错过少数特殊构建收益"],
+        "testMethod": "回退后确认手感是否恢复。",
+        "relatedParts": ["tire_width", "widebody_kit", "aero_front", "aero_rear"],
+        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+      }
+    ]
+  }
+]

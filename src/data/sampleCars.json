@@ -1,0 +1,14 @@
+[
+  {
+    "id": "sample-bmw-m3",
+    "sample": true,
+    "name": "BMW M3",
+    "notes": "仅作为 UI 和流程演示用示例车辆，不代表完整 FH6 官方数据。"
+  },
+  {
+    "id": "sample-bmw-m2",
+    "sample": true,
+    "name": "BMW M2 Competition Coupe",
+    "notes": "仅作为 UI 和流程演示用示例车辆，不代表完整 FH6 官方数据。"
+  }
+]
