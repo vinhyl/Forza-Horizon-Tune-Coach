@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "name": "FH6 authoritative tuning rule facts",
+    "createdAt": "2026-06-01",
+    "notes": "Concise, original-language rule summaries derived from ForzaFire FH6 guide pages. These are not copied guide text; keep source links for audit and future refinement."
+  },
+  "sources": [
+    {
+      "id": "forzafire_fh6_platform_handling",
+      "title": "ForzaFire FH6 Platform & Handling Tuning Guide",
+      "url": "https://www.forzafire.com/guides/forza-horizon-6-platform-and-handling-tuning-guide",
+      "type": "authority_guide",
+      "lastReviewed": "2026-06-01"
+    },
+    {
+      "id": "forzafire_fh6_tires_rims",
+      "title": "ForzaFire FH6 Tires & Rims Tuning Guide",
+      "url": "https://www.forzafire.com/guides/forza-horizon-6-tires-and-rims-tuning-guide",
+      "type": "authority_guide",
+      "lastReviewed": "2026-06-01"
+    },
+    {
+      "id": "forzafire_fh6_aero_appearance",
+      "title": "ForzaFire FH6 Aero & Appearance Tuning Guide",
+      "url": "https://www.forzafire.com/guides/forza-horizon-6-aero-and-appearance-tuning-guide",
+      "type": "authority_guide",
+      "lastReviewed": "2026-06-01"
+    },
+    {
+      "id": "forzafire_fh6_drivetrain",
+      "title": "ForzaFire FH6 Drivetrain Tuning Guide",
+      "url": "https://www.forzafire.com/guides/forza-horizon-6-drivetrain-tuning-guide",
+      "type": "authority_guide",
+      "lastReviewed": "2026-06-01"
+    },
+    {
+      "id": "forzafire_fh6_engine",
+      "title": "ForzaFire FH6 Engine Tuning Guide",
+      "url": "https://www.forzafire.com/guides/forza-horizon-6-engine-tuning-guide",
+      "type": "authority_guide",
+      "lastReviewed": "2026-06-01"
+    }
+  ],
+  "facts": [
+    {
+      "id": "fh6-race-suspension-unlocks-full-chassis-tuning",
+      "domain": "platform_handling",
+      "subject": "suspension",
+      "summary": "Race, Rally, and Off-Road suspension unlock alignment, spring, ride-height, bump, and rebound tuning. For A class and above, full suspension tuning is a core enabler for road builds.",
+      "appliesTo": ["road", "street", "touge", "A", "S1"],
+      "grantsCapabilities": ["tunable_suspension"],
+      "userObservationsNeeded": ["is_available", "pi_delta"],
+      "sourceIds": ["forzafire_fh6_platform_handling"]
+    },
+    {
+      "id": "fh6-race-arbs-unlock-axle-balance-control",
+      "domain": "platform_handling",
+      "subject": "antiroll_bars",
+      "summary": "Race anti-roll bars unlock front and rear stiffness tuning. Softer front helps front grip and understeer; softer rear helps rear stability and power-oversteer.",
+      "appliesTo": ["road", "street", "touge", "A", "S1"],
+      "grantsCapabilities": ["tunable_antiroll_bars"],
+      "goodForSymptoms": ["entry_understeer", "mid_corner_understeer", "exit_oversteer"],
+      "sourceIds": ["forzafire_fh6_platform_handling"]
+    },
+    {
+      "id": "fh6-race-brakes-unlock-balance-and-pressure",
+      "domain": "platform_handling",
+      "subject": "brakes",
+      "summary": "Race brakes unlock brake balance and pressure tuning. Road builds usually use a front-biased brake setup; FWD generally wants more front bias than RWD or AWD.",
+      "appliesTo": ["road", "street", "touge", "A", "S1"],
+      "grantsCapabilities": ["tunable_brakes"],
+      "goodForSymptoms": ["braking_instability", "entry_understeer"],
+      "sourceIds": ["forzafire_fh6_platform_handling"]
+    },
+    {
+      "id": "fh6-weight-reduction-improves-multiple-axes-but-must-pass-pi-test",
+      "domain": "platform_handling",
+      "subject": "weight_reduction",
+      "summary": "Weight reduction can improve acceleration, braking, cornering, and lateral response, but already-light cars may not justify the PI cost. Check power-to-weight and PI before keeping it.",
+      "appliesTo": ["road", "street", "touge", "A", "S1"],
+      "userObservationsNeeded": ["pi_delta", "stat_acceleration_delta", "stat_handling_delta", "user_feel"],
+      "sourceIds": ["forzafire_fh6_platform_handling"]
+    },
+    {
+      "id": "fh6-road-camber-and-toe-should-stay-conservative",
+      "domain": "platform_handling",
+      "subject": "alignment",
+      "summary": "Road race alignment starts with moderate negative camber and neutral toe. Toe changes should be small because non-neutral toe adds scrub and can hurt top speed.",
+      "requiresCapabilities": ["tunable_suspension"],
+      "goodForSymptoms": ["entry_understeer", "mid_corner_understeer", "high_speed_float"],
+      "sourceIds": ["forzafire_fh6_platform_handling"]
+    },
+    {
+      "id": "fh6-road-ride-height-usually-low-unless-bottoming",
+      "domain": "platform_handling",
+      "subject": "ride_height",
+      "summary": "Road builds usually start near minimum ride height for lower center of gravity. Raise only if the car bottoms out on curbs, bumps, or compression zones.",
+      "requiresCapabilities": ["tunable_suspension"],
+      "goodForSymptoms": ["curb_bounce", "high_speed_float"],
+      "sourceIds": ["forzafire_fh6_platform_handling"]
+    },
+    {
+      "id": "fh6-tire-compound-is-first-order-build-choice",
+      "domain": "tires_rims",
+      "subject": "tire_compound",
+      "summary": "Tire compound is one of the highest-impact build choices. Road builds commonly use Sport, Semi-Slick, or Race Slick depending on class and PI budget; dirt and mixed routes should not blindly use slicks.",
+      "appliesTo": ["road", "street", "touge", "A", "S1"],
+      "goodForSymptoms": ["entry_understeer", "mid_corner_understeer", "exit_oversteer", "braking_instability"],
+      "userObservationsNeeded": ["is_available", "pi_delta", "stat_handling_delta", "stat_speed_delta"],
+      "sourceIds": ["forzafire_fh6_tires_rims"]
+    },
+    {
+      "id": "fh6-tire-width-trades-grip-against-pi-weight-and-drag",
+      "domain": "tires_rims",
+      "subject": "tire_width",
+      "summary": "Wider tires add grip but can cost PI, add weight, and increase drag. Moderate widening is often a sweet spot for B/A; maximum width is more relevant in S1 and above.",
+      "appliesTo": ["road", "street", "touge", "A", "S1"],
+      "goodForSymptoms": ["exit_oversteer", "launch_wheelspin", "braking_instability"],
+      "userObservationsNeeded": ["is_available", "pi_delta", "stat_speed_delta"],
+      "sourceIds": ["forzafire_fh6_tires_rims"]
+    },
+    {
+      "id": "fh6-rwd-tire-width-often-biases-rear",
+      "domain": "tires_rims",
+      "subject": "tire_width",
+      "summary": "RWD builds often benefit from more rear tire than front for putting power down; AWD commonly stays equal or only slightly rear-biased; FWD usually prioritizes the front axle.",
+      "appliesTo": ["RWD", "AWD", "FWD"],
+      "goodForSymptoms": ["exit_oversteer", "launch_wheelspin", "exit_understeer"],
+      "sourceIds": ["forzafire_fh6_tires_rims"]
+    },
+    {
+      "id": "fh6-tire-pressure-is-a-test-loop-not-a-fixed-answer",
+      "domain": "tires_rims",
+      "subject": "tire_pressure",
+      "summary": "Tire pressure should start from a compound-appropriate baseline, then move in small increments based on grip, temperature behavior, and feel. Lower pressure adds contact patch but can overheat or feel lazy.",
+      "requiresCapabilities": ["tunable_tire_pressure"],
+      "goodForSymptoms": ["mid_corner_understeer", "exit_oversteer", "curb_bounce"],
+      "userObservationsNeeded": ["user_feel", "tire_temperature_behavior"],
+      "sourceIds": ["forzafire_fh6_tires_rims"]
+    },
+    {
+      "id": "fh6-front-aero-unlocks-front-downforce-and-fights-understeer",
+      "domain": "aero_appearance",
+      "subject": "aero_front",
+      "summary": "Race front aero unlocks front downforce tuning. More front downforce improves high-speed turn-in and helps fight understeer, but costs drag and top speed.",
+      "appliesTo": ["road", "street", "touge", "S1"],
+      "grantsCapabilities": ["tunable_front_aero"],
+      "goodForSymptoms": ["mid_corner_understeer", "high_speed_float"],
+      "userObservationsNeeded": ["is_available", "pi_delta", "stat_speed_delta"],
+      "sourceIds": ["forzafire_fh6_aero_appearance"]
+    },
+    {
+      "id": "fh6-rear-aero-unlocks-rear-downforce-but-can-waste-pi-on-some-awd",
+      "domain": "aero_appearance",
+      "subject": "aero_rear",
+      "summary": "Race rear aero unlocks rear downforce tuning and can stabilize RWD at speed. Some AWD builds may keep rear downforce low or skip the wing if drag and PI cost outweigh stability gains.",
+      "appliesTo": ["road", "street", "touge", "A", "S1"],
+      "grantsCapabilities": ["tunable_rear_aero"],
+      "goodForSymptoms": ["high_speed_float", "exit_oversteer"],
+      "sourceIds": ["forzafire_fh6_aero_appearance"]
+    },
+    {
+      "id": "fh6-aero-balance-is-more-important-than-maxing-both-sliders",
+      "domain": "aero_appearance",
+      "subject": "aero_balance",
+      "summary": "Aero should be tuned as a front/rear balance. More front bias helps understeer; more rear bias adds stability but can make the car push wide.",
+      "requiresCapabilities": ["tunable_front_aero", "tunable_rear_aero"],
+      "goodForSymptoms": ["mid_corner_understeer", "high_speed_float", "too_slow_on_straights"],
+      "sourceIds": ["forzafire_fh6_aero_appearance"]
+    },
+    {
+      "id": "fh6-awd-swap-adds-traction-but-brings-understeer-and-pi-cost",
+      "domain": "drivetrain",
+      "subject": "drivetrain_swap",
+      "summary": "AWD swaps can improve launch and corner-exit traction, especially at high class, but add PI cost and often introduce understeer that must be managed with differential, ARB, and front grip.",
+      "appliesTo": ["RWD", "FWD", "S1"],
+      "goodForSymptoms": ["launch_wheelspin", "exit_oversteer"],
+      "userObservationsNeeded": ["is_available", "pi_delta", "symptom_after_install"],
+      "sourceIds": ["forzafire_fh6_drivetrain"]
+    },
+    {
+      "id": "fh6-sport-transmission-is-often-enough-for-b-and-a",
+      "domain": "drivetrain",
+      "subject": "transmission",
+      "summary": "Sport transmission can be enough for many B/A builds because it unlocks final drive without paying for full individual gear tuning. Race transmission matters when stock gear spacing wastes the engine band.",
+      "appliesTo": ["road", "street", "touge", "A"],
+      "grantsCapabilities": ["adjustable_gearing"],
+      "goodForSymptoms": ["frequent_shifting", "too_slow_on_straights", "launch_wheelspin"],
+      "sourceIds": ["forzafire_fh6_drivetrain"]
+    },
+    {
+      "id": "fh6-final-drive-is-first-gearing-baseline",
+      "domain": "drivetrain",
+      "subject": "gearing",
+      "summary": "Final drive is the first gearing lever: shorter improves acceleration but can reduce top speed; longer can fix early redline or frantic low gears but may dull acceleration.",
+      "requiresCapabilities": ["adjustable_gearing"],
+      "goodForSymptoms": ["frequent_shifting", "too_slow_on_straights", "launch_wheelspin"],
+      "sourceIds": ["forzafire_fh6_drivetrain"]
+    },
+    {
+      "id": "fh6-differential-is-required-for-power-delivery-tuning",
+      "domain": "drivetrain",
+      "subject": "differential",
+      "summary": "A tunable differential is required to shape power delivery and rotation. It is a core follow-up tool when AWD pushes wide, RWD spins on exit, or launch traction is inconsistent.",
+      "appliesTo": ["RWD", "AWD", "A", "S1"],
+      "grantsCapabilities": ["tunable_differential"],
+      "goodForSymptoms": ["exit_understeer", "exit_oversteer", "launch_wheelspin"],
+      "sourceIds": ["forzafire_fh6_drivetrain"]
+    },
+    {
+      "id": "fh6-engine-upgrades-must-be-ranked-by-pi-efficiency",
+      "domain": "engine",
+      "subject": "power",
+      "summary": "Engine upgrades do not provide tune-menu sliders, so the decision is install order and PI efficiency. Watch power-to-weight and class ceiling instead of blindly maxing every engine part.",
+      "appliesTo": ["road", "street", "touge", "A", "S1"],
+      "userObservationsNeeded": ["pi_delta", "stat_speed_delta", "stat_launch_delta"],
+      "sourceIds": ["forzafire_fh6_engine"]
+    },
+    {
+      "id": "fh6-exhaust-and-intake-are-common-early-power-candidates",
+      "domain": "engine",
+      "subject": "power",
+      "summary": "Exhaust and intake are often efficient early power candidates. They should still be checked against PI, target class, and whether the car already has enough traction and braking.",
+      "appliesTo": ["road", "street", "touge", "A", "S1"],
+      "goodForSymptoms": ["too_slow_on_straights"],
+      "userObservationsNeeded": ["pi_delta", "stat_speed_delta", "user_feel"],
+      "sourceIds": ["forzafire_fh6_engine"]
+    },
+    {
+      "id": "fh6-big-power-parts-can-overpower-low-grip-builds",
+      "domain": "engine",
+      "subject": "power",
+      "summary": "Displacement, camshaft, pistons, and similar high-power upgrades can be strong in high classes, but may over-consume PI or overpower the chassis in A class and loose-surface builds.",
+      "appliesTo": ["A", "S1"],
+      "goodForSymptoms": ["too_slow_on_straights"],
+      "riskSymptoms": ["exit_oversteer", "launch_wheelspin", "braking_instability"],
+      "userObservationsNeeded": ["pi_delta", "symptom_after_install"],
+      "sourceIds": ["forzafire_fh6_engine"]
+    }
+  ]
+}

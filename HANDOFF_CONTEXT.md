@@ -584,3 +584,40 @@ npm run build
 - 前台只展示“玩家下一步要做什么、为什么、怎么判断保留/回退”
 - 数据覆盖、来源可信度、sample 标记、规则 confidence 放在开发/数据层，等接入官方数据后再考虑是否以更自然的“数据边界说明”形式出现
 - 下一步可继续把“目标向导”的卡片结构改成更强的流程体验：当前建议 -> 去游戏确认 -> 记录结果 -> 保留/回退/下一候选
+
+## 14. 2026-06-01 官方车辆表与 ForzaFire 规则事实整理
+
+用户确认：
+
+- 车辆数据可以用脚本采集
+- ForzaFire FH6 的规则文本比较适合先作为权威指南来源
+- 本阶段先整理官方车辆列表与 ForzaFire FH6 规则文本
+
+本轮新增：
+
+- `scripts/collect-car-catalog.mjs`
+  - 从 `https://forza.net/fh6cars?pubDate=20260123` 解析官方 FH6 车辆表
+  - 输出 `src/data/carCatalog.json`
+  - 可通过 `npm run collect:cars` 重新采集
+- `src/data/carCatalog.json`
+  - 当前采集到 618 台车
+  - 字段包括：`make`、`carName`、`carType`、`initialClass`、`initialPI`、`rawClass`、`country`、`collection`、`addOns`、`sourceIds`
+- `src/data/authoritativeRuleFacts.json`
+  - 从 ForzaFire FH6 指南归纳出 20 条规则事实
+  - 覆盖：悬挂、防倾杆、刹车、减重、定位、车高、轮胎胶料、胎宽、胎压、前后空力、空力平衡、驱动转换、变速箱、终传、差速器、发动机升级
+  - 该文件只保存原创摘要和规则化字段，不复制指南原文
+- `src/data/sources.json`
+  - 新增官方车辆列表来源
+  - 新增 ForzaFire FH6 Platform & Handling / Tires & Rims / Aero & Appearance / Drivetrain / Engine 指南来源
+
+来源边界：
+
+- 官方车表适合做车辆基础目录和筛选条件
+- ForzaFire 规则适合做“权威指南级规则事实”，但不是官方数据
+- 单车具体零件可用性、装后 PI、性能条变化和手感仍然必须由用户在游戏里确认
+
+后续建议：
+
+1. 把 `carCatalog.json` 接入改装卡片车辆搜索，选择车辆后自动填充初始 PI / 等级 / 车型。
+2. 把 `authoritativeRuleFacts.json` 映射进现有 `partRules`、`goalRules` 和 `symptomRules`，逐步替换 sample 来源。
+3. 增加数据验证脚本，检查 `sourceIds`、部件 ID、症状 ID 和能力 ID 是否都能互相解析。
