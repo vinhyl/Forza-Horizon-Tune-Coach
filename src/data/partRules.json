@@ -1,170 +1,1353 @@
 [
   {
     "id": "tire_compound",
-    "name": "轮胎胶料",
-    "summary": "影响基础抓地、刹车距离、出弯牵引和极限速度区间，是稳定向构建最先检查的项目之一。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["increase_mechanical_grip", "improve_braking", "improve_corner_speed"],
-    "sideEffects": ["pi_cost_can_be_high", "may_reduce_top_speed_or_acceleration_budget"],
-    "goodFor": ["entry_understeer", "mid_corner_understeer", "exit_oversteer", "braking_instability"],
-    "notRecommendedWhen": ["pi_budget_is_tight_and_current_tire_is_already_sufficient"],
-    "relatedParts": ["tire_width", "weight_reduction", "power", "suspension"]
+    "name": "轮胎配方",
+    "category": "tires",
+    "priority": 1,
+    "exclusiveGroup": "tire_type",
+    "grantsCapabilities": [],
+    "summary": "最关键的改装选择，直接决定基础抓地力上限。公路/街赛/山路：B级用运动胎，A级用半热熔，S1/S2用光头胎；泥土赛必须用拉力胎；越野赛必须用越野胎；直线加速用光头胎（最大抓地力）；漂移用漂移胎（可控滑动）。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升抓地力",
+      "改善过弯性能"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "更软轮胎磨耗更快"
+    ],
+    "goodFor": [
+      "mid_corner_understeer",
+      "exit_power_oversteer",
+      "corner_exit_wheelspin",
+      "sluggish_response"
+    ],
+    "notRecommendedWhen": [
+      "PI很紧且当前轮胎已够用",
+      "低级别轻车换高等级胎PI成本超收益"
+    ],
+    "relatedParts": [
+      "tire_width",
+      "rim",
+      "weight_reduction",
+      "suspension"
+    ],
+    "notes": "公路/街赛/山路按级别选胎：B级运动胎，A级半热熔，S1/S2光头胎。泥土赛拉力胎强制，越野赛越野胎强制，直线加速光头胎，漂移漂移胎。"
   },
   {
     "id": "tire_width",
-    "name": "胎宽",
-    "summary": "胎宽会影响机械抓地、牵引、制动稳定性，也可能影响重量、极速和 PI 表现。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["increase_mechanical_grip", "improve_traction", "improve_braking_stability"],
-    "sideEffects": ["may_reduce_top_speed", "may_increase_weight_feel", "pi_effect_can_vary"],
-    "goodFor": ["corner_exit_wheelspin", "instability_under_braking", "high_power_builds"],
-    "notRecommendedWhen": ["car_already_feels_sluggish_on_long_straights", "pi_budget_is_tight_and_core_handling_parts_are_missing"],
-    "relatedParts": ["widebody_kit", "tire_compound", "weight_reduction", "aero_front", "aero_rear"]
+    "name": "轮胎宽度",
+    "category": "tires",
+    "priority": 7,
+    "grantsCapabilities": [],
+    "summary": "更宽轮胎增加接地面积和抓地力，但消耗更多PI并增加空气阻力和重量。RWD后轮加宽，FWD前轮加宽或等宽，AWD前后等宽。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "增加接地面积",
+      "提升抓地力"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "增加空气阻力",
+      "增加重量"
+    ],
+    "goodFor": [
+      "corner_exit_wheelspin",
+      "exit_power_oversteer",
+      "mid_corner_understeer"
+    ],
+    "notRecommendedWhen": [
+      "低级别底盘无法充分利用",
+      "需要宽体才能安装且PI紧张"
+    ],
+    "relatedParts": [
+      "tire_compound",
+      "rim",
+      "widebody",
+      "aero_front"
+    ]
   },
   {
-    "id": "widebody_kit",
-    "name": "宽体套件",
-    "summary": "通常用于解锁更宽胎或改变车辆姿态，不应被当作必装性能答案。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["may_unlock_wider_tires", "can_change_vehicle_weight_and_track"],
-    "sideEffects": ["pi_effect_can_vary", "may_add_weight", "not_available_on_every_car"],
-    "goodFor": ["traction_issues", "wide_tire_builds"],
-    "notRecommendedWhen": ["only_reason_is_visual", "pi_budget_is_tight_without_testing"],
-    "relatedParts": ["tire_width", "tire_compound", "weight_reduction"]
+    "id": "rim",
+    "name": "轮圈",
+    "category": "tires",
+    "priority": 17,
+    "grantsCapabilities": [],
+    "summary": "更小轮圈更轻且胎壁形变更多（适合拉力），17-18寸是公路最佳区间。大尺寸增加簧下重量和PI。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "减少簧下重量",
+      "影响胎壁形变"
+    ],
+    "sideEffects": [
+      "大尺寸增加重量和PI"
+    ],
+    "goodFor": [
+      "sluggish_response",
+      "curb_bouncing"
+    ],
+    "notRecommendedWhen": [
+      "只为外观加大尺寸"
+    ],
+    "relatedParts": [
+      "tire_compound",
+      "tire_width"
+    ]
   },
   {
-    "id": "brakes",
-    "name": "刹车",
-    "summary": "提升制动控制和可调性，适合需要稳定入弯和山路反复重刹的构建。",
+    "id": "rally_tires",
+    "name": "拉力胎",
+    "category": "tires",
+    "priority": 20,
+    "exclusiveGroup": "tire_type",
+    "grantsCapabilities": [],
+    "summary": "泥土赛强制轮胎，提供松散砾石和泥土路面抓地力，胎纹设计排出碎屑。柏油抓地力降低，滚动阻力更高。",
     "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["improve_braking_control", "unlock_brake_bias", "unlock_brake_pressure"],
-    "sideEffects": ["pi_cost_without_lap_time_gain_if_driver_does_not_need_it"],
-    "goodFor": ["braking_instability", "late_braking", "touge"],
-    "notRecommendedWhen": ["driver_rarely_locks_or_overheats_braking_phase"],
-    "relatedParts": ["tire_compound", "tire_width", "suspension", "aero_rear"]
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": ["dirt"]
+    },
+    "effects": [
+      "松散砾石和泥土路面抓地力",
+      "胎纹设计排出碎屑"
+    ],
+    "sideEffects": [
+      "柏油路面抓地力降低",
+      "滚动阻力更高"
+    ],
+    "goodFor": [
+      "dirt_racing"
+    ],
+    "notRecommendedWhen": [
+      "primarily_tarmac"
+    ],
+    "relatedParts": [
+      "tire_compound",
+      "rally_springs"
+    ]
+  },
+  {
+    "id": "offroad_tires",
+    "name": "越野胎",
+    "category": "tires",
+    "priority": 21,
+    "exclusiveGroup": "tire_type",
+    "grantsCapabilities": [],
+    "summary": "越野赛强制轮胎，提供泥地、沙地和崎岖地形最大抓地力，大胎块应对深路面。柏油抓地力极差，滚动阻力高。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": ["cross_country"]
+    },
+    "effects": [
+      "泥地、沙地和崎岖地形最大抓地力",
+      "大胎块应对深路面"
+    ],
+    "sideEffects": [
+      "柏油抓地力极差",
+      "滚动阻力高",
+      "噪音大"
+    ],
+    "goodFor": [
+      "cross_country"
+    ],
+    "notRecommendedWhen": [
+      "any_tarmac_racing"
+    ],
+    "relatedParts": [
+      "tire_compound",
+      "offroad_springs"
+    ]
+  },
+  {
+    "id": "drift_tires",
+    "name": "漂移胎",
+    "category": "tires",
+    "priority": 22,
+    "exclusiveGroup": "tire_type",
+    "grantsCapabilities": [],
+    "summary": "漂移赛专用轮胎，提供可控滑动特性和可预测的突破与恢复。绝对抓地力降低，轮胎磨损更快。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": ["drift"]
+    },
+    "effects": [
+      "可控滑动特性",
+      "可预测的突破和恢复"
+    ],
+    "sideEffects": [
+      "绝对抓地力降低",
+      "轮胎磨损更快"
+    ],
+    "goodFor": [
+      "drift_zones"
+    ],
+    "notRecommendedWhen": [
+      "grip_racing"
+    ],
+    "relatedParts": [
+      "tire_compound",
+      "suspension"
+    ]
+  },
+  {
+    "id": "slick_tires",
+    "name": "光头胎",
+    "category": "tires",
+    "priority": 23,
+    "exclusiveGroup": "tire_type",
+    "grantsCapabilities": [],
+    "summary": "最大干地抓地力轮胎，提供最大接地面积。零湿地能力，需要暖胎。适用于公路/街赛/山路/直线加速的干地赛事。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": ["road", "street", "touge", "drag"]
+    },
+    "effects": [
+      "最大干地抓地力",
+      "最大接地面积"
+    ],
+    "sideEffects": [
+      "零湿地能力",
+      "需要暖胎"
+    ],
+    "goodFor": [
+      "dry_tarmac_racing",
+      "drag_racing"
+    ],
+    "notRecommendedWhen": [
+      "wet_conditions",
+      "dirt",
+      "cross_country"
+    ],
+    "relatedParts": [
+      "tire_compound",
+      "tire_width"
+    ]
   },
   {
     "id": "suspension",
-    "name": "悬挂",
-    "summary": "解锁车高、弹簧和阻尼调校，帮助处理压路肩、重量转移和弯中姿态。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["unlock_ride_height", "unlock_spring_damper_tuning", "improve_platform_control"],
-    "sideEffects": ["wrong_values_can_cause_bouncing_or_snap_behavior"],
-    "goodFor": ["curb_bounce", "high_speed_float", "mid_corner_balance"],
-    "notRecommendedWhen": ["user_will_not_tune_or_test_adjustments"],
-    "relatedParts": ["antiroll_bars", "tire_compound", "weight_reduction", "aero_front", "aero_rear"]
+    "name": "弹簧与阻尼",
+    "category": "platform",
+    "priority": 2,
+    "exclusiveGroup": "suspension_type",
+    "grantsCapabilities": ["tunable_suspension"],
+    "summary": "赛车弹簧解锁全部悬挂调校（定位、弹簧、阻尼、车高），是最重要的调校解锁项。公路/街赛/山路/计时赛用赛车弹簧（前39-40%，后6-7%）；泥土赛用拉力弹簧（公路值减半：前约20%，后约3-4%）；越野用越野弹簧；直线加速用赛车弹簧（硬前约45%，软后约4-5%）；漂移用赛车弹簧（前39-40%，后6-7%）。调错可能导致弹跳或失控。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "解锁悬挂调校",
+      "改善车身姿态控制",
+      "解锁定位参数调整"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "调错可能导致弹跳或失控"
+    ],
+    "goodFor": [
+      "curb_bouncing",
+      "entry_understeer",
+      "exit_power_oversteer",
+      "braking_instability"
+    ],
+    "notRecommendedWhen": [
+      "B级以下PI紧张且无法利用调校滑块"
+    ],
+    "relatedParts": [
+      "antiroll_bars",
+      "brakes"
+    ],
+    "notes": "弹簧硬度按赛事类型调整：公路/街赛/山路/计时赛前39-40%后6-7%；泥土赛减半前约20%后约3-4%；越野前39-40%后6-7%；直线加速硬前约45%软后约4-5%；漂移前39-40%后6-7%。"
   },
   {
     "id": "antiroll_bars",
     "name": "防倾杆",
-    "summary": "影响前后轴侧倾和转向平衡，是处理推头/甩尾的低成本可调项目。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["change_front_rear_roll_balance", "adjust_understeer_oversteer"],
-    "sideEffects": ["too_extreme_values_can_reduce_grip_or_make_car_nervous"],
-    "goodFor": ["entry_understeer", "mid_corner_understeer", "exit_oversteer"],
-    "notRecommendedWhen": ["tire_or_alignment_problem_is_unidentified"],
-    "relatedParts": ["suspension", "differential", "tire_width"]
+    "category": "platform",
+    "priority": 3,
+    "grantsCapabilities": ["tunable_antiroll_bars"],
+    "summary": "赛车防倾杆解锁防倾杆硬度调校，是弯中平衡的关键。修正推头软前防倾杆，修正甩尾软后防倾杆。前后都拉满会让车跳动。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "解锁防倾杆调校",
+      "控制车身侧倾",
+      "调整弯中平衡"
+    ],
+    "sideEffects": [
+      "过硬导致颠簸路面失去抓地",
+      "前后都拉满会让车跳动"
+    ],
+    "goodFor": [
+      "entry_understeer",
+      "mid_corner_understeer",
+      "exit_power_oversteer"
+    ],
+    "notRecommendedWhen": [
+      "不打算做后续调校和测试",
+      "还没安装赛车弹簧"
+    ],
+    "relatedParts": [
+      "suspension",
+      "differential"
+    ]
   },
   {
-    "id": "transmission",
-    "name": "变速箱",
-    "summary": "用于匹配赛道速度、减少频繁换挡或提升出弯加速可控性。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["unlock_gear_ratio_tuning", "improve_acceleration_band", "reduce_unwanted_shifts"],
-    "sideEffects": ["wrong_final_drive_can_hurt_top_speed_or_launch"],
-    "goodFor": ["frequent_shifting", "too_slow_on_straights", "launch_wheelspin"],
-    "notRecommendedWhen": ["stock_gearing_already_matches_track"],
-    "relatedParts": ["power", "differential", "drivetrain"]
-  },
-  {
-    "id": "differential",
-    "name": "差速器",
-    "summary": "不一定直接提高表面性能，但能解锁关键调校能力，尤其对 AWD/RWD 的抓地和转向平衡很重要。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["unlocks_key_handling_adjustment", "improve_corner_exit_balance", "change_understeer_oversteer_behavior"],
-    "sideEffects": ["wrong_values_can_make_car_worse", "requires_feedback_loop_testing"],
-    "goodFor": ["exit_understeer", "exit_oversteer", "traction_issues", "stability_issues"],
-    "notRecommendedWhen": ["user_has_not_identified_vehicle_problem_yet"],
-    "relatedParts": ["drivetrain", "antiroll_bars", "aero_front", "aero_rear", "tire_width"]
-  },
-  {
-    "id": "aero_front",
-    "name": "前空力",
-    "summary": "前下压力通常更影响中高速弯中的前轴抓地和转向响应。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["improve_front_high_speed_grip", "help_mid_high_speed_turn_in"],
-    "sideEffects": ["may_reduce_top_speed", "less_effective_for_low_speed_mechanical_grip_issues"],
-    "goodFor": ["mid_corner_understeer", "high_speed_turn_in_weakness"],
-    "notRecommendedWhen": ["main_problem_is_low_speed_exit_traction", "main_problem_is_top_speed_on_long_highways"],
-    "relatedParts": ["aero_rear", "antiroll_bars", "differential", "tire_width"]
-  },
-  {
-    "id": "aero_rear",
-    "name": "后空力",
-    "summary": "后下压力通常提升高速尾部稳定，但可能加重推头并影响直线速度。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["improve_rear_high_speed_stability", "help_confidence_in_fast_corners"],
-    "sideEffects": ["may_increase_understeer", "may_reduce_top_speed"],
-    "goodFor": ["rear_instability_high_speed", "braking_instability_at_speed"],
-    "notRecommendedWhen": ["car_already_understeers", "car_is_built_for_top_speed"],
-    "relatedParts": ["aero_front", "antiroll_bars", "differential"]
+    "id": "brakes",
+    "name": "刹车",
+    "category": "platform",
+    "priority": 5,
+    "grantsCapabilities": ["tunable_brakes"],
+    "summary": "赛车刹车解锁刹车平衡和刹车压力调校，改善制动控制。公路/街赛/山路/泥土/越野/漂移：刹车平衡45-50%后偏；直线加速：50%或略偏前。不需要更强刹车时可能花了PI却不涨圈速。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "解锁刹车平衡调校",
+      "解锁刹车压力调校",
+      "改善制动控制",
+      "缩短刹车距离"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "不需要更强刹车时可能花了PI却不涨圈速"
+    ],
+    "goodFor": [
+      "long_braking_distance",
+      "braking_instability",
+      "entry_understeer"
+    ],
+    "notRecommendedWhen": [
+      "很少在刹车阶段锁死或失控",
+      "PI很紧核心操控件还没补齐"
+    ],
+    "relatedParts": [
+      "suspension",
+      "weight_reduction"
+    ],
+    "notes": "刹车平衡按赛事类型：公路/街赛/山路/泥土/越野/漂移45-50%后偏（松散路面需要后偏帮助入弯）；直线加速50%或略偏前。"
   },
   {
     "id": "weight_reduction",
     "name": "减重",
-    "summary": "改善加速、刹车和转向响应，但 PI 成本可能很高。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["improve_acceleration", "improve_braking", "improve_direction_change"],
-    "sideEffects": ["pi_cost_can_be_high", "can_make_weight_transfer_faster"],
-    "goodFor": ["sluggish_handling", "braking_distance", "touge_direction_changes"],
-    "notRecommendedWhen": ["pi_over_limit_and_core_grip_parts_missing"],
-    "relatedParts": ["tire_width", "suspension", "brakes", "power"]
+    "category": "platform",
+    "priority": 6,
+    "grantsCapabilities": [],
+    "summary": "改善加速、制动和过弯，降低功重比。重型车（卡车、越野、豪华、经典肌肉）几乎总是值得减重，运动减重必选，PI允许选赛车减重；中型车（跑车、小钢炮、超级GT、拉力）运动减重是最佳选择，PI允许选赛车减重；轻型车（超跑、终极超跑、赛道玩具）需谨慎，仅选运动减重，赛车减重可能让车过于敏感。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "carType": ["heavy", "medium", "light"]
+    },
+    "effects": [
+      "改善加速",
+      "改善制动",
+      "改善过弯",
+      "降低功重比"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "很轻的车收益递减"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "launch_wheelspin",
+      "long_braking_distance"
+    ],
+    "notRecommendedWhen": [
+      "车已经很轻低于800kg",
+      "PI很紧且减重PI成本超收益"
+    ],
+    "relatedParts": [
+      "driveline",
+      "flywheel",
+      "engine_upgrades"
+    ],
+    "notes": "重型车运动减重必选，赛车减重PI允许则选；中型车运动减重是最佳选择；轻型车仅选运动减重，赛车减重可能让车过于敏感难以控制。"
   },
   {
-    "id": "power",
-    "name": "发动机动力升级",
-    "summary": "提升直线和出弯速度，但对新手稳定向构建通常不是第一优先级。",
+    "id": "chassis_reinforcement",
+    "name": "车身强化",
+    "category": "platform",
+    "priority": 14,
+    "grantsCapabilities": [],
+    "summary": "提高车身刚性和操控精度，协助悬挂工作，但增加重量。泥土/越野赛非常有价值（应对冲击和粗糙路面）；公路/街赛可选；直线加速跳过（增加重量无收益）；漂移可选（刚性帮助一致性但增加重量）。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": ["dirt", "cross_country"]
+    },
+    "effects": [
+      "减少粗糙路面的车身形变",
+      "冲击下更一致的操控",
+      "提高车身刚性",
+      "改善操控精度",
+      "协助悬挂工作"
+    ],
+    "sideEffects": [
+      "增加重量",
+      "可能抵消刚性收益",
+      "略微更硬的乘坐感"
+    ],
+    "goodFor": [
+      "dirt_racing",
+      "cross_country",
+      "heavy_impacts",
+      "sluggish_response",
+      "high_speed_instability"
+    ],
+    "notRecommendedWhen": [
+      "直线加速配置",
+      "PI预算紧张",
+      "轻型车低于1200kg"
+    ],
+    "relatedParts": [
+      "suspension",
+      "antiroll_bars"
+    ],
+    "notes": "泥土/越野赛非常有价值，公路/街赛可选，直线加速跳过，漂移可选。"
+  },
+  {
+    "id": "widebody",
+    "name": "宽体套件",
+    "category": "platform",
+    "priority": 16,
+    "grantsCapabilities": [],
+    "summary": "允许安装更宽轮胎和增加轮距，提升机械抓地，可能解锁空力调校。但增加空气阻力、消耗PI并可能增加重量。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "解锁更宽轮胎",
+      "增加轮距",
+      "提升机械抓地",
+      "可能解锁空力调校"
+    ],
+    "sideEffects": [
+      "增加空气阻力",
+      "消耗PI",
+      "可能增加重量"
+    ],
+    "goodFor": [
+      "corner_exit_wheelspin",
+      "mid_corner_understeer"
+    ],
+    "notRecommendedWhen": [
+      "不打算使用更宽轮胎",
+      "只为了外观",
+      "PI紧张"
+    ],
+    "relatedParts": [
+      "tire_width",
+      "aero_front",
+      "aero_rear"
+    ]
+  },
+  {
+    "id": "rally_springs",
+    "name": "拉力悬挂",
+    "category": "platform",
+    "priority": 18,
+    "exclusiveGroup": "suspension_type",
+    "grantsCapabilities": ["tunable_suspension"],
+    "summary": "拉力赛专用悬挂，更软的弹簧率适应松散路面，允许悬挂吸收泥土上的颠簸和车辙。柏油路段车身侧倾更多，高速精度降低。",
     "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "scope": { "appliesTo": ["road", "street", "touge"] },
-    "effects": ["improve_straight_speed", "improve_acceleration"],
-    "sideEffects": ["can_create_wheelspin", "can_push_pi_over_limit", "can_hide_handling_problems"],
-    "goodFor": ["too_slow_on_straights"],
-    "notRecommendedWhen": ["car_already_has_exit_oversteer", "car_cannot_brake_or_turn_consistently"],
-    "relatedParts": ["transmission", "differential", "tire_width", "tire_compound"]
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": ["dirt"]
+    },
+    "effects": [
+      "更软的弹簧率适应松散路面",
+      "允许悬挂吸收泥土上的颠簸和车辙"
+    ],
+    "sideEffects": [
+      "柏油路段车身侧倾更多",
+      "高速精度降低"
+    ],
+    "goodFor": [
+      "dirt_racing",
+      "loose_surface_compliance"
+    ],
+    "notRecommendedWhen": [
+      "primarily_racing_on_tarmac"
+    ],
+    "relatedParts": [
+      "suspension",
+      "rally_tires"
+    ]
+  },
+  {
+    "id": "offroad_springs",
+    "name": "越野悬挂",
+    "category": "platform",
+    "priority": 19,
+    "exclusiveGroup": "suspension_type",
+    "grantsCapabilities": ["tunable_suspension"],
+    "summary": "越野赛专用悬挂，长行程应对跳跃和车辙，提供最大离地间隙。显著车身侧倾，柏油操控大幅降低。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": ["cross_country"]
+    },
+    "effects": [
+      "长行程悬挂应对跳跃和车辙",
+      "最大离地间隙"
+    ],
+    "sideEffects": [
+      "显著车身侧倾",
+      "柏油操控降低"
+    ],
+    "goodFor": [
+      "cross_country",
+      "jump_absorption"
+    ],
+    "notRecommendedWhen": [
+      "any_tarmac_racing"
+    ],
+    "relatedParts": [
+      "suspension",
+      "offroad_tires"
+    ]
+  },
+  {
+    "id": "engine_upgrades",
+    "name": "引擎升级",
+    "category": "engine",
+    "priority": 13,
+    "grantsCapabilities": [],
+    "summary": "引擎升级总类别。安装顺序影响PI效率：赛车排气>赛车进气>赛车进气歧管>赛车点火>赛车燃油>飞轮>赛车凸轮轴>赛车活塞>赛车气门>赛车排量>赛车机油冷却。B级及以下多数停在第3-4步，A级可考虑第1-7步，S1及以上PI装得下就尽量安装。详见各引擎子项。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升动力",
+      "改善加速",
+      "提升极速"
+    ],
+    "sideEffects": [
+      "消耗大量PI",
+      "可能挤占底盘预算",
+      "高转取向升级损失低转扭矩"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "launch_wheelspin"
+    ],
+    "notRecommendedWhen": [
+      "底盘和轮胎还没补齐就堆动力",
+      "功重比没有改善",
+      "扭矩取向配置用高转升级"
+    ],
+    "relatedParts": [
+      "transmission",
+      "weight_reduction",
+      "tire_compound"
+    ]
+  },
+  {
+    "id": "exhaust",
+    "name": "排气",
+    "category": "engine",
+    "priority": 24,
+    "grantsCapabilities": [],
+    "summary": "PI效率最高的引擎升级，几乎每辆车都应优先安装赛车排气。安装优先级第1。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升动力",
+      "改善排气效率",
+      "PI效率最高"
+    ],
+    "sideEffects": [
+      "消耗少量PI"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "launch_wheelspin"
+    ],
+    "notRecommendedWhen": [
+      "PI极度紧张且底盘未补齐"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "intake",
+      "intake_manifold"
+    ]
+  },
+  {
+    "id": "intake",
+    "name": "进气",
+    "category": "engine",
+    "priority": 25,
+    "grantsCapabilities": [],
+    "summary": "PI效率第二高的引擎升级。安装优先级第2。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升动力",
+      "改善进气效率"
+    ],
+    "sideEffects": [
+      "消耗少量PI"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "launch_wheelspin"
+    ],
+    "notRecommendedWhen": [
+      "PI极度紧张且底盘未补齐"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "exhaust",
+      "intake_manifold"
+    ]
+  },
+  {
+    "id": "intake_manifold",
+    "name": "进气歧管",
+    "category": "engine",
+    "priority": 26,
+    "grantsCapabilities": [],
+    "summary": "与赛车进气配合发挥完整收益，安装优先级第3。只装赛车进气而不升级歧管会浪费性能潜力。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升动力",
+      "与进气升级协同增效"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "单独安装收益有限"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "launch_wheelspin"
+    ],
+    "notRecommendedWhen": [
+      "未安装赛车进气",
+      "PI紧张"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "intake",
+      "exhaust"
+    ]
+  },
+  {
+    "id": "ignition",
+    "name": "点火系统",
+    "category": "engine",
+    "priority": 27,
+    "grantsCapabilities": [],
+    "summary": "PI成本最低的引擎升级之一，安装优先级第4。超过B级后几乎总值得安装。可作为PI补点工具。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升动力",
+      "改善燃烧效率",
+      "PI成本极低"
+    ],
+    "sideEffects": [
+      "消耗少量PI"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "PI补点"
+    ],
+    "notRecommendedWhen": [
+      "B级以下PI极度紧张"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "fuel_system"
+    ]
+  },
+  {
+    "id": "fuel_system",
+    "name": "燃油系统",
+    "category": "engine",
+    "priority": 28,
+    "grantsCapabilities": [],
+    "summary": "支撑高功率升级所必需，安装优先级第5。应先于赛车活塞或赛车排量安装。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升动力",
+      "支撑高功率升级供油需求"
+    ],
+    "sideEffects": [
+      "消耗PI"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "launch_wheelspin"
+    ],
+    "notRecommendedWhen": [
+      "未安装排气和进气",
+      "PI紧张且基础引擎升级未完成"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "ignition",
+      "pistons",
+      "displacement"
+    ]
+  },
+  {
+    "id": "camshaft",
+    "name": "凸轮轴",
+    "category": "engine",
+    "priority": 29,
+    "grantsCapabilities": [],
+    "summary": "安装优先级第7。高度依赖赛事类型——高级别公路赛值得安装，越野/泥地原厂或运动更好。赛车凸轮轴把动力推向高转，低转扭矩损失明显。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升高转速动力",
+      "改变动力输出曲线"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "低转扭矩损失",
+      "越野/泥地可能反而更慢"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "公路赛高转速需求"
+    ],
+    "notRecommendedWhen": [
+      "越野/泥地赛事",
+      "低级别需要低转扭矩",
+      "PI紧张"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "pistons",
+      "valves"
+    ]
+  },
+  {
+    "id": "pistons",
+    "name": "活塞与压缩",
+    "category": "engine",
+    "priority": 30,
+    "grantsCapabilities": [],
+    "summary": "安装优先级第8。高动力高PI成本升级，与凸轮轴配合效果更好。会让引擎更偏向高转速运行。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升动力",
+      "提高压缩比",
+      "与凸轮轴协同增效"
+    ],
+    "sideEffects": [
+      "消耗大量PI",
+      "偏向高转速运行",
+      "低转扭矩可能下降"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "公路赛高转速需求"
+    ],
+    "notRecommendedWhen": [
+      "PI紧张",
+      "低级别赛事",
+      "越野/泥地赛事"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "camshaft",
+      "valves"
+    ]
+  },
+  {
+    "id": "valves",
+    "name": "气门",
+    "category": "engine",
+    "priority": 31,
+    "grantsCapabilities": [],
+    "summary": "安装优先级第9。完成高转三件套（凸轮轴+活塞+气门），与凸轮轴配套工作，单独安装收益递减。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "提升高转速进气排气效率",
+      "与凸轮轴和活塞协同"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "单独安装收益递减"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "公路赛高转速需求"
+    ],
+    "notRecommendedWhen": [
+      "未安装凸轮轴",
+      "PI紧张",
+      "越野/泥地赛事"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "camshaft",
+      "pistons"
+    ]
+  },
+  {
+    "id": "displacement",
+    "name": "排量",
+    "category": "engine",
+    "priority": 32,
+    "grantsCapabilities": [],
+    "summary": "安装优先级第10，建议最后安装。单项动力提升最大但PI成本也最大（30-60点PI）。S1/S2/R级几乎总值得，B级通常跳过。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "大幅提升动力",
+      "单项动力提升最大"
+    ],
+    "sideEffects": [
+      "PI成本最大（30-60点PI）",
+      "可能挤占底盘预算"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "S1/S2/R级需要最大动力"
+    ],
+    "notRecommendedWhen": [
+      "B级及以下",
+      "PI紧张",
+      "底盘和轮胎还没补齐"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "camshaft",
+      "pistons",
+      "fuel_system"
+    ]
+  },
+  {
+    "id": "oil_cooling",
+    "name": "机油与冷却",
+    "category": "engine",
+    "priority": 33,
+    "grantsCapabilities": [],
+    "summary": "安装优先级第11。更像是可靠性升级，不直接增加峰值马力。耐力赛/长距离有价值，短冲刺可跳过。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "改善引擎热管理",
+      "提高长时间运行可靠性"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "不直接增加峰值马力"
+    ],
+    "goodFor": [
+      "耐力赛",
+      "长距离赛事"
+    ],
+    "notRecommendedWhen": [
+      "短冲刺赛事",
+      "PI紧张",
+      "需要每一点PI提升圈速"
+    ],
+    "relatedParts": [
+      "engine_upgrades",
+      "displacement"
+    ]
+  },
+  {
+    "id": "aero_front",
+    "name": "前保险杠/前空力",
+    "category": "aero",
+    "priority": 9,
+    "grantsCapabilities": ["tunable_front_aero"],
+    "summary": "赛车前保险杠解锁前下压力调校。公路/街赛/山路/计时赛应最大化下压力；泥土/越野赛用最低下压力（路面太松散空力无效）；直线加速用最低下压力（减少阻力提升极速）；漂移前保险杠可用。AWD应前高后低，RWD应中高前后。增加空气阻力和少量重量。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": ["road", "street", "touge", "time_attack", "drift"]
+    },
+    "effects": [
+      "解锁前下压力调校",
+      "改善高速前轴抓地",
+      "帮助中高速入弯"
+    ],
+    "sideEffects": [
+      "增加空气阻力",
+      "降低极速",
+      "增加少量重量"
+    ],
+    "goodFor": [
+      "entry_understeer",
+      "mid_corner_understeer",
+      "high_speed_instability"
+    ],
+    "notRecommendedWhen": [
+      "B级以下速度不够高",
+      "纯直线加速",
+      "PI很紧"
+    ],
+    "relatedParts": [
+      "aero_rear",
+      "differential"
+    ],
+    "notes": "公路/街赛/山路/计时赛最大化下压力；泥土/越野最低下压力；直线加速最低下压力；漂移前保险杠可用。"
+  },
+  {
+    "id": "aero_rear",
+    "name": "尾翼/后空力",
+    "category": "aero",
+    "priority": 10,
+    "grantsCapabilities": ["tunable_rear_aero"],
+    "summary": "赛车尾翼解锁后下压力调校。公路/街赛/山路/计时赛应最大化下压力；泥土/越野赛用最低下压力；直线加速用最低下压力；漂移跳过尾翼（降低滑动能力）。AWD应最低后下压力（反直觉但正确），RWD应中高。比前空力更多空气阻力。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": ["road", "street", "touge", "time_attack"]
+    },
+    "effects": [
+      "解锁后下压力调校",
+      "改善高速尾部稳定",
+      "提升高速弯信心"
+    ],
+    "sideEffects": [
+      "增加空气阻力比前空力更多",
+      "降低极速",
+      "增加少量重量"
+    ],
+    "goodFor": [
+      "exit_power_oversteer",
+      "high_speed_instability",
+      "braking_instability"
+    ],
+    "notRecommendedWhen": [
+      "AWD车辆通常最低后下压力",
+      "直线加速",
+      "B级以下",
+      "漂移（降低滑动能力）"
+    ],
+    "relatedParts": [
+      "aero_front",
+      "differential"
+    ],
+    "notes": "公路/街赛/山路/计时赛最大化下压力；泥土/越野最低下压力；直线加速最低下压力；漂移跳过尾翼。"
+  },
+  {
+    "id": "hood",
+    "name": "引擎盖",
+    "category": "aero",
+    "priority": 34,
+    "grantsCapabilities": [],
+    "summary": "纯减重升级，从车头减少约5-15kg。不解锁任何调校滑块。对前重车辆有助改善平衡。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "减少车头重量",
+      "改善前后重量分配"
+    ],
+    "sideEffects": [
+      "消耗少量PI"
+    ],
+    "goodFor": [
+      "前重车辆改善平衡",
+      "sluggish_response"
+    ],
+    "notRecommendedWhen": [
+      "PI紧张",
+      "车已经很轻"
+    ],
+    "relatedParts": [
+      "weight_reduction",
+      "aero_front"
+    ]
+  },
+  {
+    "id": "side_skirts",
+    "name": "侧裙",
+    "category": "aero",
+    "priority": 35,
+    "grantsCapabilities": [],
+    "summary": "主要是外观部件，对空力效率可能有轻微影响。不解锁任何调校滑块。PI紧张时谨慎选择。",
+    "confidence": "low",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "轻微改善空力效率"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "可能增加少量重量"
+    ],
+    "goodFor": [],
+    "notRecommendedWhen": [
+      "PI紧张",
+      "需要每一点PI用于性能升级"
+    ],
+    "relatedParts": [
+      "aero_front",
+      "aero_rear"
+    ]
+  },
+  {
+    "id": "differential",
+    "name": "差速器",
+    "category": "drivetrain",
+    "priority": 4,
+    "grantsCapabilities": ["tunable_differential"],
+    "summary": "赛车差速器解锁全部差速器调校（加速/减速锁定，AWD中央分配），对AWD尤为关键。调错会让车更难开。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "解锁差速器调校",
+      "解锁关键操控调校",
+      "改善出弯平衡",
+      "改变推头甩尾倾向"
+    ],
+    "sideEffects": [
+      "调错会让车更难开",
+      "锁定过快影响操控性"
+    ],
+    "goodFor": [
+      "exit_power_oversteer",
+      "exit_power_understeer",
+      "corner_exit_wheelspin",
+      "launch_wheelspin"
+    ],
+    "notRecommendedWhen": [
+      "B级运动差速器已够用",
+      "不打算做后续调校"
+    ],
+    "relatedParts": [
+      "transmission",
+      "antiroll_bars",
+      "aero_rear"
+    ]
+  },
+  {
+    "id": "transmission",
+    "name": "变速箱",
+    "category": "drivetrain",
+    "priority": 8,
+    "grantsCapabilities": ["adjustable_gearing"],
+    "summary": "运动变速箱解锁主减速比滑块，赛车变速箱解锁每个挡位的单独齿比调校和挡位数量选择（6-10速）。原厂/街道变速箱有时反而降低PI。B/A级运动变速箱通常是甜点选择，S1/S2级推荐赛车变速箱。引擎升级后变速箱PI成本可能变化，需要重新检查。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "解锁齿比调校",
+      "改善加速区间",
+      "减少不必要换挡",
+      "赛车变速箱可选挡位数量（6-10速）"
+    ],
+    "sideEffects": [
+      "赛车变速箱比运动变速箱多消耗约2-8点PI",
+      "更多挡位增加变速箱重量",
+      "主减速比不合适会伤害尾速或起步"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "launch_wheelspin",
+      "原厂齿比不合理",
+      "齿比无法匹配引擎动力区间"
+    ],
+    "notRecommendedWhen": [
+      "原厂齿比已适合路线",
+      "PI很紧且低级别配置",
+      "底盘和轮胎还没补齐"
+    ],
+    "relatedParts": [
+      "differential",
+      "driveline",
+      "engine_upgrades"
+    ],
+    "notes": "运动变速箱只解锁主减速比，适合只需调整整体加速/极速平衡的配置；赛车变速箱解锁每个挡位齿比，适合原厂齿比不合理或需要精确匹配动力区间的配置。赛车变速箱可选择6-10速，更多挡位让引擎保持在动力区间但增加换挡次数，不需要的挡位可以通过设为与相邻挡位相同来'隐藏'。引擎升级后重新检查变速箱PI成本——原厂动力下便宜的运动变速箱，装了赛车排气后可能变贵。不要默认拉满所有传动系统等级（变速箱+离合器+传动轴+差速器可能消耗15-25点PI）。"
+  },
+  {
+    "id": "driveline",
+    "name": "传动轴",
+    "category": "drivetrain",
+    "priority": 11,
+    "grantsCapabilities": [],
+    "summary": "轻量化传动轴，减少传动系统旋转质量，改善油门响应。PI效率较高的减重选择。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "减少传动系统旋转质量",
+      "改善油门响应",
+      "降低车重"
+    ],
+    "sideEffects": [
+      "消耗少量PI"
+    ],
+    "goodFor": [
+      "low_top_speed",
+      "sluggish_response"
+    ],
+    "notRecommendedWhen": [
+      "车已经很轻",
+      "PI有更紧迫需求"
+    ],
+    "relatedParts": [
+      "flywheel",
+      "weight_reduction",
+      "clutch"
+    ]
+  },
+  {
+    "id": "flywheel",
+    "name": "飞轮",
+    "category": "drivetrain",
+    "priority": 12,
+    "grantsCapabilities": [],
+    "summary": "更轻飞轮加快转速攀升，有时反而降低PI。公路/街赛用赛车飞轮（更快转速响应）；泥土/越野用运动飞轮（不要损失太多动量）；直线加速用赛车飞轮（最快转速响应帮助起步）；漂移用运动飞轮（太响应=更难控制）。改善油门响应和降低转动惯量。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "改善油门响应",
+      "降低转动惯量",
+      "有时降低PI"
+    ],
+    "sideEffects": [
+      "消耗少量PI有时反而降低"
+    ],
+    "goodFor": [
+      "sluggish_response",
+      "launch_wheelspin"
+    ],
+    "notRecommendedWhen": [
+      "不需要更快油门响应"
+    ],
+    "relatedParts": [
+      "driveline",
+      "clutch",
+      "engine_upgrades"
+    ],
+    "notes": "公路/街赛选赛车飞轮；泥土/越野选运动飞轮（保留动量）；直线加速选赛车飞轮（最快起步）；漂移选运动飞轮（太响应难控制）。"
+  },
+  {
+    "id": "clutch",
+    "name": "离合器",
+    "category": "drivetrain",
+    "priority": 15,
+    "grantsCapabilities": [],
+    "summary": "主要影响重量，使用手动带离合时换挡速度收益有限。PI效率较低。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "减轻重量"
+    ],
+    "sideEffects": [
+      "消耗PI",
+      "不使用手动带离合时换挡速度收益有限"
+    ],
+    "goodFor": [
+      "low_top_speed"
+    ],
+    "notRecommendedWhen": [
+      "使用手动带离合时换挡速度无差异",
+      "PI效率低"
+    ],
+    "relatedParts": [
+      "driveline",
+      "flywheel",
+      "transmission"
+    ]
+  },
+  {
+    "id": "drivetrain_conversion",
+    "name": "驱动形式转换",
+    "category": "conversion",
+    "priority": 36,
+    "grantsCapabilities": [],
+    "summary": "将RWD/FWD转为AWD或反之。PI成本差异很大（30-80+点）。S1/S2公路赛/泥地/越野→AWD通常强势；漂移→必须RWD；低级别公路→RWD通常更好。AWD转换后通常搭载赛车变速箱。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "改变驱动形式",
+      "改变操控特性",
+      "改变PI成本"
+    ],
+    "sideEffects": [
+      "PI成本差异很大（30-80+点）",
+      "可能大幅改变车辆平衡",
+      "AWD转换增加重量"
+    ],
+    "goodFor": [
+      "S1/S2公路赛转AWD",
+      "泥地/越野转AWD",
+      "漂移转RWD"
+    ],
+    "notRecommendedWhen": [
+      "低级别公路赛转AWD",
+      "PI紧张",
+      "原厂驱动形式已适合赛事"
+    ],
+    "relatedParts": [
+      "differential",
+      "transmission",
+      "engine_swap"
+    ]
+  },
+  {
+    "id": "engine_swap",
+    "name": "引擎互换",
+    "category": "conversion",
+    "priority": 37,
+    "grantsCapabilities": [],
+    "summary": "整体引擎替换，彻底改变动力特性。关键是功重比而非排量大小。高转速引擎适合公路赛，高扭矩V8适合直线加速/漂移/越野。互换后必须检查进气形式升级菜单。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "彻底改变动力特性",
+      "可能大幅提升功重比",
+      "改变可用升级路径"
+    ],
+    "sideEffects": [
+      "PI成本不可预测",
+      "互换后需重新调校",
+      "可能改变车辆平衡"
+    ],
+    "goodFor": [
+      "原厂引擎功重比不足",
+      "需要特定动力特性"
+    ],
+    "notRecommendedWhen": [
+      "原厂引擎已足够",
+      "不了解互换引擎特性",
+      "PI预算不确定"
+    ],
+    "relatedParts": [
+      "aspiration",
+      "transmission",
+      "drivetrain_conversion"
+    ]
+  },
+  {
+    "id": "aspiration",
+    "name": "进气形式",
+    "category": "conversion",
+    "priority": 38,
+    "grantsCapabilities": [],
+    "summary": "改变引擎进气方式（NA/机械增压/双涡轮/单涡轮）。显著改变动力输出特性。不同引擎可用选项和PI成本差异很大，应逐项尝试。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "effects": [
+      "改变引擎进气方式",
+      "显著改变动力输出特性",
+      "可能大幅提升动力"
+    ],
+    "sideEffects": [
+      "PI成本差异很大",
+      "涡轮迟滞影响响应",
+      "改变动力曲线特性"
+    ],
+    "goodFor": [
+      "需要大幅提升动力",
+      "公路赛适合双涡轮/单涡轮",
+      "直线加速适合机械增压"
+    ],
+    "notRecommendedWhen": [
+      "PI紧张",
+      "不了解不同进气形式特性",
+      "越野/泥地需要线性动力输出"
+    ],
+    "relatedParts": [
+      "engine_swap",
+      "exhaust",
+      "intake"
+    ]
   }
 ]

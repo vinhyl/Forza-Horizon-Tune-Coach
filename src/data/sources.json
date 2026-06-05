@@ -1,80 +1,16 @@
 [
   {
-    "id": "sample-general-principles",
-    "title": "通用改装原则（sample）",
-    "type": "sample",
-    "confidence": "medium",
-    "sample": true,
-    "notes": "初始示例来源，用于演示规则系统结构，不代表 FH6 完整或官方数据。"
-  },
-  {
-    "id": "sample-user-observation",
-    "title": "用户游戏内观察（sample）",
-    "type": "user_input",
-    "confidence": "variable",
-    "sample": true,
-    "notes": "来自用户当前在游戏界面看到的信息，例如 PI 变化、零件是否可选、车辆手感反馈。"
-  },
-  {
-    "id": "sample-structured-coaching",
-    "title": "调车问诊逻辑（sample）",
-    "type": "sample",
-    "confidence": "medium",
-    "sample": true,
-    "notes": "用于演示症状 -> 调整 -> 反馈 -> 下一步的引导流程。"
-  },
-  {
-    "id": "forza_official_fh6_car_list",
-    "title": "Forza Horizon 6 Official Car List",
+    "id": "fh6_game_data",
+    "title": "FH6 游戏文件提取数据",
     "type": "official",
     "confidence": "high",
-    "sample": false,
-    "url": "https://forza.net/fh6cars?pubDate=20260123",
-    "notes": "官方 FH6 车辆列表，用于车辆基础目录字段采集。"
+    "notes": "从 FH6 游戏文件中提取的调校描述、升级部件名称和说明文本"
   },
   {
-    "id": "forzafire_fh6_platform_handling",
-    "title": "ForzaFire FH6 Platform & Handling Tuning Guide",
+    "id": "fh6_tuning_guide",
+    "title": "FH6 调校指南",
     "type": "authority_guide",
-    "confidence": "medium",
-    "sample": false,
-    "url": "https://www.forzafire.com/guides/forza-horizon-6-platform-and-handling-tuning-guide",
-    "notes": "用于归纳悬挂、防倾杆、刹车、减重、定位、弹簧、阻尼等规则事实。"
-  },
-  {
-    "id": "forzafire_fh6_tires_rims",
-    "title": "ForzaFire FH6 Tires & Rims Tuning Guide",
-    "type": "authority_guide",
-    "confidence": "medium",
-    "sample": false,
-    "url": "https://www.forzafire.com/guides/forza-horizon-6-tires-and-rims-tuning-guide",
-    "notes": "用于归纳轮胎胶料、胎宽、轮圈和胎压规则事实。"
-  },
-  {
-    "id": "forzafire_fh6_aero_appearance",
-    "title": "ForzaFire FH6 Aero & Appearance Tuning Guide",
-    "type": "authority_guide",
-    "confidence": "medium",
-    "sample": false,
-    "url": "https://www.forzafire.com/guides/forza-horizon-6-aero-and-appearance-tuning-guide",
-    "notes": "用于归纳前后空力、空力平衡和风阻取舍。"
-  },
-  {
-    "id": "forzafire_fh6_drivetrain",
-    "title": "ForzaFire FH6 Drivetrain Tuning Guide",
-    "type": "authority_guide",
-    "confidence": "medium",
-    "sample": false,
-    "url": "https://www.forzafire.com/guides/forza-horizon-6-drivetrain-tuning-guide",
-    "notes": "用于归纳驱动转换、变速箱、齿比、差速器等规则事实。"
-  },
-  {
-    "id": "forzafire_fh6_engine",
-    "title": "ForzaFire FH6 Engine Tuning Guide",
-    "type": "authority_guide",
-    "confidence": "medium",
-    "sample": false,
-    "url": "https://www.forzafire.com/guides/forza-horizon-6-engine-tuning-guide",
-    "notes": "用于归纳发动机升级、PI 效率和动力副作用。"
+    "confidence": "high",
+    "notes": "涵盖引擎、平台操控、轮胎、空力、传动和转换六大部分的完整调校指南"
   }
 ]

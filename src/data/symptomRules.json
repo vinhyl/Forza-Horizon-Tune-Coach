@@ -2,604 +2,6061 @@
   {
     "id": "entry_understeer",
     "name": "入弯推头",
-    "summary": "车辆转入弯心前不愿意进弯，通常和刹车释放、前轴抓地、前后防倾杆平衡有关。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["problem_happens_before_apex"],
-    "likelyCauses": ["front_tire_overloaded", "front_roll_balance_too_stiff", "too_much_entry_speed"],
-    "followUpQuestions": [
-      { "id": "speed_zone", "label": "主要发生在哪种弯？", "type": "single", "options": [{ "value": "slow", "label": "低速弯" }, { "value": "medium_fast", "label": "中高速弯" }] },
-      { "id": "braking", "label": "是否还在刹车时就开始推头？", "type": "single", "options": [{ "value": "yes", "label": "是" }, { "value": "no", "label": "不是很明显" }] }
+    "summary": "车辆转入弯心前不愿意进弯，方向盘打了但车头不指向弯心，通常和前轴抓地、防倾杆硬度、刹车释放时机有关。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
     ],
-    "entryStepId": "arb-front-softer",
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "入弯时车头不愿指向弯心",
+      "方向盘已经转动但车辆继续直行"
+    ],
+    "likelyCauses": [
+      "前防倾杆过硬导致前轮抓地不足",
+      "前轴空力下压力不够",
+      "前轮外倾角不够负导致弯中接触面积不足",
+      "刹车平衡偏后导致入弯前轮负荷不足"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "corner_type",
+        "label": "主要发生在哪种弯？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "all_corners",
+            "label": "所有弯都推"
+          },
+          {
+            "value": "high_speed_only",
+            "label": "只有高速弯"
+          },
+          {
+            "value": "low_speed_only",
+            "label": "只有低速弯"
+          }
+        ]
+      },
+      {
+        "id": "braking_before_entry",
+        "label": "入弯前提前刹车释放后推头是否减轻？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "yes",
+            "label": "减轻了"
+          },
+          {
+            "value": "no",
+            "label": "没有明显变化"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "eu-soften-front-arb",
     "steps": [
       {
-        "stepId": "arb-front-softer",
-        "action": "前防倾杆软一点，或后防倾杆硬一点",
-        "amount": "先调 1~2 格",
-        "reason": "让前轴在入弯和弯中更愿意咬住路面。",
-        "sideEffects": ["后轴可能更活", "高速稳定感可能下降"],
+        "stepId": "eu-soften-front-arb",
+        "action": "前防倾杆调软",
+        "amount": "1~2 格",
+        "reason": "前防倾杆更软→前轮抓地增加→转向不足减少。修推头先软前端，不要先硬后端。",
+        "sideEffects": [
+          "后轴可能更活跃",
+          "高速稳定感可能下降"
+        ],
         "testMethod": "同一处中速弯，比较是否更容易指向弯心。",
-        "relatedParts": ["antiroll_bars"],
-        "next": { "onImproved": "front-tire-check", "onNoChange": "brake-bias-rear", "onWorse": "rollback-front-arb" }
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "eu-refine-arb",
+          "onSlightlyImproved": "eu-front-aero",
+          "onImproved": "eu-front-aero",
+          "onNoChange": "eu-front-aero",
+          "onWorse": "eu-rollback-arb"
+        },
+        "alternatives": [
+          "eu-front-aero"
+        ],
+        "weight": 1
       },
       {
-        "stepId": "brake-bias-rear",
+        "stepId": "eu-front-aero",
+        "action": "增加前下压力",
+        "amount": "一小格",
+        "reason": "更多前下压力→高速弯前轮抓地更好→入弯指向更积极。",
+        "sideEffects": [
+          "极速可能下降",
+          "直线风阻增加"
+        ],
+        "testMethod": "用中高速弯测试入弯指向，不要用低速发夹弯判断。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调前空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "eu-refine-aero",
+          "onSlightlyImproved": "eu-front-camber",
+          "onImproved": "eu-front-camber",
+          "onNoChange": "eu-front-camber",
+          "onWorse": "eu-rollback-aero"
+        },
+        "alternatives": [
+          "eu-soften-front-arb"
+        ],
+        "weight": 2
+      },
+      {
+        "stepId": "eu-front-camber",
+        "action": "前轮外倾角调更负",
+        "amount": "-0.2°~-0.3°",
+        "reason": "负值外倾角→提升过弯时轮胎接触面积→弯中抓地更好。",
+        "sideEffects": [
+          "直线加减速性能可能下降",
+          "前胎内侧磨损加快"
+        ],
+        "testMethod": "同一弯道比较弯中指向，同时注意直线刹车是否变弱。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "eu-brake-bias",
+          "onImproved": "eu-brake-bias",
+          "onNoChange": "eu-brake-bias",
+          "onWorse": "eu-rollback-camber"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "eu-brake-bias",
         "action": "刹车平衡略向后移",
         "amount": "1%~2%",
-        "reason": "减少入弯时前轮同时承担转向和过多制动力的压力。",
-        "sideEffects": ["后轮可能更容易锁或不稳"],
+        "reason": "减少入弯时前轮同时承担转向和过多制动力的压力，让前轮有更多余量转向。",
+        "sideEffects": [
+          "后轮可能更容易锁死",
+          "刹车时车尾可能不稳"
+        ],
         "testMethod": "只测试重刹入弯，不要同时改其他项目。",
-        "relatedParts": ["brakes"],
-        "next": { "onImproved": "finish", "onNoChange": "front-tire-check", "onWorse": "rollback-front-arb" }
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调刹车，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "eu-front-tire-pressure",
+          "onImproved": "eu-front-tire-pressure",
+          "onNoChange": "eu-front-tire-pressure",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
       },
       {
-        "stepId": "front-tire-check",
-        "action": "检查前胎胶料/胎宽是否过弱",
-        "amount": "优先小幅升级前轴抓地",
-        "reason": "如果基础前轴抓地不足，调校只能缓解，不能根治。",
-        "sideEffects": ["PI 成本可能较高", "直线速度可能下降"],
-        "testMethod": "同赛段前后对照，不只看 PI。",
-        "relatedParts": ["tire_compound", "tire_width"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "stepId": "eu-front-tire-pressure",
+        "action": "降低前轮胎压",
+        "amount": "0.5~1.0 PSI",
+        "reason": "较低胎压→更大接触面积→更强抓地→入弯前轮更有信心。",
+        "sideEffects": [
+          "前胎响应可能变慢",
+          "前胎可能过热"
+        ],
+        "testMethod": "同一弯道连续跑3圈，观察入弯手感和胎温。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_compound",
+          "tire_width"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
       },
       {
-        "stepId": "rollback-front-arb",
-        "action": "恢复刚才的防倾杆变化，改查刹车或轮胎",
+        "stepId": "eu-refine-arb",
+        "action": "保留防倾杆调整方向，只做半步微调",
+        "amount": "刚才幅度的一半",
+        "reason": "已经找到有效方向，继续大幅调整容易把问题推到另一边。",
+        "sideEffects": [
+          "过调会变成甩尾"
+        ],
+        "testMethod": "跑2~3次同一弯，确认不是偶然。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "eu-rollback-arb"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "eu-refine-aero",
+        "action": "保留前空力调整方向，只做半步微调",
+        "amount": "刚才幅度的一半",
+        "reason": "已经找到有效方向，继续大幅调整容易过度牺牲极速。",
+        "sideEffects": [
+          "过调会严重拖慢直线速度"
+        ],
+        "testMethod": "同时测试弯中指向和直线末速。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调前空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "eu-rollback-aero"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "eu-rollback-arb",
+        "action": "恢复防倾杆变化，改查刹车或轮胎",
         "amount": "回到上一个可控设置",
         "reason": "变差说明车身平衡可能已越过可控区间。",
-        "sideEffects": ["需要多一次对照测试"],
+        "sideEffects": [
+          "需要多一次对照测试"
+        ],
         "testMethod": "恢复后跑同一弯，确认问题回到原状。",
-        "relatedParts": ["antiroll_bars", "brakes", "tire_width"],
-        "next": { "onImproved": "finish", "onNoChange": "front-tire-check", "onWorse": "finish" }
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars",
+          "brakes",
+          "tire_width"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars",
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调部件，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "eu-brake-bias",
+          "onSlightlyImproved": "eu-brake-bias",
+          "onImproved": "eu-brake-bias",
+          "onNoChange": "eu-front-tire-pressure",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "eu-rollback-aero",
+        "action": "恢复前空力变化",
+        "amount": "回到上一格",
+        "reason": "变差说明增加前下压力不是正确方向。",
+        "sideEffects": [
+          "需要转向其他排查路径"
+        ],
+        "testMethod": "恢复后对比入弯手感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调前空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "eu-front-camber",
+          "onSlightlyImproved": "eu-front-camber",
+          "onImproved": "eu-front-camber",
+          "onNoChange": "eu-front-camber",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "eu-rollback-camber",
+        "action": "恢复外倾角变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明外倾角方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向其他排查路径"
+        ],
+        "testMethod": "恢复后确认直线和弯中手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "eu-brake-bias",
+          "onSlightlyImproved": "eu-brake-bias",
+          "onImproved": "eu-brake-bias",
+          "onNoChange": "eu-brake-bias",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
       }
-    ]
+    ],
+    "notes": "修推头优先软前端，不要先硬后端。如果入弯前还在刹车就推头，先查刹车平衡。"
   },
   {
     "id": "mid_corner_understeer",
     "name": "弯中推头",
     "summary": "进弯后稳定转向阶段车辆越推越外，常见于前轴抓地不足、后轴过稳或空力平衡偏后。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["problem_happens_mid_corner"],
-    "likelyCauses": ["front_grip_low", "rear_too_stable", "aero_balance_rear_biased"],
-    "followUpQuestions": [
-      { "id": "has_aero", "label": "是否装了前后可调空力？", "type": "single", "options": [{ "value": "both", "label": "前后都有" }, { "value": "rear_only", "label": "只有后空力" }, { "value": "none", "label": "没有或不确定" }] }
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
     ],
-    "entryStepId": "front-aero-or-arb",
-    "steps": [
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "弯中稳定转向时车辆向外滑",
+      "过了弯心仍在推外"
+    ],
+    "likelyCauses": [
+      "前防倾杆过硬导致弯中前轮抓地不足",
+      "前轴空力不够",
+      "前弹簧过硬",
+      "AWD中央差速偏前导致弯中给油推头"
+    ],
+    "followUpQuestions": [
       {
-        "stepId": "front-aero-or-arb",
-        "action": "增加前下压力，或前防倾杆软一点",
-        "amount": "前下压力一小格；防倾杆 1~2 格",
-        "reason": "提高中高速弯的前轴抓地和持续转向能力。",
-        "sideEffects": ["极速可能下降", "后轴可能更活"],
-        "testMethod": "用一个稳定油门的中高速弯测试，不要用出弯全油阶段判断。",
-        "relatedParts": ["aero_front", "antiroll_bars"],
-        "next": { "onImproved": "finish", "onNoChange": "rear-aero-less", "onWorse": "rollback-balance" }
+        "id": "power_effect",
+        "label": "给油时推头是否加重？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "yes",
+            "label": "给油更推"
+          },
+          {
+            "value": "no",
+            "label": "和油门关系不大"
+          }
+        ]
       },
       {
-        "stepId": "rear-aero-less",
-        "action": "如果后空力很高，略降后下压力",
-        "amount": "一小格",
-        "reason": "尾部过稳会让车更不愿意转。",
-        "sideEffects": ["高速尾部稳定性下降"],
-        "testMethod": "只测试高速弯稳定性和弯中线位。",
-        "relatedParts": ["aero_rear"],
-        "next": { "onImproved": "finish", "onNoChange": "front-tire-upgrade", "onWorse": "rollback-balance" }
-      },
-      {
-        "stepId": "front-tire-upgrade",
-        "action": "升级前轴抓地来源",
-        "amount": "胶料或胎宽优先二选一",
-        "reason": "持续弯中推头常常需要基础抓地修正。",
-        "sideEffects": ["PI 预算紧张", "可能影响直线速度"],
-        "testMethod": "用同一段弯中最小速度和出弯路线对比。",
-        "relatedParts": ["tire_compound", "tire_width"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
-      },
-      {
-        "stepId": "rollback-balance",
-        "action": "恢复刚才的空力/防倾杆变化",
-        "amount": "回到上一组设置",
-        "reason": "变差说明不是简单增加前端或减少后端就能解决。",
-        "sideEffects": ["需要改查轮胎或驾驶线"],
-        "testMethod": "恢复后再跑一次确认。",
-        "relatedParts": ["aero_front", "aero_rear", "antiroll_bars"],
-        "next": { "onImproved": "front-tire-upgrade", "onNoChange": "front-tire-upgrade", "onWorse": "finish" }
+        "id": "drivetrain_type",
+        "label": "当前驱动形式？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "AWD",
+            "label": "AWD"
+          },
+          {
+            "value": "RWD",
+            "label": "RWD"
+          }
+        ]
       }
-    ]
-  },
-  {
-    "id": "exit_understeer",
-    "name": "出弯给油推头",
-    "summary": "出弯加油后车辆向外推，AWD 常和前差速/中央差速有关，RWD 则常和后轮牵引及油门时机有关。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["problem_happens_on_throttle_exit"],
-    "likelyCauses": ["front_diff_too_locked", "center_diff_too_front", "rear_too_stable_or_front_grip_low"],
-    "followUpQuestions": [
-      { "id": "drivetrain_confirm", "label": "当前驱动形式？", "type": "single", "options": [{ "value": "AWD", "label": "AWD" }, { "value": "RWD", "label": "RWD" }] },
-      { "id": "throttle", "label": "半油也推，还是全油才推？", "type": "single", "options": [{ "value": "partial", "label": "半油也推" }, { "value": "full", "label": "全油才明显" }] }
     ],
-    "entryStepId": "front-diff-less-lock",
+    "entryStepId": "mcu-soften-front-arb",
     "steps": [
       {
-        "stepId": "front-diff-less-lock",
-        "action": "AWD：降低前差速加速锁止",
-        "amount": "3%~5%",
-        "reason": "减少前轮在出弯给油时被动力牵着往外推的倾向。",
-        "sideEffects": ["可能降低牵引", "前轮拉出弯的感觉会弱一点"],
-        "testMethod": "同一个低速弯，固定入弯速度，只比较给油后的车头指向。",
-        "relatedParts": ["differential"],
-        "next": { "onImproved": "refine-small", "onNoChange": "center-diff-rear", "onWorse": "center-diff-rear" }
+        "stepId": "mcu-soften-front-arb",
+        "action": "前防倾杆调软",
+        "amount": "1~2 格",
+        "reason": "前防倾杆更软→前轮抓地增加→弯中推头减少。",
+        "sideEffects": [
+          "后轴可能更活跃",
+          "高速稳定感可能下降"
+        ],
+        "testMethod": "用一个稳定油门的中高速弯测试，不要用出弯全油阶段判断。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "mcu-refine-arb",
+          "onSlightlyImproved": "mcu-front-aero",
+          "onImproved": "mcu-front-aero",
+          "onNoChange": "mcu-front-aero",
+          "onWorse": "mcu-rollback-arb"
+        },
+        "alternatives": [
+          "mcu-front-aero"
+        ],
+        "weight": 1
       },
       {
-        "stepId": "center-diff-rear",
-        "action": "AWD：中央差速更偏后",
-        "amount": "3%~5%",
-        "reason": "让后轮承担更多动力，减少前轴被动力占用。",
-        "sideEffects": ["车尾可能更活", "湿滑路面更需要油门控制"],
-        "testMethod": "同一低速弯出弯，观察是否更愿意转出弯心。",
-        "relatedParts": ["differential"],
-        "next": { "onImproved": "refine-small", "onNoChange": "front-aero-small", "onWorse": "rear-grip-check" }
+        "stepId": "mcu-front-aero",
+        "action": "增加前下压力",
+        "amount": "一小格",
+        "reason": "更多前下压力→中高速弯前轮抓地更好→弯中更愿意转。",
+        "sideEffects": [
+          "极速可能下降"
+        ],
+        "testMethod": "用中高速弯测试弯中线位。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调前空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "mcu-soften-front-springs",
+          "onImproved": "mcu-soften-front-springs",
+          "onNoChange": "mcu-soften-front-springs",
+          "onWorse": "mcu-rollback-aero"
+        },
+        "alternatives": [
+          "mcu-soften-front-arb"
+        ],
+        "weight": 2
       },
       {
-        "stepId": "front-aero-small",
-        "action": "增加前下压力或前轴抓地",
-        "amount": "前下压力一小格，或检查前胎",
-        "reason": "如果差速变化无效，可能是前轴基础抓地或中高速前端不足。",
-        "sideEffects": ["极速可能下降", "PI 预算可能受影响"],
-        "testMethod": "区分低速发夹和中高速弯，确认哪类弯改善。",
-        "relatedParts": ["aero_front", "tire_width", "tire_compound"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "stepId": "mcu-soften-front-springs",
+        "action": "前弹簧调软",
+        "amount": "1~2 格",
+        "reason": "前弹簧比后弹簧软→增加前轮抓地→缓解转向不足。但太软→车底托底。",
+        "sideEffects": [
+          "车底可能托底",
+          "车身动作变多"
+        ],
+        "testMethod": "同一弯道比较弯中指向和车身控制。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "mcu-diff-check",
+          "onImproved": "mcu-diff-check",
+          "onNoChange": "mcu-diff-check",
+          "onWorse": "mcu-rollback-springs"
+        },
+        "alternatives": [],
+        "weight": 3
       },
       {
-        "stepId": "rear-grip-check",
-        "action": "恢复中央差速变化，检查后轮牵引",
-        "amount": "回退 3%~5%",
-        "reason": "变差可能说明后轮承受动力后已经接近失控。",
-        "sideEffects": ["会回到原本推头感"],
-        "testMethod": "恢复后测试是否甩尾减少但推头回来。",
-        "relatedParts": ["differential", "tire_width"],
-        "next": { "onImproved": "front-aero-small", "onNoChange": "finish", "onWorse": "finish" }
+        "stepId": "mcu-diff-check",
+        "action": "AWD：中央差速更偏后；RWD：检查后差速减速锁止",
+        "amount": "中央差速偏后3%~5%",
+        "reason": "AWD中央差速偏前→更多动力到前轮→推头。增加后轮扭矩→提升响应速度。",
+        "sideEffects": [
+          "车尾可能更活",
+          "湿滑路面更需要油门控制"
+        ],
+        "testMethod": "同一弯道给油出弯，观察是否更愿意转向。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "mcu-wider-front-tires",
+          "onImproved": "mcu-wider-front-tires",
+          "onNoChange": "mcu-wider-front-tires",
+          "onWorse": "mcu-rollback-diff"
+        },
+        "alternatives": [],
+        "weight": 4
       },
       {
-        "stepId": "refine-small",
-        "action": "保留改善方向，只做半步微调",
+        "stepId": "mcu-wider-front-tires",
+        "action": "升级前轴抓地来源",
+        "amount": "前胎宽或胶料优先二选一",
+        "reason": "持续弯中推头常常需要基础抓地修正。",
+        "sideEffects": [
+          "PI预算紧张",
+          "可能影响直线速度"
+        ],
+        "testMethod": "用同一段弯中最小速度和出弯路线对比。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_compound",
+          "tire_width"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "轮胎升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
+      },
+      {
+        "stepId": "mcu-refine-arb",
+        "action": "保留防倾杆调整方向，只做半步微调",
         "amount": "刚才幅度的一半",
         "reason": "已经找到有效方向，继续大幅调整容易把问题推到另一边。",
-        "sideEffects": ["过调会变成甩尾或牵引不足"],
-        "testMethod": "跑 2~3 次同一弯，确认不是偶然。",
-        "relatedParts": ["differential"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "sideEffects": [
+          "过调会变成甩尾"
+        ],
+        "testMethod": "跑2~3次同一弯，确认不是偶然。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "mcu-front-aero",
+          "onWorse": "mcu-rollback-arb"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "mcu-rollback-arb",
+        "action": "恢复防倾杆变化",
+        "amount": "回到上一个可控设置",
+        "reason": "变差说明不是简单软前端就能解决。",
+        "sideEffects": [
+          "需要改查空力或轮胎"
+        ],
+        "testMethod": "恢复后再跑一次确认。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "mcu-front-aero",
+          "onSlightlyImproved": "mcu-front-aero",
+          "onImproved": "mcu-front-aero",
+          "onNoChange": "mcu-front-aero",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "mcu-rollback-aero",
+        "action": "恢复前空力变化",
+        "amount": "回到上一格",
+        "reason": "变差说明增加前下压力不是正确方向。",
+        "sideEffects": [
+          "需要转向其他排查路径"
+        ],
+        "testMethod": "恢复后对比弯中手感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调前空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "mcu-soften-front-springs",
+          "onSlightlyImproved": "mcu-soften-front-springs",
+          "onImproved": "mcu-soften-front-springs",
+          "onNoChange": "mcu-soften-front-springs",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "mcu-rollback-springs",
+        "action": "恢复前弹簧变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明弹簧方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向差速或轮胎排查"
+        ],
+        "testMethod": "恢复后确认弯中手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "mcu-diff-check",
+          "onSlightlyImproved": "mcu-diff-check",
+          "onImproved": "mcu-diff-check",
+          "onNoChange": "mcu-diff-check",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "mcu-rollback-diff",
+        "action": "恢复差速变化",
+        "amount": "回到上一个稳定值",
+        "reason": "变差说明差速方向不适合当前车况。",
+        "sideEffects": [
+          "需要通过轮胎解决"
+        ],
+        "testMethod": "恢复后再比较推头出现时机。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "mcu-wider-front-tires",
+          "onSlightlyImproved": "mcu-wider-front-tires",
+          "onImproved": "mcu-wider-front-tires",
+          "onNoChange": "mcu-wider-front-tires",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
       }
-    ]
+    ],
+    "notes": "弯中推头优先软前防倾杆和加前空力。AWD弯中给油推头要查中央差速偏前问题。"
   },
   {
-    "id": "exit_oversteer",
-    "name": "出弯甩尾",
-    "summary": "出弯给油后车尾滑动，通常和后轮牵引、后差速加速锁止、动力输出和油门齿比有关。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["problem_happens_on_throttle_exit"],
-    "likelyCauses": ["rear_diff_too_locked", "rear_tire_grip_low", "power_too_aggressive"],
-    "entryStepId": "rear-diff-less-lock",
+    "id": "exit_power_understeer",
+    "name": "出弯给油推头",
+    "summary": "出弯加油后车辆向外推，AWD常和前差速/中央差速有关，RWD则较少出现此症状。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "AWD",
+        "RWD"
+      ]
+    },
+    "conditions": [
+      "出弯给油时车头向外推",
+      "给油越多推头越严重"
+    ],
+    "likelyCauses": [
+      "AWD中央差速偏前导致前轮被动力牵引往外推",
+      "前差速加速锁止过高",
+      "前轴基础抓地不足"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "drivetrain_confirm",
+        "label": "当前驱动形式？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "AWD",
+            "label": "AWD"
+          },
+          {
+            "value": "RWD",
+            "label": "RWD"
+          }
+        ]
+      },
+      {
+        "id": "throttle_amount",
+        "label": "半油也推还是全油才推？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "partial",
+            "label": "半油也推"
+          },
+          {
+            "value": "full",
+            "label": "全油才明显"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "epu-center-diff-rear",
     "steps": [
       {
-        "stepId": "rear-diff-less-lock",
+        "stepId": "epu-center-diff-rear",
+        "action": "AWD：中央差速更偏后",
+        "amount": "3%~5%",
+        "reason": "增加后轮扭矩→更多动力输送至后轮→减少前轮被动力占用→缓解推头。",
+        "sideEffects": [
+          "车尾可能更活",
+          "湿滑路面更需要油门控制"
+        ],
+        "testMethod": "同一低速弯出弯，观察是否更愿意转出弯心。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "epu-refine-center",
+          "onSlightlyImproved": "epu-front-diff-less",
+          "onImproved": "epu-front-diff-less",
+          "onNoChange": "epu-front-diff-less",
+          "onWorse": "epu-rollback-center"
+        },
+        "alternatives": [
+          "epu-front-diff-less"
+        ],
+        "weight": 1
+      },
+      {
+        "stepId": "epu-front-diff-less",
+        "action": "AWD：降低前差速加速锁止",
+        "amount": "3%~5%",
+        "reason": "降低前轮差速器加速设置→缓解转向不足，但降低太多→影响响应速度。",
+        "sideEffects": [
+          "可能降低前轮牵引",
+          "前轮拉出弯的感觉会弱一点"
+        ],
+        "testMethod": "同一个低速弯，固定入弯速度，只比较给油后的车头指向。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "epu-refine-front-diff",
+          "onSlightlyImproved": "epu-soften-front-arb",
+          "onImproved": "epu-soften-front-arb",
+          "onNoChange": "epu-soften-front-arb",
+          "onWorse": "epu-rollback-front-diff"
+        },
+        "alternatives": [
+          "epu-center-diff-rear"
+        ],
+        "weight": 2
+      },
+      {
+        "stepId": "epu-soften-front-arb",
+        "action": "前防倾杆调软",
+        "amount": "1~2 格",
+        "reason": "前防倾杆更软→前轮抓地增加→出弯给油时前轮更有信心。",
+        "sideEffects": [
+          "后轴可能更活跃"
+        ],
+        "testMethod": "同一出弯点给油，比较车头指向。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "epu-front-aero",
+          "onImproved": "epu-front-aero",
+          "onNoChange": "epu-front-aero",
+          "onWorse": "epu-rollback-arb"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "epu-front-aero",
+        "action": "增加前下压力",
+        "amount": "一小格",
+        "reason": "如果差速和防倾杆变化无效，可能是前轴基础抓地或中高速前端不足。",
+        "sideEffects": [
+          "极速可能下降",
+          "PI预算可能受影响"
+        ],
+        "testMethod": "区分低速发夹和中高速弯，确认哪类弯改善。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front",
+          "tire_width",
+          "tire_compound"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调前空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
+      },
+      {
+        "stepId": "epu-refine-center",
+        "action": "保留中央差速调整方向，只做半步微调",
+        "amount": "1%~2%",
+        "reason": "已经找到有效方向，继续大幅调整容易过度甩尾。",
+        "sideEffects": [
+          "过调会影响出弯牵引"
+        ],
+        "testMethod": "比较出弯速度而不只看手感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "epu-front-diff-less",
+          "onWorse": "epu-rollback-center"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "epu-refine-front-diff",
+        "action": "保留前差速调整方向，只做半步微调",
+        "amount": "1%~2%",
+        "reason": "已经找到有效方向，继续大幅调整容易过度影响牵引。",
+        "sideEffects": [
+          "过调会降低出弯效率"
+        ],
+        "testMethod": "比较出弯速度而不只看手感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "epu-soften-front-arb",
+          "onWorse": "epu-rollback-front-diff"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "epu-rollback-center",
+        "action": "恢复中央差速变化",
+        "amount": "回到上一个稳定值",
+        "reason": "变差可能说明后轮承受动力后已经接近失控。",
+        "sideEffects": [
+          "会回到原本推头感"
+        ],
+        "testMethod": "恢复后测试是否甩尾减少但推头回来。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "epu-front-diff-less",
+          "onSlightlyImproved": "epu-front-diff-less",
+          "onImproved": "epu-front-diff-less",
+          "onNoChange": "epu-front-diff-less",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "epu-rollback-front-diff",
+        "action": "恢复前差速变化",
+        "amount": "回到上一个稳定值",
+        "reason": "变差说明前差速方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向防倾杆或空力排查"
+        ],
+        "testMethod": "恢复后确认出弯手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "epu-soften-front-arb",
+          "onSlightlyImproved": "epu-soften-front-arb",
+          "onImproved": "epu-soften-front-arb",
+          "onNoChange": "epu-soften-front-arb",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "epu-rollback-arb",
+        "action": "恢复防倾杆变化",
+        "amount": "回到上一个可控设置",
+        "reason": "变差说明防倾杆方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向空力排查"
+        ],
+        "testMethod": "恢复后确认出弯手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "epu-front-aero",
+          "onSlightlyImproved": "epu-front-aero",
+          "onImproved": "epu-front-aero",
+          "onNoChange": "epu-front-aero",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      }
+    ],
+    "notes": "AWD出弯推头核心是中央差速偏前和前差速锁止过高。RWD出弯推头较少见，如果出现优先检查前轴基础抓地是否足够。"
+  },
+  {
+    "id": "exit_power_oversteer",
+    "name": "出弯甩尾",
+    "summary": "出弯给油后车尾滑动，通常和后轮牵引、后差速加速锁止、动力输出和油门时机有关。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "出弯给油时车尾向外滑动",
+      "给油越多甩尾越严重"
+    ],
+    "likelyCauses": [
+      "后差速加速锁止过高导致后轮一起突破抓地",
+      "后轴基础抓地不足",
+      "动力输出过激"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "drivetrain_type",
+        "label": "当前驱动形式？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "RWD",
+            "label": "RWD"
+          },
+          {
+            "value": "AWD",
+            "label": "AWD"
+          }
+        ]
+      },
+      {
+        "id": "onset_type",
+        "label": "甩尾是逐渐的还是突然的？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "gradual",
+            "label": "逐渐的，可以预判"
+          },
+          {
+            "value": "sudden",
+            "label": "突然的，很难反应"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "epo-rear-diff-less-lock",
+    "steps": [
+      {
+        "stepId": "epo-rear-diff-less-lock",
         "action": "降低后差速加速锁止",
         "amount": "3%~5%",
-        "reason": "降低给油时后轮一起突破抓地的倾向。",
-        "sideEffects": ["出弯牵引感可能变弱", "单轮空转风险增加"],
+        "reason": "提高后轮差速器加速设置→加剧转向过度，所以降低→缓解出弯甩尾。",
+        "sideEffects": [
+          "出弯牵引感可能变弱",
+          "单轮空转风险增加"
+        ],
         "testMethod": "固定二档或三档同一出弯点给油。",
-        "relatedParts": ["differential"],
-        "next": { "onImproved": "refine-rear", "onNoChange": "rear-tire-more", "onWorse": "rollback-power-delivery" }
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "epo-refine-rear-diff",
+          "onSlightlyImproved": "epo-rear-aero",
+          "onImproved": "epo-rear-aero",
+          "onNoChange": "epo-rear-aero",
+          "onWorse": "epo-rollback-rear-diff"
+        },
+        "alternatives": [
+          "epo-rear-aero"
+        ],
+        "weight": 1
       },
       {
-        "stepId": "rear-tire-more",
-        "action": "优先增加后轮牵引来源",
-        "amount": "后胎宽或胶料小幅升级",
-        "reason": "如果差速不能解决，可能是后轴基础抓地不足。",
-        "sideEffects": ["PI 成本上升", "车可能变钝"],
+        "stepId": "epo-rear-aero",
+        "action": "增加后下压力",
+        "amount": "一小格",
+        "reason": "更多后下压力→后轮更好接触路面→出弯给油时后轮更稳定。",
+        "sideEffects": [
+          "极速可能下降",
+          "可能增加推头倾向"
+        ],
+        "testMethod": "同一出弯点给油，观察后轮是否更安定。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调后空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "epo-soften-rear-arb",
+          "onImproved": "epo-soften-rear-arb",
+          "onNoChange": "epo-soften-rear-arb",
+          "onWorse": "epo-rollback-rear-aero"
+        },
+        "alternatives": [
+          "epo-rear-diff-less-lock"
+        ],
+        "weight": 2
+      },
+      {
+        "stepId": "epo-soften-rear-arb",
+        "action": "后防倾杆调软",
+        "amount": "1~2 格",
+        "reason": "后防倾杆更软→后轮抓地增加→车尾更稳定→甩尾减少。",
+        "sideEffects": [
+          "高速稳定感可能下降",
+          "车身侧倾变多"
+        ],
+        "testMethod": "同一出弯点给油，比较车尾安定感。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "epo-wider-rear-tires",
+          "onImproved": "epo-wider-rear-tires",
+          "onNoChange": "epo-wider-rear-tires",
+          "onWorse": "epo-rollback-rear-arb"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "epo-wider-rear-tires",
+        "action": "加宽后轮胎或升级后胎胶料",
+        "amount": "后胎宽或胶料优先二选一",
+        "reason": "后轴基础抓地不足时，调校只能缓解不能根治。",
+        "sideEffects": [
+          "PI成本上升",
+          "直线速度可能下降"
+        ],
         "testMethod": "比较能否更早全油。",
-        "relatedParts": ["tire_width", "tire_compound"],
-        "next": { "onImproved": "finish", "onNoChange": "gear-longer", "onWorse": "finish" }
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_width",
+          "tire_compound"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "轮胎升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "epo-rear-tire-pressure",
+          "onImproved": "epo-rear-tire-pressure",
+          "onNoChange": "epo-rear-tire-pressure",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
       },
       {
-        "stepId": "gear-longer",
-        "action": "略拉长低档齿比或终传",
-        "amount": "小幅调整，避免低档过暴躁",
-        "reason": "降低出弯瞬间扭矩冲击。",
-        "sideEffects": ["低速加速可能变慢"],
-        "testMethod": "只看同一档位出弯稳定性。",
-        "relatedParts": ["transmission", "power"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "stepId": "epo-rear-tire-pressure",
+        "action": "略提高后轮胎压",
+        "amount": "0.5 PSI",
+        "reason": "较高胎压→更快响应→后轮更不容易突然失去抓地。但注意不要过高。",
+        "sideEffects": [
+          "后胎温度可能降低",
+          "后胎可能瞬间失去抓地如果过高"
+        ],
+        "testMethod": "同一出弯点给油，观察后轮是否更可预判。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_compound",
+          "tire_width"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
       },
       {
-        "stepId": "rollback-power-delivery",
-        "action": "恢复差速变化，改查动力输出是否过激",
-        "amount": "回到上一个稳定值",
-        "reason": "变差说明差速方向不适合当前车。",
-        "sideEffects": ["需要通过齿比或轮胎解决"],
-        "testMethod": "恢复后再比较甩尾出现时机。",
-        "relatedParts": ["differential", "transmission", "power"],
-        "next": { "onImproved": "gear-longer", "onNoChange": "rear-tire-more", "onWorse": "finish" }
-      },
-      {
-        "stepId": "refine-rear",
-        "action": "保留改善方向，小幅回调找牵引上限",
+        "stepId": "epo-refine-rear-diff",
+        "action": "保留后差速调整方向，小幅回调找牵引上限",
         "amount": "1%~2%",
         "reason": "避免把车调得太没有出弯效率。",
-        "sideEffects": ["过低会影响加速"],
+        "sideEffects": [
+          "过低会影响加速"
+        ],
         "testMethod": "比较出弯速度而不只看手感。",
-        "relatedParts": ["differential"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "epo-rear-aero",
+          "onWorse": "epo-rollback-rear-diff"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "epo-rollback-rear-diff",
+        "action": "恢复后差速变化，改查动力输出是否过激",
+        "amount": "回到上一个稳定值",
+        "reason": "变差说明差速方向不适合当前车。",
+        "sideEffects": [
+          "需要通过空力或轮胎解决"
+        ],
+        "testMethod": "恢复后再比较甩尾出现时机。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "epo-rear-aero",
+          "onSlightlyImproved": "epo-rear-aero",
+          "onImproved": "epo-rear-aero",
+          "onNoChange": "epo-rear-aero",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "epo-rollback-rear-aero",
+        "action": "恢复后空力变化",
+        "amount": "回到上一格",
+        "reason": "变差说明增加后下压力不是正确方向。",
+        "sideEffects": [
+          "需要转向防倾杆或轮胎排查"
+        ],
+        "testMethod": "恢复后对比出弯安定感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调后空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "epo-soften-rear-arb",
+          "onSlightlyImproved": "epo-soften-rear-arb",
+          "onImproved": "epo-soften-rear-arb",
+          "onNoChange": "epo-soften-rear-arb",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "epo-rollback-rear-arb",
+        "action": "恢复后防倾杆变化",
+        "amount": "回到上一个可控设置",
+        "reason": "变差说明防倾杆方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向轮胎排查"
+        ],
+        "testMethod": "恢复后确认出弯手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "epo-wider-rear-tires",
+          "onSlightlyImproved": "epo-wider-rear-tires",
+          "onImproved": "epo-wider-rear-tires",
+          "onNoChange": "epo-wider-rear-tires",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
       }
-    ]
+    ],
+    "notes": "修甩尾优先软后端，不要先硬前端。RWD出弯甩尾核心是后差速锁止和后轴抓地。AWD出弯甩尾还要检查中央差速平衡。"
   },
   {
     "id": "braking_instability",
     "name": "刹车时车尾不稳",
     "summary": "重刹时车尾摆动或想掉头，常与刹车平衡、后轴稳定、悬挂和后空力相关。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["problem_happens_under_braking"],
-    "likelyCauses": ["brake_bias_too_rear", "rear_grip_low", "rear_platform_unstable"],
-    "entryStepId": "brake-bias-front",
-    "steps": [
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "重刹时车尾摆动",
+      "刹车时方向不稳"
+    ],
+    "likelyCauses": [
+      "刹车平衡偏后导致后轮锁死",
+      "后轮回弹阻尼不足",
+      "后轴空力不够",
+      "后防倾杆过硬"
+    ],
+    "followUpQuestions": [
       {
-        "stepId": "brake-bias-front",
-        "action": "刹车平衡略向前移",
-        "amount": "1%~2%",
-        "reason": "减少后轮制动负担，提升重刹直线稳定。",
-        "sideEffects": ["可能增加入弯推头", "刹车距离不一定更短"],
-        "testMethod": "同一刹车点，保持方向盘尽量直。",
-        "relatedParts": ["brakes"],
-        "next": { "onImproved": "finish", "onNoChange": "rear-stability", "onWorse": "rollback-brake" }
+        "id": "speed_zone",
+        "label": "只在高速重刹时发生，还是低速也发生？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "high_speed_only",
+            "label": "只有高速重刹"
+          },
+          {
+            "value": "all_speeds",
+            "label": "各种速度都有"
+          }
+        ]
       },
       {
-        "stepId": "rear-stability",
-        "action": "增加后轴稳定来源",
-        "amount": "后胎、后空力或略软后悬挂方向",
-        "reason": "后轴在重量前移时需要保留足够稳定余量。",
-        "sideEffects": ["可能加重推头", "极速可能下降"],
-        "testMethod": "重刹后再轻微转向，观察车尾是否安定。",
-        "relatedParts": ["tire_width", "aero_rear", "suspension"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "rollback-brake" }
-      },
-      {
-        "stepId": "rollback-brake",
-        "action": "恢复刹车平衡，降低刹车压力",
-        "amount": "压力降 2%~4%",
-        "reason": "如果向前移仍变差，可能是锁死或输入过激。",
-        "sideEffects": ["刹车脚感会变软"],
-        "testMethod": "确认 ABS/锁死感是否减少。",
-        "relatedParts": ["brakes"],
-        "next": { "onImproved": "finish", "onNoChange": "rear-stability", "onWorse": "finish" }
+        "id": "abs_status",
+        "label": "ABS是否开启？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "on",
+            "label": "ABS开启"
+          },
+          {
+            "value": "off",
+            "label": "ABS关闭"
+          }
+        ]
       }
-    ]
-  },
-  {
-    "id": "high_speed_float",
-    "name": "高速发飘",
-    "summary": "高速直线或高速弯方向不稳，通常与空力、车高、悬挂平台和后轴稳定有关。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["problem_happens_high_speed"],
-    "likelyCauses": ["rear_aero_low", "ride_height_or_damping_unstable", "too_much_power_for_grip"],
-    "entryStepId": "rear-aero-up",
+    ],
+    "entryStepId": "bi-brake-bias-front",
     "steps": [
       {
-        "stepId": "rear-aero-up",
+        "stepId": "bi-brake-bias-front",
+        "action": "刹车平衡向前移",
+        "amount": "2%~3%",
+        "reason": "刹车平衡向前→提升稳定性，但可能导致严重转向不足。小幅前移是安全的第一步。",
+        "sideEffects": [
+          "可能增加入弯推头",
+          "刹车距离不一定更短"
+        ],
+        "testMethod": "同一刹车点，保持方向盘尽量直。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调刹车，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "bi-refine-brake",
+          "onSlightlyImproved": "bi-rear-rebound",
+          "onImproved": "bi-rear-rebound",
+          "onNoChange": "bi-rear-rebound",
+          "onWorse": "bi-rollback-brake"
+        },
+        "alternatives": [
+          "bi-rear-rebound"
+        ],
+        "weight": 1
+      },
+      {
+        "stepId": "bi-rear-rebound",
+        "action": "增加后轮回弹阻尼",
+        "amount": "1~2 格",
+        "reason": "后轮回弹阻尼更高→刹车时后轴更稳定→车尾更不容易摆动。",
+        "sideEffects": [
+          "后轮在颠簸路面可能跳起",
+          "过调会降低后轮抓地"
+        ],
+        "testMethod": "重刹后再轻微转向，观察车尾是否安定。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "bi-rear-aero",
+          "onImproved": "bi-rear-aero",
+          "onNoChange": "bi-rear-aero",
+          "onWorse": "bi-rollback-rebound"
+        },
+        "alternatives": [
+          "bi-brake-bias-front"
+        ],
+        "weight": 2
+      },
+      {
+        "stepId": "bi-rear-aero",
         "action": "增加后下压力",
         "amount": "一小格",
-        "reason": "优先提升高速尾部稳定和信心。",
-        "sideEffects": ["极速下降", "可能增加推头"],
-        "testMethod": "高速弯或高速变线对照，避免用低速弯判断。",
-        "relatedParts": ["aero_rear"],
-        "next": { "onImproved": "front-balance-check", "onNoChange": "suspension-platform", "onWorse": "rollback-aero" }
+        "reason": "更多后下压力→高速刹车时后轮更贴路面→车尾更稳定。",
+        "sideEffects": [
+          "极速可能下降",
+          "可能增加推头倾向"
+        ],
+        "testMethod": "高速重刹对照，观察车尾安定感。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调后空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "bi-soften-rear-arb",
+          "onImproved": "bi-soften-rear-arb",
+          "onNoChange": "bi-soften-rear-arb",
+          "onWorse": "bi-rollback-rear-aero"
+        },
+        "alternatives": [],
+        "weight": 3
       },
       {
-        "stepId": "front-balance-check",
-        "action": "如开始推头，补一点前下压力",
+        "stepId": "bi-soften-rear-arb",
+        "action": "后防倾杆略调软",
+        "amount": "1 格",
+        "reason": "后防倾杆更软→后轮抓地增加→刹车时后轴更稳定。",
+        "sideEffects": [
+          "高速稳定感可能下降"
+        ],
+        "testMethod": "重刹后观察车尾是否更安定。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "bi-rear-toe-in",
+          "onImproved": "bi-rear-toe-in",
+          "onNoChange": "bi-rear-toe-in",
+          "onWorse": "bi-rollback-rear-arb"
+        },
+        "alternatives": [],
+        "weight": 4
+      },
+      {
+        "stepId": "bi-rear-toe-in",
+        "action": "增加后轮内束",
+        "amount": "0.1°~0.2°",
+        "reason": "内束→提高稳定性→刹车时后轴更不容易摆动。",
+        "sideEffects": [
+          "转向反应速度降低",
+          "直线阻力增加"
+        ],
+        "testMethod": "重刹时观察方向稳定性。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
+      },
+      {
+        "stepId": "bi-refine-brake",
+        "action": "保留刹车平衡调整方向，只做半步微调",
+        "amount": "1%",
+        "reason": "已经找到有效方向，继续大幅调整容易过度推头。",
+        "sideEffects": [
+          "过调会导致严重转向不足"
+        ],
+        "testMethod": "重刹和入弯都要测试。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调刹车，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "bi-rear-rebound",
+          "onWorse": "bi-rollback-brake"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "bi-rollback-brake",
+        "action": "恢复刹车平衡变化，降低刹车压力",
+        "amount": "压力降2%~4%",
+        "reason": "如果向前移仍变差，可能是锁死或输入过激。",
+        "sideEffects": [
+          "刹车脚感会变软"
+        ],
+        "testMethod": "确认ABS/锁死感是否减少。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调刹车，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "bi-rear-rebound",
+          "onSlightlyImproved": "bi-rear-rebound",
+          "onImproved": "bi-rear-rebound",
+          "onNoChange": "bi-rear-rebound",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "bi-rollback-rebound",
+        "action": "恢复回弹阻尼变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明回弹阻尼方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向空力排查"
+        ],
+        "testMethod": "恢复后确认刹车手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "bi-rear-aero",
+          "onSlightlyImproved": "bi-rear-aero",
+          "onImproved": "bi-rear-aero",
+          "onNoChange": "bi-rear-aero",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "bi-rollback-rear-aero",
+        "action": "恢复后空力变化",
+        "amount": "回到上一格",
+        "reason": "变差说明增加后下压力不是正确方向。",
+        "sideEffects": [
+          "需要转向防倾杆排查"
+        ],
+        "testMethod": "恢复后对比刹车安定感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调后空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "bi-soften-rear-arb",
+          "onSlightlyImproved": "bi-soften-rear-arb",
+          "onImproved": "bi-soften-rear-arb",
+          "onNoChange": "bi-soften-rear-arb",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "bi-rollback-rear-arb",
+        "action": "恢复后防倾杆变化",
+        "amount": "回到上一个可控设置",
+        "reason": "变差说明防倾杆方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向后轮内束排查"
+        ],
+        "testMethod": "恢复后确认刹车手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "bi-rear-toe-in",
+          "onSlightlyImproved": "bi-rear-toe-in",
+          "onImproved": "bi-rear-toe-in",
+          "onNoChange": "bi-rear-toe-in",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
+      }
+    ],
+    "notes": "刹车不稳优先调刹车平衡向前，然后增加后轴稳定来源。ABS关闭时更容易锁死后轮，需要更保守的刹车平衡。"
+  },
+  {
+    "id": "high_speed_instability",
+    "name": "高速发飘",
+    "summary": "高速直线或高速弯方向不稳，通常与空力、车高、悬挂平台和后轴稳定有关。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "高速时方向不稳",
+      "高速弯信心不足"
+    ],
+    "likelyCauses": [
+      "后空力不够",
+      "后轮内束不足",
+      "后轮回弹阻尼不足",
+      "空力平衡偏前"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "speed_threshold",
+        "label": "大概在什么速度开始发飘？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "above_150",
+            "label": "150km/h以上"
+          },
+          {
+            "value": "above_200",
+            "label": "200km/h以上"
+          },
+          {
+            "value": "above_250",
+            "label": "250km/h以上"
+          }
+        ]
+      },
+      {
+        "id": "instability_end",
+        "label": "前端还是后端不稳？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "rear",
+            "label": "后端发飘"
+          },
+          {
+            "value": "front",
+            "label": "前端发飘"
+          },
+          {
+            "value": "both",
+            "label": "前后都不稳"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "hsi-rear-aero-up",
+    "steps": [
+      {
+        "stepId": "hsi-rear-aero-up",
+        "action": "增加后下压力",
         "amount": "一小格",
-        "reason": "保持前后空力平衡，避免只稳尾部。",
-        "sideEffects": ["极速继续下降"],
-        "testMethod": "同一高速弯比较入弯和弯中线位。",
-        "relatedParts": ["aero_front", "aero_rear"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "reason": "提升下压力→更好接触路面→改善高速操控。优先提升高速尾部稳定和信心。",
+        "sideEffects": [
+          "极速下降",
+          "可能增加推头"
+        ],
+        "testMethod": "高速弯或高速变线对照，避免用低速弯判断。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调后空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "hsi-refine-aero",
+          "onSlightlyImproved": "hsi-rear-toe-in",
+          "onImproved": "hsi-rear-toe-in",
+          "onNoChange": "hsi-rear-toe-in",
+          "onWorse": "hsi-rollback-aero"
+        },
+        "alternatives": [
+          "hsi-rear-toe-in"
+        ],
+        "weight": 1
       },
       {
-        "stepId": "suspension-platform",
-        "action": "检查车高和悬挂是否过低过硬",
-        "amount": "车高升一小格或软化阻尼",
-        "reason": "高速压缩或路面起伏会让过低过硬的车失去稳定平台。",
-        "sideEffects": ["响应可能变慢"],
-        "testMethod": "在相同高速路面起伏处测试。",
-        "relatedParts": ["suspension"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "stepId": "hsi-rear-toe-in",
+        "action": "增加后轮内束",
+        "amount": "0.1°~0.2°",
+        "reason": "内束→提高稳定性→高速时后轴更不容易摆动。",
+        "sideEffects": [
+          "转向反应速度降低",
+          "直线阻力增加"
+        ],
+        "testMethod": "高速直线和高速弯都要测试。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "hsi-rear-rebound",
+          "onImproved": "hsi-rear-rebound",
+          "onNoChange": "hsi-rear-rebound",
+          "onWorse": "hsi-rollback-toe"
+        },
+        "alternatives": [
+          "hsi-rear-aero-up"
+        ],
+        "weight": 2
       },
       {
-        "stepId": "rollback-aero",
+        "stepId": "hsi-rear-rebound",
+        "action": "增加后轮回弹阻尼",
+        "amount": "1~2 格",
+        "reason": "后回弹阻尼更高→高速时后轴更稳定→减少发飘感。",
+        "sideEffects": [
+          "后轮在颠簸路面可能跳起"
+        ],
+        "testMethod": "高速弯和高速起伏路面都要测试。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "hsi-check-aero-balance",
+          "onImproved": "hsi-check-aero-balance",
+          "onNoChange": "hsi-check-aero-balance",
+          "onWorse": "hsi-rollback-rebound"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "hsi-check-aero-balance",
+        "action": "检查空力平衡",
+        "amount": "确认前后空力比例",
+        "reason": "空力平衡值越低→转向不足越严重。平衡值越高→转向过度越严重。需要找到合适平衡点。",
+        "sideEffects": [
+          "调整可能影响弯中和低速操控"
+        ],
+        "testMethod": "同时测试高速稳定和弯中指向。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front",
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero",
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "hsi-tire-pressure",
+          "onImproved": "hsi-tire-pressure",
+          "onNoChange": "hsi-tire-pressure",
+          "onWorse": "hsi-rollback-balance"
+        },
+        "alternatives": [],
+        "weight": 4
+      },
+      {
+        "stepId": "hsi-tire-pressure",
+        "action": "略提高胎压",
+        "amount": "0.5 PSI",
+        "reason": "较高胎压→更快响应→高速时轮胎更不容易变形→更稳定。",
+        "sideEffects": [
+          "温度可能降低",
+          "可能瞬间失去抓地"
+        ],
+        "testMethod": "高速弯和直线都要测试。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_compound",
+          "tire_width"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
+      },
+      {
+        "stepId": "hsi-refine-aero",
+        "action": "保留后空力调整方向，只做半步微调",
+        "amount": "刚才幅度的一半",
+        "reason": "已经找到有效方向，继续大幅调整容易过度牺牲极速。",
+        "sideEffects": [
+          "过调会严重拖慢直线速度"
+        ],
+        "testMethod": "同时测试高速稳定和直线末速。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调后空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "hsi-rear-toe-in",
+          "onWorse": "hsi-rollback-aero"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "hsi-rollback-aero",
         "action": "恢复后空力变化，检查是否是前后失衡",
         "amount": "回到上一格",
         "reason": "变差可能来自空力平衡被破坏。",
-        "sideEffects": ["需要转向悬挂排查"],
+        "sideEffects": [
+          "需要转向悬挂排查"
+        ],
         "testMethod": "恢复后对比高速稳定感。",
-        "relatedParts": ["aero_front", "aero_rear", "suspension"],
-        "next": { "onImproved": "suspension-platform", "onNoChange": "suspension-platform", "onWorse": "finish" }
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front",
+          "aero_rear",
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero",
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "hsi-rear-toe-in",
+          "onSlightlyImproved": "hsi-rear-toe-in",
+          "onImproved": "hsi-rear-toe-in",
+          "onNoChange": "hsi-rear-toe-in",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "hsi-rollback-toe",
+        "action": "恢复后轮内束变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明内束方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向回弹阻尼排查"
+        ],
+        "testMethod": "恢复后确认高速手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "hsi-rear-rebound",
+          "onSlightlyImproved": "hsi-rear-rebound",
+          "onImproved": "hsi-rear-rebound",
+          "onNoChange": "hsi-rear-rebound",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "hsi-rollback-rebound",
+        "action": "恢复回弹阻尼变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明回弹阻尼方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向空力平衡排查"
+        ],
+        "testMethod": "恢复后确认高速手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "hsi-check-aero-balance",
+          "onSlightlyImproved": "hsi-check-aero-balance",
+          "onImproved": "hsi-check-aero-balance",
+          "onNoChange": "hsi-check-aero-balance",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "hsi-rollback-balance",
+        "action": "恢复空力平衡变化",
+        "amount": "回到上一组设置",
+        "reason": "变差说明空力平衡调整方向不对。",
+        "sideEffects": [
+          "需要转向胎压排查"
+        ],
+        "testMethod": "恢复后确认高速手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front",
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero",
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "hsi-tire-pressure",
+          "onSlightlyImproved": "hsi-tire-pressure",
+          "onImproved": "hsi-tire-pressure",
+          "onNoChange": "hsi-tire-pressure",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
       }
-    ]
+    ],
+    "notes": "高速发飘优先加后空力和后轮内束。如果前端发飘，加前空力。检查空力平衡比单纯加下压力更重要。"
   },
   {
-    "id": "too_slow_on_straights",
+    "id": "low_top_speed",
     "name": "直线太慢",
-    "summary": "直线速度不足不一定只靠加马力，先确认空力、齿比和 PI 预算。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["problem_happens_on_straight"],
-    "likelyCauses": ["too_much_aero", "gearing_too_short", "power_low"],
-    "entryStepId": "gear-top-speed",
+    "summary": "直线速度不足不一定只靠加马力，先确认空力、齿比和PI预算。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "直线末速明显低于同级别车辆",
+      "频繁顶转速但速度上不去"
+    ],
+    "likelyCauses": [
+      "空力下压力过高导致风阻过大",
+      "终传过短导致转速空间不足",
+      "胎宽过宽导致阻力过大",
+      "动力不足"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "pi_efficiency",
+        "label": "PI预算使用是否高效？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "efficient",
+            "label": "应该还行"
+          },
+          {
+            "value": "wasteful",
+            "label": "可能有些浪费"
+          },
+          {
+            "value": "unsure",
+            "label": "不确定"
+          }
+        ]
+      },
+      {
+        "id": "power_weight",
+        "label": "当前马力重量比大概多少？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "low",
+            "label": "偏低（不到300hp/t）"
+          },
+          {
+            "value": "medium",
+            "label": "中等（300~400hp/t）"
+          },
+          {
+            "value": "high",
+            "label": "偏高（400hp/t以上）"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "lts-lower-aero",
     "steps": [
       {
-        "stepId": "gear-top-speed",
+        "stepId": "lts-lower-aero",
+        "action": "降低前后下压力",
+        "amount": "各降一小格，优先不要破坏稳定",
+        "reason": "提升下压力→增加风阻。降低空力→减少风阻→直线更快。",
+        "sideEffects": [
+          "高速稳定和弯中抓地下降"
+        ],
+        "testMethod": "最长直线和高速弯都要测。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front",
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero",
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "lts-refine-aero",
+          "onSlightlyImproved": "lts-check-final-drive",
+          "onImproved": "lts-check-final-drive",
+          "onNoChange": "lts-check-final-drive",
+          "onWorse": "lts-rollback-aero"
+        },
+        "alternatives": [
+          "lts-check-final-drive"
+        ],
+        "weight": 1
+      },
+      {
+        "stepId": "lts-check-final-drive",
         "action": "检查终传是否过短",
         "amount": "略拉长终传",
-        "reason": "如果频繁顶转，马力没有被有效转成速度。",
-        "sideEffects": ["低速加速可能变弱"],
+        "reason": "终传过短→频繁顶转→马力没有被有效转成速度。",
+        "sideEffects": [
+          "低速加速可能变弱"
+        ],
         "testMethod": "看最长直线末端是否仍有转速空间。",
-        "relatedParts": ["transmission"],
-        "next": { "onImproved": "finish", "onNoChange": "aero-drag-check", "onWorse": "power-budget" }
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "transmission"
+        ],
+        "requiresCapabilities": [
+          "adjustable_gearing"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调变速箱，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lts-check-tire-width",
+          "onImproved": "lts-check-tire-width",
+          "onNoChange": "lts-check-tire-width",
+          "onWorse": "lts-rollback-final-drive"
+        },
+        "alternatives": [
+          "lts-lower-aero"
+        ],
+        "weight": 2
       },
       {
-        "stepId": "aero-drag-check",
-        "action": "检查前后下压力是否过高",
-        "amount": "各降一小格，优先不要破坏稳定",
-        "reason": "过高空力会牺牲直线速度。",
-        "sideEffects": ["高速稳定和弯中抓地下降"],
-        "testMethod": "最长直线和高速弯都要测。",
-        "relatedParts": ["aero_front", "aero_rear"],
-        "next": { "onImproved": "finish", "onNoChange": "power-budget", "onWorse": "finish" }
+        "stepId": "lts-check-tire-width",
+        "action": "检查胎宽是否过宽",
+        "amount": "如果过宽则适当缩窄",
+        "reason": "胎宽过宽→阻力增大→直线速度下降。适度加宽是甜点，过宽反而拖慢。",
+        "sideEffects": [
+          "抓地可能下降",
+          "需要重新评估PI分配"
+        ],
+        "testMethod": "对比直线末速和弯中速度。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_width"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "轮胎宽度无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lts-engine-upgrades",
+          "onImproved": "lts-engine-upgrades",
+          "onNoChange": "lts-engine-upgrades",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
       },
       {
-        "stepId": "power-budget",
+        "stepId": "lts-engine-upgrades",
         "action": "在稳定不丢失的前提下加动力",
         "amount": "优先轻量、低副作用动力件",
         "reason": "确认不是齿比和空力后，再用动力解决直线。",
-        "sideEffects": ["出弯打滑", "PI 超标"],
+        "sideEffects": [
+          "出弯打滑",
+          "PI超标"
+        ],
         "testMethod": "同时看直线末速和出弯可控性。",
-        "relatedParts": ["power", "tire_width", "differential"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "engine_upgrades",
+          "driveline"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "动力升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lts-weight-reduction",
+          "onImproved": "lts-weight-reduction",
+          "onNoChange": "lts-weight-reduction",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
+      },
+      {
+        "stepId": "lts-weight-reduction",
+        "action": "减重升级",
+        "amount": "优先低PI成本的减重等级",
+        "reason": "更轻的车→更好的马力重量比→更好的加速和末速。",
+        "sideEffects": [
+          "PI成本",
+          "可能影响操控平衡"
+        ],
+        "testMethod": "对比直线末速和弯中速度。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "weight_reduction"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "减重无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
+      },
+      {
+        "stepId": "lts-refine-aero",
+        "action": "保留空力调整方向，只做半步微调",
+        "amount": "刚才幅度的一半",
+        "reason": "已经找到有效方向，继续大幅调整容易过度牺牲弯中操控。",
+        "sideEffects": [
+          "过调会让高速弯变得不可控"
+        ],
+        "testMethod": "同时测试直线末速和高速弯信心。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front",
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero",
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "lts-check-final-drive",
+          "onWorse": "lts-rollback-aero"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "lts-rollback-aero",
+        "action": "恢复空力变化",
+        "amount": "回到上一组设置",
+        "reason": "变差说明降低空力不是正确方向或过度了。",
+        "sideEffects": [
+          "需要转向齿比排查"
+        ],
+        "testMethod": "恢复后对比直线和弯中。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_front",
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_front_aero",
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "lts-check-final-drive",
+          "onSlightlyImproved": "lts-check-final-drive",
+          "onImproved": "lts-check-final-drive",
+          "onNoChange": "lts-check-final-drive",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "lts-rollback-final-drive",
+        "action": "恢复终传变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明终传方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向胎宽排查"
+        ],
+        "testMethod": "恢复后确认直线和加速回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "transmission"
+        ],
+        "requiresCapabilities": [
+          "adjustable_gearing"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调变速箱，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "lts-check-tire-width",
+          "onSlightlyImproved": "lts-check-tire-width",
+          "onImproved": "lts-check-tire-width",
+          "onNoChange": "lts-check-tire-width",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
       }
-    ]
+    ],
+    "notes": "直线太慢先查空力和齿比，再加动力。PI预算分配比单纯堆马力更重要。"
   },
   {
     "id": "launch_wheelspin",
     "name": "起步打滑",
     "summary": "起步轮胎空转通常与后轮牵引、低档齿比、差速锁止和动力输出有关。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["problem_happens_launch"],
-    "likelyCauses": ["first_gear_too_short", "rear_grip_low", "diff_too_aggressive"],
-    "entryStepId": "first-gear-longer",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "起步时驱动轮空转",
+      "起步后无法有效加速"
+    ],
+    "likelyCauses": [
+      "后差速加速锁止过高",
+      "后轴基础抓地不足",
+      "一档齿比过短",
+      "动力输出过激"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "drivetrain_type",
+        "label": "当前驱动形式？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "RWD",
+            "label": "RWD"
+          },
+          {
+            "value": "AWD",
+            "label": "AWD"
+          }
+        ]
+      },
+      {
+        "id": "tire_type",
+        "label": "当前轮胎等级？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "stock_sport",
+            "label": "原厂或运动胎"
+          },
+          {
+            "value": "semi_slick",
+            "label": "半热熔"
+          },
+          {
+            "value": "race_slick",
+            "label": "热熔胎"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "lw-rear-diff-less",
     "steps": [
       {
-        "stepId": "first-gear-longer",
-        "action": "略拉长一档或终传",
-        "amount": "小幅调整",
-        "reason": "降低起步瞬间扭矩冲击。",
-        "sideEffects": ["低速响应变慢"],
+        "stepId": "lw-rear-diff-less",
+        "action": "RWD：降低后差速加速锁止；AWD：降低后差速加速锁止",
+        "amount": "3%~5%",
+        "reason": "降低后差速加速锁止→减少起步时后轮一起突破抓地的倾向。",
+        "sideEffects": [
+          "出弯牵引感可能变弱",
+          "单轮空转风险增加"
+        ],
         "testMethod": "重复三次起步，比较轮胎空转长度。",
-        "relatedParts": ["transmission"],
-        "next": { "onImproved": "finish", "onNoChange": "rear-grip-launch", "onWorse": "finish" }
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "lw-refine-diff",
+          "onSlightlyImproved": "lw-wider-rear-tires",
+          "onImproved": "lw-wider-rear-tires",
+          "onNoChange": "lw-wider-rear-tires",
+          "onWorse": "lw-rollback-diff"
+        },
+        "alternatives": [
+          "lw-wider-rear-tires"
+        ],
+        "weight": 1
       },
       {
-        "stepId": "rear-grip-launch",
-        "action": "增加驱动轮抓地或降低差速加速锁止",
-        "amount": "胎宽/胶料，或差速 3%~5%",
-        "reason": "让驱动轮更温和地建立牵引。",
-        "sideEffects": ["PI 成本", "出弯性格改变"],
+        "stepId": "lw-wider-rear-tires",
+        "action": "加宽后轮胎或升级后胎胶料",
+        "amount": "后胎宽或胶料优先二选一",
+        "reason": "更宽的后胎→更大接触面积→更强抓地→起步更不容易空转。",
+        "sideEffects": [
+          "PI成本上升",
+          "直线速度可能下降"
+        ],
         "testMethod": "同路面同辅助设置起步测试。",
-        "relatedParts": ["tire_width", "tire_compound", "differential"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
-      }
-    ]
-  },
-  {
-    "id": "frequent_shifting",
-    "name": "频繁换挡",
-    "summary": "弯中或短直频繁换挡会打断车辆平衡，通常先查齿比。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["gear_ratio_problem"],
-    "likelyCauses": ["gears_too_short", "final_drive_too_short"],
-    "entryStepId": "final-drive-longer",
-    "steps": [
-      {
-        "stepId": "final-drive-longer",
-        "action": "略拉长终传或问题档位",
-        "amount": "小幅调整",
-        "reason": "让常用弯角减少无意义升降档。",
-        "sideEffects": ["加速响应可能变慢"],
-        "testMethod": "用同一个弯，目标是一个档位稳定通过。",
-        "relatedParts": ["transmission"],
-        "next": { "onImproved": "finish", "onNoChange": "gear-spacing", "onWorse": "finish" }
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_width",
+          "tire_compound"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "轮胎升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lw-lower-rear-pressure",
+          "onImproved": "lw-lower-rear-pressure",
+          "onNoChange": "lw-lower-rear-pressure",
+          "onWorse": "finish"
+        },
+        "alternatives": [
+          "lw-rear-diff-less"
+        ],
+        "weight": 2
       },
       {
-        "stepId": "gear-spacing",
-        "action": "拉开相邻档位间距",
-        "amount": "只改发生问题的两个档位",
-        "reason": "减少弯前或弯中来回换挡。",
-        "sideEffects": ["某些速度段可能掉转速"],
-        "testMethod": "记录通过弯心时的档位和转速。",
-        "relatedParts": ["transmission"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "stepId": "lw-lower-rear-pressure",
+        "action": "降低后轮胎压",
+        "amount": "0.5~1.0 PSI",
+        "reason": "较低胎压→更大接触面积→更强抓地→起步更不容易空转。",
+        "sideEffects": [
+          "后胎响应可能变慢",
+          "后胎可能过热"
+        ],
+        "testMethod": "重复三次起步，比较空转长度。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_compound",
+          "tire_width"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lw-softer-rear-springs",
+          "onImproved": "lw-softer-rear-springs",
+          "onNoChange": "lw-softer-rear-springs",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "lw-softer-rear-springs",
+        "action": "后弹簧调软",
+        "amount": "1~2 格",
+        "reason": "后弹簧比前弹簧软→增加后轮抓地→起步时后轮更有牵引。",
+        "sideEffects": [
+          "车底可能托底",
+          "高速稳定感可能下降"
+        ],
+        "testMethod": "起步和出弯都要测试。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lw-center-balance",
+          "onImproved": "lw-center-balance",
+          "onNoChange": "lw-center-balance",
+          "onWorse": "lw-rollback-springs"
+        },
+        "alternatives": [],
+        "weight": 4
+      },
+      {
+        "stepId": "lw-center-balance",
+        "action": "AWD：检查中央差速平衡",
+        "amount": "略偏前2%~3%",
+        "reason": "AWD中央差速偏后过多→后轮扭矩过高→轮胎空转和大量转向过度。适当偏前更稳定。",
+        "sideEffects": [
+          "可能增加推头倾向"
+        ],
+        "testMethod": "起步和出弯都要测试。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
+      },
+      {
+        "stepId": "lw-refine-diff",
+        "action": "保留差速调整方向，只做半步微调",
+        "amount": "1%~2%",
+        "reason": "已经找到有效方向，继续大幅调整容易过度影响牵引。",
+        "sideEffects": [
+          "过调会降低起步和出弯效率"
+        ],
+        "testMethod": "重复三次起步，确认不是偶然。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "lw-wider-rear-tires",
+          "onWorse": "lw-rollback-diff"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "lw-rollback-diff",
+        "action": "恢复差速变化",
+        "amount": "回到上一个稳定值",
+        "reason": "变差说明差速方向不适合当前车况。",
+        "sideEffects": [
+          "需要通过轮胎解决"
+        ],
+        "testMethod": "恢复后确认起步手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "lw-wider-rear-tires",
+          "onSlightlyImproved": "lw-wider-rear-tires",
+          "onImproved": "lw-wider-rear-tires",
+          "onNoChange": "lw-wider-rear-tires",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "lw-rollback-springs",
+        "action": "恢复后弹簧变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明弹簧方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向中央差速排查"
+        ],
+        "testMethod": "恢复后确认起步和出弯手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "lw-center-balance",
+          "onSlightlyImproved": "lw-center-balance",
+          "onImproved": "lw-center-balance",
+          "onNoChange": "lw-center-balance",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
       }
-    ]
+    ],
+    "notes": "RWD起步打滑核心是后差速锁止和后轴抓地。AWD起步打滑还要检查中央差速平衡。一档齿比过短也是常见原因。"
   },
   {
-    "id": "curb_bounce",
+    "id": "curb_bouncing",
     "name": "压路肩弹跳",
     "summary": "压路肩或起伏路面弹跳，常见于车高过低、弹簧/阻尼过硬或悬挂行程不足。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["problem_happens_on_curbs"],
-    "likelyCauses": ["ride_height_too_low", "springs_too_stiff", "damping_too_stiff"],
-    "entryStepId": "raise-ride-height",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "压路肩后车辆弹跳",
+      "过起伏路面时车辆不稳"
+    ],
+    "likelyCauses": [
+      "压缩阻尼过硬",
+      "车高过低导致触底",
+      "防倾杆过硬",
+      "弹簧过硬"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "bounce_end",
+        "label": "哪一端弹跳更严重？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "front",
+            "label": "前端"
+          },
+          {
+            "value": "rear",
+            "label": "后端"
+          },
+          {
+            "value": "both",
+            "label": "前后都弹"
+          }
+        ]
+      },
+      {
+        "id": "flat_road",
+        "label": "平路是否也有弹跳？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "no",
+            "label": "只有路肩和起伏"
+          },
+          {
+            "value": "yes",
+            "label": "平路也有"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "cb-soften-compression",
     "steps": [
       {
-        "stepId": "raise-ride-height",
+        "stepId": "cb-soften-compression",
+        "action": "软化压缩阻尼",
+        "amount": "1~2 格",
+        "reason": "压缩阻尼过硬→路肩冲击无法被吸收→弹跳。软化→轮胎更快回到路面。",
+        "sideEffects": [
+          "车身动作变多",
+          "过渡性操控可能改变"
+        ],
+        "testMethod": "同一路肩用同速度通过。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "cb-refine-damping",
+          "onSlightlyImproved": "cb-raise-ride-height",
+          "onImproved": "cb-raise-ride-height",
+          "onNoChange": "cb-raise-ride-height",
+          "onWorse": "cb-rollback-compression"
+        },
+        "alternatives": [
+          "cb-raise-ride-height"
+        ],
+        "weight": 1
+      },
+      {
+        "stepId": "cb-raise-ride-height",
         "action": "车高升一小格",
         "amount": "一小格",
-        "reason": "给悬挂留出压缩空间，减少触底和弹跳。",
-        "sideEffects": ["重心略高", "响应可能稍慢"],
+        "reason": "车高过低→托底失控。适当升高→给悬挂留出压缩空间→减少触底和弹跳。",
+        "sideEffects": [
+          "重心略高",
+          "响应可能稍慢"
+        ],
         "testMethod": "同一路肩用同速度通过。",
-        "relatedParts": ["suspension"],
-        "next": { "onImproved": "finish", "onNoChange": "soften-damping", "onWorse": "finish" }
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "cb-soften-arbs",
+          "onImproved": "cb-soften-arbs",
+          "onNoChange": "cb-soften-arbs",
+          "onWorse": "cb-rollback-height"
+        },
+        "alternatives": [
+          "cb-soften-compression"
+        ],
+        "weight": 2
       },
       {
-        "stepId": "soften-damping",
-        "action": "软化回弹/压缩阻尼",
+        "stepId": "cb-soften-arbs",
+        "action": "防倾杆调软",
+        "amount": "1 格",
+        "reason": "防倾杆过硬→单侧受冲击时整个轴被拉起→弹跳。软化→更独立地处理路肩冲击。",
+        "sideEffects": [
+          "车身侧倾变多",
+          "高速稳定感可能下降"
+        ],
+        "testMethod": "压路肩后观察是否更快恢复稳定。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "cb-check-bottoming",
+          "onImproved": "cb-check-bottoming",
+          "onNoChange": "cb-check-bottoming",
+          "onWorse": "cb-rollback-arbs"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "cb-check-bottoming",
+        "action": "检查是否托底",
+        "amount": "观察车底是否触地",
+        "reason": "车高过低→车底托底→失控。如果托底需要继续升高车高或软化弹簧。",
+        "sideEffects": [
+          "升高车高会影响重心"
+        ],
+        "testMethod": "听是否有托底声，观察压路肩后是否突然失控。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "cb-softer-springs",
+          "onImproved": "cb-softer-springs",
+          "onNoChange": "cb-softer-springs",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
+      },
+      {
+        "stepId": "cb-softer-springs",
+        "action": "弹簧调软",
         "amount": "1~2 格",
-        "reason": "让轮胎更快回到路面并吸收路肩冲击。",
-        "sideEffects": ["车身动作变多"],
-        "testMethod": "看压路肩后是否更快恢复稳定。",
-        "relatedParts": ["suspension"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "reason": "弹簧过硬→悬挂行程不足→路肩冲击直接传递到车身→弹跳。软化→更多行程吸收冲击。",
+        "sideEffects": [
+          "车底可能托底",
+          "车身动作变多"
+        ],
+        "testMethod": "压路肩和起伏路面都要测试。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
+      },
+      {
+        "stepId": "cb-refine-damping",
+        "action": "保留阻尼调整方向，只做半步微调",
+        "amount": "刚才幅度的一半",
+        "reason": "已经找到有效方向，继续大幅调整容易过度影响操控。",
+        "sideEffects": [
+          "过调会让车身变得懒散"
+        ],
+        "testMethod": "跑2~3次同一路肩，确认不是偶然。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "cb-raise-ride-height",
+          "onWorse": "cb-rollback-compression"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "cb-rollback-compression",
+        "action": "恢复压缩阻尼变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明压缩阻尼方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向车高排查"
+        ],
+        "testMethod": "恢复后确认路肩手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "cb-raise-ride-height",
+          "onSlightlyImproved": "cb-raise-ride-height",
+          "onImproved": "cb-raise-ride-height",
+          "onNoChange": "cb-raise-ride-height",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "cb-rollback-height",
+        "action": "恢复车高变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明升高车高不是正确方向。",
+        "sideEffects": [
+          "需要转向防倾杆排查"
+        ],
+        "testMethod": "恢复后确认路肩手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "cb-soften-arbs",
+          "onSlightlyImproved": "cb-soften-arbs",
+          "onImproved": "cb-soften-arbs",
+          "onNoChange": "cb-soften-arbs",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "cb-rollback-arbs",
+        "action": "恢复防倾杆变化",
+        "amount": "回到上一个可控设置",
+        "reason": "变差说明防倾杆方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向托底排查"
+        ],
+        "testMethod": "恢复后确认路肩手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "cb-check-bottoming",
+          "onSlightlyImproved": "cb-check-bottoming",
+          "onImproved": "cb-check-bottoming",
+          "onNoChange": "cb-check-bottoming",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
       }
-    ]
+    ],
+    "notes": "压路肩弹跳优先软压缩阻尼和升车高。如果平路也弹跳，可能是回弹阻尼过高或弹簧过硬。"
   },
   {
-    "id": "unknown_next_part",
-    "name": "不知道下一步装什么",
-    "summary": "没有明确症状时，不建议盲目堆动力，先按赛事、等级和稳定目标建立升级优先级。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["no_clear_symptom"],
-    "likelyCauses": ["build_goal_unclear", "pi_budget_unknown"],
-    "entryStepId": "use-goal-priority",
+    "id": "sluggish_response",
+    "name": "转向响应迟钝",
+    "summary": "方向盘打了但车头反应慢，常见于前轮外束不足、防倾杆过软、阻尼不足或胎压过低。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "方向盘转动后车头反应慢",
+      "转向感觉模糊不精确"
+    ],
+    "likelyCauses": [
+      "前轮外束不足",
+      "前防倾杆过软",
+      "前轮回弹阻尼不足",
+      "胎压过低导致响应变慢"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "speed_range",
+        "label": "所有速度都迟钝还是只有低速？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "all_speeds",
+            "label": "所有速度都迟钝"
+          },
+          {
+            "value": "low_speed_only",
+            "label": "只有低速迟钝"
+          },
+          {
+            "value": "high_speed_only",
+            "label": "只有高速迟钝"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "sr-front-toe-out",
     "steps": [
       {
-        "stepId": "use-goal-priority",
-        "action": "先用改装目标向导确定升级顺序",
-        "amount": "选择赛事、等级、驱动和偏好",
-        "reason": "没有症状时，最稳的策略是先补通用抓地和可调基础。",
-        "sideEffects": ["不会给出所谓最优解，需要你用实测反馈收敛"],
-        "testMethod": "每装一个关键部件后跑同一路段，记录是否更稳或更快。",
-        "relatedParts": ["tire_compound", "brakes", "suspension", "differential"],
-        "next": { "onImproved": "finish", "onNoChange": "identify-symptom", "onWorse": "identify-symptom" }
+        "stepId": "sr-front-toe-out",
+        "action": "增加前轮外束",
+        "amount": "0.1°~0.2°",
+        "reason": "外束→提高转向反应速度→方向盘更灵敏。",
+        "sideEffects": [
+          "稳定性降低",
+          "直线阻力增加"
+        ],
+        "testMethod": "低速弯和高速弯都要测试转向反应。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "sr-refine-toe",
+          "onSlightlyImproved": "sr-stiffen-front-arb",
+          "onImproved": "sr-stiffen-front-arb",
+          "onNoChange": "sr-stiffen-front-arb",
+          "onWorse": "sr-rollback-toe"
+        },
+        "alternatives": [
+          "sr-stiffen-front-arb"
+        ],
+        "weight": 1
       },
       {
-        "stepId": "identify-symptom",
-        "action": "先选一个最明显症状再继续问诊",
-        "amount": "只选一个最大问题",
-        "reason": "结构化问诊需要明确车辆在哪个阶段出问题。",
-        "sideEffects": ["可能需要多跑一圈观察"],
-        "testMethod": "把问题归类为入弯、弯中、出弯、刹车、高速或直线。",
-        "relatedParts": ["brakes", "suspension", "transmission"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "stepId": "sr-stiffen-front-arb",
+        "action": "前防倾杆略调硬",
+        "amount": "1 格",
+        "reason": "前防倾杆略硬→减少前轴侧倾→转向更直接。",
+        "sideEffects": [
+          "前轮抓地可能减少",
+          "可能增加推头"
+        ],
+        "testMethod": "同一弯道比较转向反应速度。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "sr-front-rebound",
+          "onImproved": "sr-front-rebound",
+          "onNoChange": "sr-front-rebound",
+          "onWorse": "sr-rollback-arb"
+        },
+        "alternatives": [
+          "sr-front-toe-out"
+        ],
+        "weight": 2
+      },
+      {
+        "stepId": "sr-front-rebound",
+        "action": "增加前轮回弹阻尼",
+        "amount": "1~2 格",
+        "reason": "回弹阻尼更高→前轴更稳定→转向更精确。",
+        "sideEffects": [
+          "前轮在颠簸路面可能跳起"
+        ],
+        "testMethod": "连续弯道比较转向精确度。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "sr-check-tire-pressure",
+          "onImproved": "sr-check-tire-pressure",
+          "onNoChange": "sr-check-tire-pressure",
+          "onWorse": "sr-rollback-rebound"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "sr-check-tire-pressure",
+        "action": "检查胎压是否过低",
+        "amount": "如果过低则提高0.5~1.0 PSI",
+        "reason": "较低胎压→响应变慢→转向迟钝。适当提高→更快响应。",
+        "sideEffects": [
+          "温度可能降低",
+          "可能瞬间失去抓地"
+        ],
+        "testMethod": "同一弯道比较转向反应速度。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_compound",
+          "tire_width"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "sr-lighter-flywheel",
+          "onImproved": "sr-lighter-flywheel",
+          "onNoChange": "sr-lighter-flywheel",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
+      },
+      {
+        "stepId": "sr-lighter-flywheel",
+        "action": "换更轻的飞轮",
+        "amount": "升级飞轮",
+        "reason": "更轻的飞轮→发动机响应更快→整体感觉更灵活。",
+        "sideEffects": [
+          "PI成本",
+          "怠速可能不稳"
+        ],
+        "testMethod": "比较加速响应和转向整体感觉。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "flywheel"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "飞轮升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
+      },
+      {
+        "stepId": "sr-refine-toe",
+        "action": "保留外束调整方向，只做半步微调",
+        "amount": "0.05°",
+        "reason": "已经找到有效方向，继续大幅调整容易过度牺牲稳定性。",
+        "sideEffects": [
+          "过调会让高速变得不稳"
+        ],
+        "testMethod": "低速弯和高速直线都要测试。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "sr-stiffen-front-arb",
+          "onWorse": "sr-rollback-toe"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "sr-rollback-toe",
+        "action": "恢复外束变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明外束方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向防倾杆排查"
+        ],
+        "testMethod": "恢复后确认转向手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "sr-stiffen-front-arb",
+          "onSlightlyImproved": "sr-stiffen-front-arb",
+          "onImproved": "sr-stiffen-front-arb",
+          "onNoChange": "sr-stiffen-front-arb",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "sr-rollback-arb",
+        "action": "恢复防倾杆变化",
+        "amount": "回到上一个可控设置",
+        "reason": "变差说明防倾杆方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向回弹阻尼排查"
+        ],
+        "testMethod": "恢复后确认转向手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "sr-front-rebound",
+          "onSlightlyImproved": "sr-front-rebound",
+          "onImproved": "sr-front-rebound",
+          "onNoChange": "sr-front-rebound",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "sr-rollback-rebound",
+        "action": "恢复回弹阻尼变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明回弹阻尼方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向胎压排查"
+        ],
+        "testMethod": "恢复后确认转向手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "sr-check-tire-pressure",
+          "onSlightlyImproved": "sr-check-tire-pressure",
+          "onImproved": "sr-check-tire-pressure",
+          "onNoChange": "sr-check-tire-pressure",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
       }
-    ]
+    ],
+    "notes": "转向迟钝优先加前轮外束和硬前防倾杆。注意不要过度牺牲稳定性来换取响应。"
   },
   {
-    "id": "pi_over_limit",
-    "name": "PI 超等级",
-    "summary": "PI 超标时优先拆副作用大或非核心目标的项目，不要先拆掉解决核心症状的部件。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-general-principles"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["pi_over_target"],
-    "likelyCauses": ["too_many_power_parts", "expensive_weight_or_tire_parts", "aero_or_drivetrain_budget"],
-    "entryStepId": "remove-power-first",
-    "steps": [
+    "id": "long_braking_distance",
+    "name": "刹车距离长",
+    "summary": "刹车距离过长，常见于刹车部件等级不足、刹车压力过低、轮胎抓地不够或车重过大。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "刹车点明显比同级别车辆更早",
+      "重刹时感觉制动力不足"
+    ],
+    "likelyCauses": [
+      "刹车部件等级不足",
+      "刹车压力过低",
+      "刹车平衡不当",
+      "轮胎抓地不够",
+      "车重过大"
+    ],
+    "followUpQuestions": [
       {
-        "stepId": "remove-power-first",
-        "action": "优先下调非必要动力件",
-        "amount": "从最高 PI 成本或最难控制的动力件开始",
-        "reason": "稳定向构建里，动力最容易制造牵引和刹车副作用。",
-        "sideEffects": ["直线速度下降"],
-        "testMethod": "看圈速是否真的变慢，还是更稳后反而更快。",
-        "relatedParts": ["power"],
-        "next": { "onImproved": "finish", "onNoChange": "trim-weight-or-width", "onWorse": "trim-weight-or-width" }
+        "id": "wheel_lock",
+        "label": "刹车时是否容易锁死车轮？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "yes_easy",
+            "label": "很容易锁死"
+          },
+          {
+            "value": "no_never",
+            "label": "从不锁死"
+          },
+          {
+            "value": "sometimes",
+            "label": "偶尔锁死"
+          }
+        ]
       },
       {
-        "stepId": "trim-weight-or-width",
-        "action": "再考虑减重等级或胎宽退一级",
-        "amount": "只退一个项目",
-        "reason": "如果动力不能拆，再动 PI 成本高的非必须项目。",
-        "sideEffects": ["手感可能变钝或抓地下降"],
-        "testMethod": "退一级后跑同一路段，确认核心症状没有回来。",
-        "relatedParts": ["weight_reduction", "tire_width"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "id": "abs_status",
+        "label": "ABS是否开启？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "on",
+            "label": "ABS开启"
+          },
+          {
+            "value": "off",
+            "label": "ABS关闭"
+          }
+        ]
       }
-    ]
+    ],
+    "entryStepId": "lbd-upgrade-brakes",
+    "steps": [
+      {
+        "stepId": "lbd-upgrade-brakes",
+        "action": "升级到赛车刹车",
+        "amount": "Race刹车",
+        "reason": "赛车刹车→解锁刹车平衡和刹车压力调节→更强制动力。",
+        "sideEffects": [
+          "PI成本"
+        ],
+        "testMethod": "同一刹车点比较刹车距离。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "刹车升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "lbd-refine-brakes",
+          "onSlightlyImproved": "lbd-increase-pressure",
+          "onImproved": "lbd-increase-pressure",
+          "onNoChange": "lbd-increase-pressure",
+          "onWorse": "finish"
+        },
+        "alternatives": [
+          "lbd-increase-pressure"
+        ],
+        "weight": 1
+      },
+      {
+        "stepId": "lbd-increase-pressure",
+        "action": "增加刹车压力",
+        "amount": "2%~4%",
+        "reason": "刹车油压提升→降低踏板行程→更强制动力。但太高容易抱死。",
+        "sideEffects": [
+          "容易锁死车轮",
+          "踏板行程变短"
+        ],
+        "testMethod": "同一刹车点比较刹车距离和锁死感。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调刹车，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lbd-adjust-balance",
+          "onImproved": "lbd-adjust-balance",
+          "onNoChange": "lbd-adjust-balance",
+          "onWorse": "lbd-rollback-pressure"
+        },
+        "alternatives": [
+          "lbd-upgrade-brakes"
+        ],
+        "weight": 2
+      },
+      {
+        "stepId": "lbd-adjust-balance",
+        "action": "调整刹车平衡",
+        "amount": "根据锁死情况微调1%~2%",
+        "reason": "刹车平衡不当→某轴先锁死→整体制动力不足。找到前后同时锁死的平衡点。",
+        "sideEffects": [
+          "可能影响入弯操控"
+        ],
+        "testMethod": "同一刹车点比较刹车距离和稳定性。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调刹车，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lbd-wider-tires",
+          "onImproved": "lbd-wider-tires",
+          "onNoChange": "lbd-wider-tires",
+          "onWorse": "lbd-rollback-balance"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "lbd-wider-tires",
+        "action": "加宽轮胎",
+        "amount": "优先加宽前轴",
+        "reason": "更宽的轮胎→更大接触面积→更强制动力。",
+        "sideEffects": [
+          "PI成本上升",
+          "直线速度可能下降"
+        ],
+        "testMethod": "同一刹车点比较刹车距离。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_width"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "轮胎宽度无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lbd-check-compound",
+          "onImproved": "lbd-check-compound",
+          "onNoChange": "lbd-check-compound",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
+      },
+      {
+        "stepId": "lbd-check-compound",
+        "action": "检查轮胎胶料等级",
+        "amount": "如果太低则升级",
+        "reason": "更好的胶料→更强抓地→更短刹车距离。",
+        "sideEffects": [
+          "PI成本上升"
+        ],
+        "testMethod": "同一刹车点比较刹车距离。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_compound"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "轮胎升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "lbd-weight-reduction",
+          "onImproved": "lbd-weight-reduction",
+          "onNoChange": "lbd-weight-reduction",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
+      },
+      {
+        "stepId": "lbd-weight-reduction",
+        "action": "减重升级",
+        "amount": "优先低PI成本的减重等级",
+        "reason": "更轻的车→更短的刹车距离→更好的整体性能。",
+        "sideEffects": [
+          "PI成本",
+          "可能影响操控平衡"
+        ],
+        "testMethod": "同一刹车点比较刹车距离。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "weight_reduction"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "减重无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 6
+      },
+      {
+        "stepId": "lbd-refine-brakes",
+        "action": "保留刹车升级，微调压力和平衡",
+        "amount": "小幅调整",
+        "reason": "已经找到有效方向，微调找最佳刹车点。",
+        "sideEffects": [
+          "需要多次测试"
+        ],
+        "testMethod": "同一刹车点比较刹车距离。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调刹车，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "lbd-increase-pressure",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "lbd-rollback-pressure",
+        "action": "恢复刹车压力变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明刹车压力方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向刹车平衡排查"
+        ],
+        "testMethod": "恢复后确认刹车手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调刹车，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "lbd-adjust-balance",
+          "onSlightlyImproved": "lbd-adjust-balance",
+          "onImproved": "lbd-adjust-balance",
+          "onNoChange": "lbd-adjust-balance",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "lbd-rollback-balance",
+        "action": "恢复刹车平衡变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明刹车平衡方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向轮胎排查"
+        ],
+        "testMethod": "恢复后确认刹车手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "brakes"
+        ],
+        "requiresCapabilities": [
+          "tunable_brakes"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调刹车，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "lbd-wider-tires",
+          "onSlightlyImproved": "lbd-wider-tires",
+          "onImproved": "lbd-wider-tires",
+          "onNoChange": "lbd-wider-tires",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      }
+    ],
+    "notes": "刹车距离长优先升级刹车部件和调压力。如果容易锁死，先调平衡再调压力。ABS关闭时需要更保守的刹车设置。"
   },
   {
-    "id": "part_drops_pi",
-    "name": "某个零件反而降 PI，不知道值不值得装",
-    "summary": "单个零件降 PI 不代表一定亏或赚，需要看它是否解决当前症状、是否带来可测试收益。",
-    "confidence": "medium",
-    "sourceIds": ["sample-structured-coaching", "sample-user-observation"],
-    "sample": true,
-    "scope": { "eventType": ["road", "street", "touge"], "drivetrain": ["RWD", "AWD"] },
-    "conditions": ["part_changes_pi_unexpectedly"],
-    "likelyCauses": ["tradeoff_between_grip_weight_drag_power", "game_pi_model_not_explained"],
-    "entryStepId": "test-before-judging",
+    "id": "corner_exit_wheelspin",
+    "name": "出弯打滑",
+    "summary": "出弯时驱动轮空转，常见于差速锁止不足、轮胎抓地不够或弹簧过硬。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "road",
+        "street",
+        "touge",
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "出弯给油时驱动轮空转",
+      "出弯无法有效加速"
+    ],
+    "likelyCauses": [
+      "差速加速锁止不足导致单轮空转",
+      "驱动轮抓地不够",
+      "弹簧过硬导致出弯时驱动轮负荷不足"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "which_wheel",
+        "label": "内侧轮空转还是两侧都空转？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "inside",
+            "label": "只有内侧轮空转"
+          },
+          {
+            "value": "both",
+            "label": "两侧都空转"
+          }
+        ]
+      },
+      {
+        "id": "drivetrain_type",
+        "label": "当前驱动形式？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "RWD",
+            "label": "RWD"
+          },
+          {
+            "value": "AWD",
+            "label": "AWD"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "cew-increase-diff-lock",
     "steps": [
       {
-        "stepId": "test-before-judging",
-        "action": "先把它当作取舍项做 A/B 测试",
-        "amount": "只装/拆这个零件，其他不变",
-        "reason": "工具不精确计算 PI，实际价值要看它对症状和赛段的影响。",
-        "sideEffects": ["需要多跑一次对照"],
-        "testMethod": "同车、同路段、同天气，比较稳定性、末速和弯心速度。",
-        "relatedParts": ["tire_width", "widebody_kit", "aero_front", "aero_rear", "weight_reduction"],
-        "next": { "onImproved": "keep-observed", "onNoChange": "remove-if-no-purpose", "onWorse": "remove-if-no-purpose" }
+        "stepId": "cew-increase-diff-lock",
+        "action": "增加差速加速锁止",
+        "amount": "3%~5%",
+        "reason": "内侧轮空转→差速锁止不足→增加锁止→两侧轮更均匀分配动力。",
+        "sideEffects": [
+          "可能加剧甩尾",
+          "操控性降低"
+        ],
+        "testMethod": "同一出弯点给油，观察是否还有单轮空转。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "cew-refine-diff",
+          "onSlightlyImproved": "cew-wider-tires",
+          "onImproved": "cew-wider-tires",
+          "onNoChange": "cew-wider-tires",
+          "onWorse": "cew-rollback-diff"
+        },
+        "alternatives": [
+          "cew-wider-tires"
+        ],
+        "weight": 1
       },
       {
-        "stepId": "keep-observed",
-        "action": "保留并记录用户实测结果",
-        "amount": "写入备注",
-        "reason": "实测改善比表面 PI 更能说明它是否适合这台车。",
-        "sideEffects": ["对其他车辆不可直接套用"],
-        "testMethod": "后续只在同类赛道参考这条记录。",
-        "relatedParts": ["tire_width", "widebody_kit"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "stepId": "cew-wider-tires",
+        "action": "加宽驱动轮胎",
+        "amount": "驱动轴胎宽或胶料优先二选一",
+        "reason": "更宽的轮胎→更大接触面积→更强抓地→出弯更不容易空转。",
+        "sideEffects": [
+          "PI成本上升",
+          "直线速度可能下降"
+        ],
+        "testMethod": "同一出弯点给油，比较是否更早全油。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_width",
+          "tire_compound"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "轮胎升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "cew-lower-tire-pressure",
+          "onImproved": "cew-lower-tire-pressure",
+          "onNoChange": "cew-lower-tire-pressure",
+          "onWorse": "finish"
+        },
+        "alternatives": [
+          "cew-increase-diff-lock"
+        ],
+        "weight": 2
       },
       {
-        "stepId": "remove-if-no-purpose",
-        "action": "没有明确收益就先拆掉",
-        "amount": "恢复原零件",
-        "reason": "MVP 不把 PI 异常视为隐藏最优，只按可解释收益判断。",
-        "sideEffects": ["可能错过少数特殊构建收益"],
-        "testMethod": "回退后确认手感是否恢复。",
-        "relatedParts": ["tire_width", "widebody_kit", "aero_front", "aero_rear"],
-        "next": { "onImproved": "finish", "onNoChange": "finish", "onWorse": "finish" }
+        "stepId": "cew-lower-tire-pressure",
+        "action": "降低驱动轮胎压",
+        "amount": "0.5~1.0 PSI",
+        "reason": "较低胎压→更大接触面积→更强抓地→出弯更不容易空转。",
+        "sideEffects": [
+          "响应可能变慢",
+          "可能过热"
+        ],
+        "testMethod": "同一出弯点给油，比较空转情况。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tire_compound",
+          "tire_width"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "cew-softer-rear-springs",
+          "onImproved": "cew-softer-rear-springs",
+          "onNoChange": "cew-softer-rear-springs",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "cew-softer-rear-springs",
+        "action": "后弹簧调软",
+        "amount": "1~2 格",
+        "reason": "后弹簧比前弹簧软→增加后轮抓地→出弯时后轮更有牵引。",
+        "sideEffects": [
+          "车底可能托底",
+          "高速稳定感可能下降"
+        ],
+        "testMethod": "出弯和直线加速都要测试。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "cew-center-balance",
+          "onImproved": "cew-center-balance",
+          "onNoChange": "cew-center-balance",
+          "onWorse": "cew-rollback-springs"
+        },
+        "alternatives": [],
+        "weight": 4
+      },
+      {
+        "stepId": "cew-center-balance",
+        "action": "AWD：调整中央差速平衡",
+        "amount": "略偏前2%~3%",
+        "reason": "AWD中央差速偏后过多→后轮扭矩过高→轮胎空转。适当偏前→前轮分担更多动力。",
+        "sideEffects": [
+          "可能增加推头倾向"
+        ],
+        "testMethod": "出弯和起步都要测试。",
+        "sourceIds": [
+          "fh6_game_data",
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 5
+      },
+      {
+        "stepId": "cew-refine-diff",
+        "action": "保留差速调整方向，只做半步微调",
+        "amount": "1%~2%",
+        "reason": "已经找到有效方向，继续大幅调整容易过度甩尾。",
+        "sideEffects": [
+          "过调会加剧甩尾"
+        ],
+        "testMethod": "同一出弯点给油，比较空转和出弯速度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "cew-wider-tires",
+          "onWorse": "cew-rollback-diff"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "cew-rollback-diff",
+        "action": "恢复差速变化",
+        "amount": "回到上一个稳定值",
+        "reason": "变差说明差速锁止方向不适合当前车况。",
+        "sideEffects": [
+          "需要通过轮胎解决"
+        ],
+        "testMethod": "恢复后确认出弯手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "cew-wider-tires",
+          "onSlightlyImproved": "cew-wider-tires",
+          "onImproved": "cew-wider-tires",
+          "onNoChange": "cew-wider-tires",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "cew-rollback-springs",
+        "action": "恢复后弹簧变化",
+        "amount": "回到上一个值",
+        "reason": "变差说明弹簧方向不适合当前车况。",
+        "sideEffects": [
+          "需要转向中央差速排查"
+        ],
+        "testMethod": "恢复后确认出弯手感回到原状。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "cew-center-balance",
+          "onSlightlyImproved": "cew-center-balance",
+          "onImproved": "cew-center-balance",
+          "onNoChange": "cew-center-balance",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
       }
-    ]
+    ],
+    "notes": "出弯打滑内侧轮空转→加差速锁止。两侧都空转→加轮胎抓地。AWD还要检查中央差速平衡。"
+  },
+  {
+    "id": "dirt_loose_oversteer",
+    "name": "泥地松散路面过度转向",
+    "summary": "泥地松散路面上后轮失去抓地力导致过度转向，需要针对泥地路面特性调整差速器和悬挂。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "AWD",
+        "RWD",
+        "FWD"
+      ]
+    },
+    "conditions": [
+      "后轮在泥地上失去抓地力",
+      "车尾在弯中滑动超出预期"
+    ],
+    "likelyCauses": [
+      "后轮差速器加速锁定过高",
+      "后悬挂过硬导致弹跳",
+      "胎压过高减少接地面积"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "dirt_oversteer_on_power",
+        "label": "过度转向发生在？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "on_throttle",
+            "label": "加油时"
+          },
+          {
+            "value": "off_throttle",
+            "label": "收油时"
+          },
+          {
+            "value": "both",
+            "label": "两种情况都有"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "dirt_oversteer_1",
+    "steps": [
+      {
+        "stepId": "dirt_oversteer_1",
+        "action": "降低后差速器加速锁定5-10%",
+        "amount": "5-10%",
+        "reason": "减少加油时后轮打滑",
+        "sideEffects": [
+          "出弯牵引感可能变弱",
+          "单轮空转风险增加"
+        ],
+        "testMethod": "同一泥地弯道给油出弯，观察后轮是否更安定。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "dirt_oversteer_2",
+          "onSlightlyImproved": "dirt_oversteer_2",
+          "onImproved": "dirt_oversteer_2",
+          "onNoChange": "dirt_oversteer_alt1",
+          "onWorse": "dirt_oversteer_alt2"
+        },
+        "alternatives": [
+          "dirt_oversteer_alt1"
+        ],
+        "weight": 1
+      },
+      {
+        "stepId": "dirt_oversteer_2",
+        "action": "软化后防倾杆1-2档",
+        "amount": "1-2档",
+        "reason": "允许后悬挂更多独立运动",
+        "sideEffects": [
+          "高速稳定感可能下降",
+          "车身侧倾变多"
+        ],
+        "testMethod": "同一泥地弯道，比较车尾安定感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "dirt_oversteer_alt1",
+          "onWorse": "dirt_oversteer_alt2"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "dirt_oversteer_alt1",
+        "action": "降低后胎压1-2 PSI",
+        "amount": "1-2 PSI",
+        "reason": "增加后轮接地面积",
+        "sideEffects": [
+          "后胎响应可能变慢",
+          "后胎可能过热"
+        ],
+        "testMethod": "同一泥地弯道，比较后轮抓地感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tires"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "dirt_oversteer_alt2",
+        "action": "升高后车身高度5-10%",
+        "amount": "5-10%",
+        "reason": "增加后轮在松散路面的下压力",
+        "sideEffects": [
+          "重心升高",
+          "响应可能变慢"
+        ],
+        "testMethod": "同一泥地弯道，比较后轮安定感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
+      }
+    ],
+    "notes": "泥地过度转向优先调后差速和后防倾杆。泥地路面抓地力低，调校方向是让后轮更独立、更贴地。"
+  },
+  {
+    "id": "dirt_loose_understeer",
+    "name": "泥地松散路面转向不足",
+    "summary": "泥地松散路面前轮推头，需要针对泥地路面特性调整差速器、悬挂和车身高度。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "dirt"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "AWD",
+        "RWD",
+        "FWD"
+      ]
+    },
+    "conditions": [
+      "前轮在泥地上推头",
+      "方向盘转动但车辆不响应"
+    ],
+    "likelyCauses": [
+      "前轮差速器锁定过高",
+      "前悬挂过硬",
+      "胎压过高",
+      "车身高度不足导致托底"
+    ],
+    "followUpQuestions": [
+      {
+        "id": "dirt_understeer_condition",
+        "label": "转向不足发生在？",
+        "type": "single",
+        "required": true,
+        "options": [
+          {
+            "value": "entry",
+            "label": "入弯时"
+          },
+          {
+            "value": "mid",
+            "label": "弯中"
+          },
+          {
+            "value": "exit",
+            "label": "出弯时"
+          }
+        ]
+      }
+    ],
+    "entryStepId": "dirt_understeer_1",
+    "steps": [
+      {
+        "stepId": "dirt_understeer_1",
+        "action": "降低前差速器加速锁定5-10%",
+        "amount": "5-10%",
+        "reason": "减少前轮在加油时的干涉",
+        "sideEffects": [
+          "前轮牵引感可能变弱",
+          "单轮空转风险增加"
+        ],
+        "testMethod": "同一泥地弯道给油，观察前轮是否更愿意转向。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "dirt_understeer_2",
+          "onSlightlyImproved": "dirt_understeer_2",
+          "onImproved": "dirt_understeer_2",
+          "onNoChange": "dirt_understeer_alt1",
+          "onWorse": "dirt_understeer_alt2"
+        },
+        "alternatives": [
+          "dirt_understeer_alt1"
+        ],
+        "weight": 1
+      },
+      {
+        "stepId": "dirt_understeer_2",
+        "action": "软化前防倾杆1-2档",
+        "amount": "1-2档",
+        "reason": "允许前轮更多独立运动和抓地力",
+        "sideEffects": [
+          "后轴可能更活跃",
+          "高速稳定感可能下降"
+        ],
+        "testMethod": "同一泥地弯道，比较前轮指向。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "dirt_understeer_alt1",
+          "onWorse": "dirt_understeer_alt2"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "dirt_understeer_alt1",
+        "action": "升高车身高度到75-80%范围",
+        "amount": "75-80%范围",
+        "reason": "确保足够离地间隙",
+        "sideEffects": [
+          "重心升高",
+          "响应可能变慢"
+        ],
+        "testMethod": "同一泥地弯道，比较是否还托底推头。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "dirt_understeer_alt2",
+        "action": "降低前胎压1 PSI",
+        "amount": "1 PSI",
+        "reason": "增加前轮接地面积",
+        "sideEffects": [
+          "前胎响应可能变慢",
+          "前胎可能过热"
+        ],
+        "testMethod": "同一泥地弯道，比较前轮抓地感。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tires"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
+      }
+    ],
+    "notes": "泥地转向不足优先调前差速和前防倾杆。泥地路面需要更高车身和更低胎压增加接地面积。"
+  },
+  {
+    "id": "cross_country_bottoming_out",
+    "name": "越野底盘触底",
+    "summary": "越野赛中底盘撞击地面导致失控，需要最大化离地间隙和悬挂行程。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "cross_country"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "跳跃后底盘撞击地面",
+      "通过坑洼时底盘刮底",
+      "悬挂触底导致失控"
+    ],
+    "likelyCauses": [
+      "车身高度不够",
+      "悬挂过硬导致弹跳",
+      "阻尼不足无法控制反弹"
+    ],
+    "entryStepId": "cc_bottom_1",
+    "steps": [
+      {
+        "stepId": "cc_bottom_1",
+        "action": "将车身高度调到最高",
+        "amount": "最高",
+        "reason": "越野赛离地间隙不可妥协",
+        "sideEffects": [
+          "重心升高",
+          "高速弯响应变慢"
+        ],
+        "testMethod": "同一跳跃点，观察是否还触底。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "cc_bottom_2",
+          "onSlightlyImproved": "cc_bottom_2",
+          "onImproved": "cc_bottom_2",
+          "onNoChange": "cc_bottom_2",
+          "onWorse": "cc_bottom_3"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "cc_bottom_2",
+        "action": "增加压缩阻尼2-3档",
+        "amount": "2-3档",
+        "reason": "控制悬挂压缩速度防止触底",
+        "sideEffects": [
+          "小颠簸可能更硬",
+          "车身动作可能变多"
+        ],
+        "testMethod": "同一跳跃点，观察悬挂是否还触底。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "cc_bottom_3",
+          "onWorse": "cc_bottom_3"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "cc_bottom_3",
+        "action": "软化弹簧刚度10-15%",
+        "amount": "10-15%",
+        "reason": "允许更多悬挂行程吸收冲击",
+        "sideEffects": [
+          "车身动作变多",
+          "高速稳定感可能下降"
+        ],
+        "testMethod": "同一跳跃点和坑洼路段，比较触底情况。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      }
+    ],
+    "notes": "越野赛底盘触底优先升车高到最高，然后增加压缩阻尼。弹簧软化是最后手段。"
+  },
+  {
+    "id": "cross_country_unstable_over_jumps",
+    "name": "越野跳跃后不稳定",
+    "summary": "越野赛跳跃后车辆姿态不可控或落地弹跳不止，需要调整悬挂匹配和阻尼。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "cross_country"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "跳跃后车头朝下栽",
+      "落地后车辆弹跳不止",
+      "空中姿态不可控"
+    ],
+    "likelyCauses": [
+      "前后悬挂硬度不匹配",
+      "阻尼设置不当",
+      "车身高度前后差异过大"
+    ],
+    "entryStepId": "cc_jump_1",
+    "steps": [
+      {
+        "stepId": "cc_jump_1",
+        "action": "增加回弹阻尼2-3档",
+        "amount": "2-3档",
+        "reason": "控制落地后的弹跳",
+        "sideEffects": [
+          "小颠簸可能更硬",
+          "悬挂可能不够灵活"
+        ],
+        "testMethod": "同一跳跃点，观察落地后是否还弹跳。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "cc_jump_2",
+          "onSlightlyImproved": "cc_jump_2",
+          "onImproved": "cc_jump_2",
+          "onNoChange": "cc_jump_2",
+          "onWorse": "cc_jump_3"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "cc_jump_2",
+        "action": "微调前悬挂比后悬挂稍硬",
+        "amount": "前硬1-2档",
+        "reason": "帮助跳跃时保持水平姿态",
+        "sideEffects": [
+          "前轮抓地可能减少",
+          "可能增加推头"
+        ],
+        "testMethod": "同一跳跃点，观察空中姿态是否更水平。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "cc_jump_3",
+          "onWorse": "cc_jump_3"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "cc_jump_3",
+        "action": "确保前后车身高度一致",
+        "amount": "前后一致",
+        "reason": "避免跳跃时车头朝下",
+        "sideEffects": [
+          "可能需要调整整体车高"
+        ],
+        "testMethod": "同一跳跃点，观察空中姿态。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      }
+    ],
+    "notes": "越野跳跃不稳定优先增加回弹阻尼控制弹跳，然后调整前后悬挂硬度匹配保持水平姿态。"
+  },
+  {
+    "id": "drag_wheelspin",
+    "name": "直线加速起步打滑",
+    "summary": "直线加速赛起步时驱动轮空转，需要最大化起步牵引力。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "drag"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "起步时驱动轮空转",
+      "起步阶段失去牵引力",
+      "1-2档切换时打滑"
+    ],
+    "likelyCauses": [
+      "差速器锁定不足",
+      "后胎压过高",
+      "后悬挂过软无法转移重量"
+    ],
+    "entryStepId": "drag_wheelspin_1",
+    "steps": [
+      {
+        "stepId": "drag_wheelspin_1",
+        "action": "增加差速器加速锁定到90-100%",
+        "amount": "90-100%",
+        "reason": "确保最大牵引力传递",
+        "sideEffects": [
+          "转弯可能更困难",
+          "轮胎磨损加快"
+        ],
+        "testMethod": "同一起步点，比较轮胎空转长度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "drag_wheelspin_2",
+          "onSlightlyImproved": "drag_wheelspin_2",
+          "onImproved": "drag_wheelspin_2",
+          "onNoChange": "drag_wheelspin_2",
+          "onWorse": "drag_wheelspin_3"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "drag_wheelspin_2",
+        "action": "降低后胎压到24-26 PSI",
+        "amount": "24-26 PSI",
+        "reason": "增加后轮接地面积提升牵引",
+        "sideEffects": [
+          "后胎响应可能变慢",
+          "后胎可能过热"
+        ],
+        "testMethod": "同一起步点，比较轮胎空转长度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tires"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "drag_wheelspin_3",
+          "onWorse": "drag_wheelspin_3"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "drag_wheelspin_3",
+        "action": "软化后弹簧5-10%",
+        "amount": "5-10%",
+        "reason": "允许更多重量转移到后轮",
+        "sideEffects": [
+          "车底可能托底",
+          "高速稳定感可能下降"
+        ],
+        "testMethod": "同一起步点，比较起步牵引力。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      }
+    ],
+    "notes": "直线加速起步打滑优先增加差速锁定和降低后胎压。软化后弹簧帮助重量转移是最后手段。"
+  },
+  {
+    "id": "drag_poor_launch",
+    "name": "直线加速起步反应慢",
+    "summary": "直线加速赛起步迟缓，需要优化转速响应和齿比。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "drag"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD",
+        "AWD"
+      ]
+    },
+    "conditions": [
+      "起步迟缓",
+      "转速上升慢",
+      "离合器接合后动力不足"
+    ],
+    "likelyCauses": [
+      "飞轮过重",
+      "齿比过密",
+      "引擎低转扭矩不足"
+    ],
+    "entryStepId": "drag_launch_1",
+    "steps": [
+      {
+        "stepId": "drag_launch_1",
+        "action": "安装赛车飞轮",
+        "amount": "赛车飞轮",
+        "reason": "更快转速响应帮助起步",
+        "sideEffects": [
+          "PI成本",
+          "怠速可能不稳"
+        ],
+        "testMethod": "同一起步点，比较转速上升速度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "flywheel"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "飞轮升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "drag_launch_2",
+          "onSlightlyImproved": "drag_launch_2",
+          "onImproved": "drag_launch_2",
+          "onNoChange": "drag_launch_2",
+          "onWorse": "drag_launch_3"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "drag_launch_2",
+        "action": "调高一档齿比",
+        "amount": "更高一档齿比",
+        "reason": "利用更大扭矩范围起步",
+        "sideEffects": [
+          "一档加速可能变弱",
+          "需要更高起步转速"
+        ],
+        "testMethod": "同一起步点，比较起步加速度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "transmission"
+        ],
+        "requiresCapabilities": [
+          "adjustable_gearing"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调变速箱，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "drag_launch_3",
+          "onWorse": "drag_launch_3"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "drag_launch_3",
+        "action": "调整起步转速到扭矩峰值区间",
+        "amount": "扭矩峰值区间",
+        "reason": "最大化起步牵引力",
+        "sideEffects": [
+          "需要多次测试找最佳转速"
+        ],
+        "testMethod": "不同起步转速对比起步加速度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "transmission"
+        ],
+        "requiresCapabilities": [
+          "adjustable_gearing"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调变速箱，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      }
+    ],
+    "notes": "直线加速起步慢优先换赛车飞轮提升转速响应，然后调整齿比利用更大扭矩范围。"
+  },
+  {
+    "id": "drift_not_enough_angle",
+    "name": "漂移角度不够",
+    "summary": "漂移时无法维持足够角度，需要降低后轮抓地力和增加差速锁定。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "drift"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD"
+      ]
+    },
+    "conditions": [
+      "无法维持足够漂移角度",
+      "车辆容易回正",
+      "漂移时角度逐渐减小"
+    ],
+    "likelyCauses": [
+      "差速器锁定不足",
+      "后胎压过高",
+      "后防倾杆过软",
+      "尾翼产生过多下压力"
+    ],
+    "entryStepId": "drift_angle_1",
+    "steps": [
+      {
+        "stepId": "drift_angle_1",
+        "action": "增加差速器加速锁定到90-100%",
+        "amount": "90-100%",
+        "reason": "确保后轮持续空转维持角度",
+        "sideEffects": [
+          "轮胎磨损极快",
+          "日常驾驶不可用"
+        ],
+        "testMethod": "同一漂移弯道，比较能否维持角度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "drift_angle_2",
+          "onSlightlyImproved": "drift_angle_2",
+          "onImproved": "drift_angle_2",
+          "onNoChange": "drift_angle_2",
+          "onWorse": "drift_angle_3"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "drift_angle_2",
+        "action": "降低后胎压2-3 PSI（目标20-23 PSI）",
+        "amount": "2-3 PSI",
+        "reason": "降低后轮抓地力更容易滑动",
+        "sideEffects": [
+          "后胎响应变慢",
+          "后胎可能过热"
+        ],
+        "testMethod": "同一漂移弯道，比较是否更容易维持角度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tires"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "drift_angle_3",
+          "onSlightlyImproved": "drift_angle_3",
+          "onImproved": "drift_angle_3",
+          "onNoChange": "drift_angle_3",
+          "onWorse": "drift_angle_4"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "drift_angle_3",
+        "action": "拆除尾翼或降低后空力",
+        "amount": "最低或拆除",
+        "reason": "减少后轮下压力降低抓地力",
+        "sideEffects": [
+          "高速稳定感大幅下降",
+          "非漂移场景不可用"
+        ],
+        "testMethod": "同一漂移弯道，比较是否更容易维持角度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "aero_rear"
+        ],
+        "requiresCapabilities": [
+          "tunable_rear_aero"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调后空力，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "drift_angle_4",
+          "onSlightlyImproved": "drift_angle_4",
+          "onImproved": "drift_angle_4",
+          "onNoChange": "drift_angle_4",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      },
+      {
+        "stepId": "drift_angle_4",
+        "action": "增加后防倾杆硬度1-2档",
+        "amount": "1-2档",
+        "reason": "减少后轮独立运动帮助维持滑动",
+        "sideEffects": [
+          "后轮抓地可能减少",
+          "颠簸路面更不稳定"
+        ],
+        "testMethod": "同一漂移弯道，比较是否更容易维持角度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "antiroll_bars"
+        ],
+        "requiresCapabilities": [
+          "tunable_antiroll_bars"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调防倾杆，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 4
+      }
+    ],
+    "notes": "漂移角度不够核心是降低后轮抓地力和增加差速锁定。注意漂移调校不适用于正常竞速。"
+  },
+  {
+    "id": "drift_too_much_angle",
+    "name": "漂移角度过大（旋转）",
+    "summary": "漂移时车辆容易旋转过多导致调头，需要增加后轮抓地力和控制差速。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "drift"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD"
+      ]
+    },
+    "conditions": [
+      "漂移时车辆容易旋转过多",
+      "无法控制漂移角度",
+      "经常调头"
+    ],
+    "likelyCauses": [
+      "差速器锁定过高",
+      "后胎压过低",
+      "后悬挂过软"
+    ],
+    "entryStepId": "drift_over_angle_1",
+    "steps": [
+      {
+        "stepId": "drift_over_angle_1",
+        "action": "降低差速器加速锁定5-10%",
+        "amount": "5-10%",
+        "reason": "允许后轮有一定速度差减少旋转",
+        "sideEffects": [
+          "可能难以维持漂移角度",
+          "单轮空转风险增加"
+        ],
+        "testMethod": "同一漂移弯道，比较是否更容易控制角度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "differential"
+        ],
+        "requiresCapabilities": [
+          "tunable_differential"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调差速，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "drift_over_angle_2",
+          "onSlightlyImproved": "drift_over_angle_2",
+          "onImproved": "drift_over_angle_2",
+          "onNoChange": "drift_over_angle_2",
+          "onWorse": "drift_over_angle_3"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "drift_over_angle_2",
+        "action": "增加后胎压2-3 PSI（目标23-26 PSI）",
+        "amount": "2-3 PSI",
+        "reason": "增加后轮抓地力防止过度滑动",
+        "sideEffects": [
+          "后轮响应更快但可能突然失去抓地"
+        ],
+        "testMethod": "同一漂移弯道，比较是否更容易控制角度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "tires"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "胎压无需特殊部件即可调整。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "drift_over_angle_3",
+          "onSlightlyImproved": "drift_over_angle_3",
+          "onImproved": "drift_over_angle_3",
+          "onNoChange": "drift_over_angle_3",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "drift_over_angle_3",
+        "action": "增加后回弹阻尼1-2档",
+        "amount": "1-2档",
+        "reason": "更好地控制后悬挂运动",
+        "sideEffects": [
+          "后轮在颠簸路面可能跳起"
+        ],
+        "testMethod": "同一漂移弯道，比较后悬挂控制。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      }
+    ],
+    "notes": "漂移角度过大核心是降低差速锁定和增加后轮抓地力。注意与角度不够的调校方向相反。"
+  },
+  {
+    "id": "drift_slow_transition",
+    "name": "漂移换向迟缓",
+    "summary": "连续漂移时换向反应慢，需要优化转速响应和悬挂回弹。",
+    "confidence": "medium",
+    "sourceIds": [
+      "fh6_tuning_guide"
+    ],
+    "scope": {
+      "eventType": [
+        "drift"
+      ],
+      "class": [
+        "A",
+        "S1",
+        "B",
+        "S2"
+      ],
+      "drivetrain": [
+        "RWD"
+      ]
+    },
+    "conditions": [
+      "连续漂移时换向慢",
+      "从左漂移切换到右漂移反应迟钝",
+      "无法快速连续漂移"
+    ],
+    "likelyCauses": [
+      "飞轮过重导致转速响应慢",
+      "齿比不当",
+      "悬挂回弹阻尼不足"
+    ],
+    "entryStepId": "drift_trans_1",
+    "steps": [
+      {
+        "stepId": "drift_trans_1",
+        "action": "安装运动飞轮（不要赛车飞轮，太灵敏难控制）",
+        "amount": "运动飞轮",
+        "reason": "平衡转速响应和可控性",
+        "sideEffects": [
+          "PI成本",
+          "怠速可能稍不稳"
+        ],
+        "testMethod": "连续漂移弯道，比较换向速度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "flywheel"
+        ],
+        "requiresCapabilities": [],
+        "fallbackIfMissing": {
+          "action": "飞轮升级无需特殊可调部件。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "drift_trans_2",
+          "onSlightlyImproved": "drift_trans_2",
+          "onImproved": "drift_trans_2",
+          "onNoChange": "drift_trans_2",
+          "onWorse": "drift_trans_3"
+        },
+        "alternatives": [],
+        "weight": 1
+      },
+      {
+        "stepId": "drift_trans_2",
+        "action": "缩短最终减速比",
+        "amount": "更短最终减速比",
+        "reason": "更快的转速变化帮助换向",
+        "sideEffects": [
+          "极速可能下降",
+          "需要更频繁换档"
+        ],
+        "testMethod": "连续漂移弯道，比较换向速度。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "transmission"
+        ],
+        "requiresCapabilities": [
+          "adjustable_gearing"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调变速箱，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "drift_trans_3",
+          "onSlightlyImproved": "drift_trans_3",
+          "onImproved": "drift_trans_3",
+          "onNoChange": "drift_trans_3",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 2
+      },
+      {
+        "stepId": "drift_trans_3",
+        "action": "增加回弹阻尼1-2档",
+        "amount": "1-2档",
+        "reason": "更快控制悬挂运动帮助换向",
+        "sideEffects": [
+          "颠簸路面可能更硬"
+        ],
+        "testMethod": "连续漂移弯道，比较换向时悬挂控制。",
+        "sourceIds": [
+          "fh6_tuning_guide"
+        ],
+        "sourceType": "authority_guide",
+        "relatedParts": [
+          "suspension"
+        ],
+        "requiresCapabilities": [
+          "tunable_suspension"
+        ],
+        "fallbackIfMissing": {
+          "action": "先回到目标向导补齐可调悬挂，再回来做这一步微调。",
+          "targetModule": "goal_wizard"
+        },
+        "next": {
+          "onGreatlyImproved": "finish",
+          "onSlightlyImproved": "finish",
+          "onImproved": "finish",
+          "onNoChange": "finish",
+          "onWorse": "finish"
+        },
+        "alternatives": [],
+        "weight": 3
+      }
+    ],
+    "notes": "漂移换向迟缓优先换运动飞轮平衡响应和可控性，然后缩短减速比和增加回弹阻尼。"
   }
 ]

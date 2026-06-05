@@ -1,44 +1,50 @@
 [
   {
-    "id": "feedback-improved",
-    "name": "建议后改善",
-    "summary": "用户反馈问题明显改善或稍微改善。",
+    "id": "feedback_greatly_improved",
+    "name": "明显改善",
+    "summary": "调整后问题明显改善，保留当前设置并继续",
     "confidence": "high",
-    "sourceIds": ["sample-structured-coaching"],
-    "sample": true,
-    "trigger": { "feedback": ["greatly_improved", "slightly_improved"] },
+    "sourceIds": ["fh6_tuning_guide"],
+    "trigger": { "feedback": ["greatly_improved"] },
     "response": {
       "type": "keep_and_continue",
-      "message": "建议保留当前调整，并只做小幅微调。如果问题仍未完全解决，再进入下一条更轻微的优化建议。",
-      "nextMode": "optional_refinement"
+      "message": "保留当前调整。如果还有其他症状，可以继续问诊。"
     }
   },
   {
-    "id": "feedback-no-change",
-    "name": "建议后无变化",
-    "summary": "用户反馈调完后几乎没有感受到改善。",
+    "id": "feedback_slightly_improved",
+    "name": "稍微改善",
+    "summary": "调整后问题有改善但不彻底，继续下一步调整",
     "confidence": "high",
-    "sourceIds": ["sample-structured-coaching"],
-    "sample": true,
+    "sourceIds": ["fh6_tuning_guide"],
+    "trigger": { "feedback": ["slightly_improved"] },
+    "response": {
+      "type": "move_to_next_step",
+      "message": "方向正确但还不够，继续下一步调整。"
+    }
+  },
+  {
+    "id": "feedback_no_change",
+    "name": "无变化",
+    "summary": "调整后问题没有变化，跳到下一个排查方向",
+    "confidence": "high",
+    "sourceIds": ["fh6_tuning_guide"],
     "trigger": { "feedback": ["no_change"] },
     "response": {
       "type": "move_to_next_step",
-      "message": "当前调整没有明显效果，建议恢复或保留原值后，进入下一条建议。",
-      "nextMode": "next_recommendation"
+      "message": "当前调整没有效果，换一个方向继续排查。"
     }
   },
   {
-    "id": "feedback-worse",
-    "name": "建议后变差",
-    "summary": "用户反馈调整后车辆手感或成绩更差。",
+    "id": "feedback_worse",
+    "name": "变差",
+    "summary": "调整后问题加重，回滚变化并换一个方向",
     "confidence": "high",
-    "sourceIds": ["sample-structured-coaching"],
-    "sample": true,
+    "sourceIds": ["fh6_tuning_guide"],
     "trigger": { "feedback": ["worse"] },
     "response": {
       "type": "rollback_and_branch",
-      "message": "建议恢复刚才的设置，并尝试替代路径。不要连续叠加多个会让同一特性更极端的调整。",
-      "nextMode": "alternative_path"
+      "message": "当前调整让情况变差，先恢复原来的设置，然后换一个方向排查。"
     }
   }
 ]

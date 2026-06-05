@@ -1,58 +1,223 @@
 [
   {
-    "id": "dep-aero-balance-understeer",
-    "name": "前后空力平衡与推头",
-    "summary": "后下压力过高而前下压力过低时，车辆可能更容易推头。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "appliesWhen": { "hasFrontAero": true, "hasRearAero": true },
+    "id": "suspension_antiroll_interaction",
+    "name": "悬挂与防倾杆配合",
+    "summary": "防倾杆调校依赖赛车弹簧提供的基础悬挂设定，防倾杆过硬会抵消悬挂顺应性。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
     "interaction": {
-      "parts": ["aero_front", "aero_rear"],
-      "effect": "rear_too_stable_can_increase_understeer"
+      "parts": [
+        "suspension",
+        "antiroll_bars"
+      ],
+      "effect": "防倾杆调校依赖悬挂基础设定"
     },
     "guidance": [
-      "如果主要问题是推头，优先检查前后空力平衡，而不是单独继续增加后下压力。",
-      "如果主要问题是高速尾部不稳，才优先增加后下压力。"
-    ],
-    "weightModifier": 0.15,
-    "notes": "后续可扩展成根据症状和赛道速度区间动态改变建议权重。"
+      "先装赛车弹簧再调防倾杆",
+      "防倾杆过硬会抵消悬挂顺应性"
+    ]
   },
   {
-    "id": "dep-diff-arb-awd-understeer",
-    "name": "AWD推头与差速器/防倾杆交叉影响",
-    "summary": "AWD 推头通常不只由一个参数造成，差速器和防倾杆常常需要结合考虑。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
-    "appliesWhen": { "drivetrain": ["AWD"] },
+    "id": "aero_balance_interaction",
+    "name": "前后空力平衡",
+    "summary": "前后下压力比例决定高速平衡。AWD应前高后低，RWD应中高前后。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
     "interaction": {
-      "parts": ["differential", "antiroll_bars"],
-      "effect": "diff_and_arb_can_both_change_front_load_and_rotation"
+      "parts": [
+        "aero_front",
+        "aero_rear"
+      ],
+      "effect": "前后下压力比例决定高速平衡"
     },
     "guidance": [
-      "如果降低前差速加速没有效果，可继续通过前软后硬的防倾杆方向改善推头。",
-      "如果调整防倾杆后车辆变得太活，再回头微调中央差速。"
-    ],
-    "weightModifier": 0.2,
-    "notes": "后续需要做成更结构化的依赖系统，而不仅是说明文本。"
+      "不要前后都拉满",
+      "根据驱动形式设定平衡目标"
+    ]
   },
   {
-    "id": "dep-tire-width-speed-tradeoff",
-    "name": "胎宽与速度/手感取舍",
-    "summary": "更宽胎通常改善牵引和制动稳定，但也可能使车辆变钝或损失直线表现。",
-    "confidence": "medium",
-    "sourceIds": ["sample-general-principles"],
-    "sample": true,
+    "id": "diff_arb_balance",
+    "name": "差速器与防倾杆配合",
+    "summary": "两者都影响弯中平衡，需要协调调整。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
     "interaction": {
-      "parts": ["tire_width", "weight_reduction", "power"],
-      "effect": "more_width_can_help_grip_but_change_feel_and_speed"
+      "parts": [
+        "differential",
+        "antiroll_bars"
+      ],
+      "effect": "两者都影响弯中平衡需要协调"
     },
     "guidance": [
-      "一旦加宽胎后 PI 下降或变化异常，不要立刻下结论，应该进行同赛段前后对照测试。",
-      "如果加宽后解决了出弯打滑，但长直道明显变慢，应考虑退一级胎宽。"
+      "修正推头先软前防倾杆再调差速器",
+      "修正甩尾先软后防倾杆"
+    ]
+  },
+  {
+    "id": "tire_aero_tradeoff",
+    "name": "轮胎与空力取舍",
+    "summary": "高级别需要同时考虑轮胎抓地和空力下压力，两者PI竞争激烈。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
     ],
-    "weightModifier": 0.1,
-    "notes": "后续可扩展为前后胎宽比例规则。"
+    "interaction": {
+      "parts": [
+        "tire_compound",
+        "tire_width",
+        "aero_front",
+        "aero_rear"
+      ],
+      "effect": "轮胎与空力PI竞争"
+    },
+    "guidance": [
+      "S1+两者都需要",
+      "A级优先轮胎",
+      "空力视赛道而定"
+    ]
+  },
+  {
+    "id": "engine_drivetrain_pi",
+    "name": "引擎与传动PI竞争",
+    "summary": "引擎升级后变速箱PI成本可能变化，需要重新检查传动选择。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "interaction": {
+      "parts": [
+        "engine_upgrades",
+        "transmission",
+        "driveline"
+      ],
+      "effect": "引擎升级后传动PI成本可能变化"
+    },
+    "guidance": [
+      "完成引擎升级后重新检查变速箱选择",
+      "用引擎内部升级补满PI而不是先堆引擎"
+    ]
+  },
+  {
+    "id": "weight_distribution",
+    "name": "重量分布影响",
+    "summary": "减重、飞轮、传动轴都影响重量分配，引擎互换可能改变前后配重。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "interaction": {
+      "parts": [
+        "weight_reduction",
+        "flywheel",
+        "driveline",
+        "engine_upgrades"
+      ],
+      "effect": "减重和旋转质量件影响重量分配"
+    },
+    "guidance": [
+      "注意前重车辆减重方向",
+      "引擎互换可能改变前后配重"
+    ]
+  },
+  {
+    "id": "brake_suspension_coord",
+    "name": "刹车与悬挂配合",
+    "summary": "刹车平衡和阻尼设置共同影响入弯姿态，需要协调调整。",
+    "confidence": "high",
+    "sourceIds": [
+      "fh6_game_data",
+      "fh6_tuning_guide"
+    ],
+    "interaction": {
+      "parts": [
+        "brakes",
+        "suspension"
+      ],
+      "effect": "刹车平衡和阻尼共同影响入弯姿态"
+    },
+    "guidance": [
+      "刹车偏前配合带刹入弯",
+      "阻尼影响刹车时重量转移速度"
+    ]
+  },
+  {
+    "id": "rally_tire_suspension",
+    "name": "拉力胎与悬挂配合",
+    "summary": "拉力胎在松散路面上需要更软的悬挂设定配合，过硬悬挂会导致拉力胎无法均匀接触地面。",
+    "confidence": "medium",
+    "sourceIds": ["fh6_tuning_guide"],
+    "appliesWhen": { "eventType": ["dirt"] },
+    "interaction": {
+      "parts": ["tire_compound", "suspension"],
+      "effect": "拉力胎需要更软悬挂才能发挥松散路面抓地力"
+    },
+    "guidance": [
+      "泥地赛悬挂硬度约为公路赛的一半",
+      "拉力弹簧配合拉力胎是泥地赛的基础组合",
+      "悬挂过硬会导致拉力胎在松散路面上弹跳失去抓地力"
+    ]
+  },
+  {
+    "id": "offroad_clearance_spring",
+    "name": "越野离地间隙与弹簧配合",
+    "summary": "越野弹簧必须配合最大离地间隙，降低车高会抵消越野弹簧的行程优势。",
+    "confidence": "medium",
+    "sourceIds": ["fh6_tuning_guide"],
+    "appliesWhen": { "eventType": ["cross_country"] },
+    "interaction": {
+      "parts": ["suspension"],
+      "effect": "越野弹簧需要最大车高才能发挥行程优势"
+    },
+    "guidance": [
+      "越野赛车高必须设到最高",
+      "降低车高会减少悬挂可用行程导致触底",
+      "越野弹簧比公路弹簧软，需要更多行程吸收冲击"
+    ]
+  },
+  {
+    "id": "drift_diff_tire",
+    "name": "漂移差速器与胎压配合",
+    "summary": "漂移时差速器锁止和胎压共同决定滑动特性，高锁止+低胎压=更容易滑动但更难控制。",
+    "confidence": "medium",
+    "sourceIds": ["fh6_tuning_guide"],
+    "appliesWhen": { "eventType": ["drift"] },
+    "interaction": {
+      "parts": ["differential", "tire_compound"],
+      "effect": "差速器锁止和胎压共同决定漂移滑动特性"
+    },
+    "guidance": [
+      "差速器加速锁止90-100%配合低胎压20-23 PSI=激进漂移",
+      "差速器加速锁止70-80%配合中胎压23-26 PSI=温和漂移",
+      "两者不要同时调到极端，否则难以控制角度"
+    ]
+  },
+  {
+    "id": "drag_launch_suspension_tire",
+    "name": "直线起步悬挂与胎压配合",
+    "summary": "直线加速赛中后悬挂软硬和后胎压共同决定起步牵引力，软后悬+低后胎压=最大起步抓地。",
+    "confidence": "medium",
+    "sourceIds": ["fh6_tuning_guide"],
+    "appliesWhen": { "eventType": ["drag"] },
+    "interaction": {
+      "parts": ["suspension", "tire_compound"],
+      "effect": "后悬挂软硬和后胎压共同决定起步牵引力"
+    },
+    "guidance": [
+      "后弹簧偏软允许重量转移到后轮增加牵引",
+      "后胎压24-26 PSI增加接地面积",
+      "前悬挂偏硬防止起步时前轮抬起过多"
+    ]
   }
 ]

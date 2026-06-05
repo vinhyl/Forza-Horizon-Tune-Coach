@@ -3,8 +3,30 @@ import type { BuildCardData, DiagnosticSessionState } from "../types/rules";
 const BUILD_KEY = "fhtc.buildCards.v1";
 const SESSION_KEY = "fhtc.diagnosticSession.v1";
 
+const legacyEventMap: Record<string, string> = {
+  road: "road_racing",
+  street: "street_racing",
+  touge: "touge",
+};
+
+const legacyPreferenceMap: Record<string, string> = {
+  stable: "balanced",
+  rotation: "handling",
+};
+
+function migrateBuildCard(build: BuildCardData): BuildCardData {
+  if (legacyEventMap[build.eventType]) {
+    build.eventType = legacyEventMap[build.eventType];
+  }
+  if (legacyPreferenceMap[build.drivingPreference]) {
+    build.drivingPreference = legacyPreferenceMap[build.drivingPreference];
+  }
+  return build;
+}
+
 export function loadBuildCards(): BuildCardData[] {
-  return readJson<BuildCardData[]>(BUILD_KEY, []);
+  const cards = readJson<BuildCardData[]>(BUILD_KEY, []);
+  return cards.map(migrateBuildCard);
 }
 
 export function saveBuildCards(cards: BuildCardData[]) {

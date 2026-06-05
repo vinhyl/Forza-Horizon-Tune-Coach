@@ -7,7 +7,20 @@ export type SourceType =
   | "user_tested"
   | "sample";
 
-export type EventType = "road" | "street" | "touge" | string;
+export type EventType =
+  | "road_racing"
+  | "dirt_racing"
+  | "cross_country"
+  | "touge"
+  | "street_racing"
+  | "drag_racing"
+  | "time_attack"
+  | "speed_traps"
+  | "speed_zones"
+  | "danger_signs"
+  | "drift_zones"
+  | "trailblazers"
+  | string;
 export type TargetClass = "A" | "S1" | string;
 export type Drivetrain = "RWD" | "AWD" | "FWD" | string;
 export type FeedbackType =
@@ -22,6 +35,7 @@ export type BuildCapability =
   | "tunable_differential"
   | "tunable_front_aero"
   | "tunable_rear_aero"
+  | "tunable_tire_pressure"
   | "adjustable_gearing"
   | string;
 export type ObservationKey =
@@ -84,6 +98,12 @@ export interface ObservationRequest {
   choices?: { value: string; label: string }[];
 }
 
+export interface PartDetail {
+  partId: string;
+  benefit: string;
+  cost?: string;
+}
+
 export interface UpgradePlanStep {
   id: string;
   phase: string;
@@ -92,6 +112,7 @@ export interface UpgradePlanStep {
   reason: string;
   expectedBenefits: string[];
   expectedCosts?: string[];
+  partDetails?: PartDetail[];
   requiredCapabilities?: BuildCapability[];
   grantsCapabilities?: BuildCapability[];
   knownFacts?: string[];
@@ -138,9 +159,25 @@ export interface EscalationRule {
   message: string;
 }
 
+export type PartCategory =
+  | "tires"
+  | "platform"
+  | "engine"
+  | "aero"
+  | "drivetrain"
+  | "conversion";
+
+export type ExclusiveGroup =
+  | "tire_type"
+  | "suspension_type";
+
 export interface PartRule {
   id: string;
   name: string;
+  category: PartCategory;
+  priority: number;
+  exclusiveGroup?: ExclusiveGroup;
+  grantsCapabilities: BuildCapability[];
   summary: string;
   confidence: ConfidenceLevel;
   sourceIds: string[];
@@ -247,6 +284,13 @@ export interface DependencyRule {
 export interface BuildCardData {
   id: string;
   carName: string;
+  carType?: string;
+  weightKg?: number;
+  weightDistribution?: number;
+  frontSpringMinKgf?: number;
+  frontSpringMaxKgf?: number;
+  rearSpringMinKgf?: number;
+  rearSpringMaxKgf?: number;
   currentPI: string;
   targetClass: TargetClass;
   eventType: EventType;
@@ -280,6 +324,22 @@ export interface DiagnosticSessionState {
   status: "idle" | "asking" | "recommending" | "finished";
   createdAt: string;
   updatedAt: string;
+}
+
+export interface CarCatalogEntry {
+  id: string;
+  make: string;
+  makeCn?: string;
+  carName: string;
+  carType: string;
+  carTypeCn?: string;
+  initialClass: string;
+  initialPI: number;
+  rawClass: string;
+  country: string;
+  collection: string[];
+  addOns: string[];
+  sourceIds: string[];
 }
 
 export interface RuleBundle {

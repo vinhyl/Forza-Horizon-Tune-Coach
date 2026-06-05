@@ -23,7 +23,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿巴斯",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "abarth-1980-abarth-fiat-131",
@@ -41,7 +43,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿巴斯",
+      "carTypeCn": "经典拉力赛车"
     },
     {
       "id": "abarth-2016-abarth-695-biposto",
@@ -58,7 +62,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿巴斯",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "acura-2001-acura-integra-type-r",
@@ -76,7 +82,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "复古高性能掀背车",
+      "makeCn": "讴歌"
     },
     {
       "id": "acura-2002-acura-rsx-type-s",
@@ -94,7 +102,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "复古高性能掀背车",
+      "makeCn": "讴歌"
     },
     {
       "id": "acura-2022-acura-nsx-type-s",
@@ -111,7 +121,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级跑车",
+      "makeCn": "讴歌"
     },
     {
       "id": "acura-2023-acura-integra-a-spec",
@@ -129,7 +141,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "高性能掀背车",
+      "makeCn": "讴歌"
     },
     {
       "id": "alfa-romeo-1965-alfa-romeo-giulia-sprint-gta-stradale",
@@ -147,7 +161,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿尔法·罗密欧",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "alfa-romeo-1965-alfa-romeo-giulia-tz2",
@@ -165,7 +181,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿尔法·罗密欧",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "alfa-romeo-1968-alfa-romeo-33-stradale",
@@ -183,7 +201,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿尔法·罗密欧",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "alfa-romeo-1990-alfa-romeo-se-048sp",
@@ -202,7 +222,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿尔法·罗密欧",
+      "carTypeCn": "复古赛车"
     },
     {
       "id": "alfa-romeo-1992-alfa-romeo-155-q4",
@@ -219,7 +241,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿尔法·罗密欧",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "alfa-romeo-2007-alfa-romeo-8c-competizione",
@@ -237,7 +261,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿尔法·罗密欧",
+      "carTypeCn": "GT 赛车"
     },
     {
       "id": "alfa-romeo-2014-alfa-romeo-4c",
@@ -254,7 +280,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿尔法·罗密欧",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "alfa-romeo-2017-alfa-romeo-giulia-quadrifoglio",
@@ -272,7 +300,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿尔法·罗密欧",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "alfa-romeo-2021-alfa-romeo-giulia-gtam",
@@ -291,7 +321,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿尔法·罗密欧",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "alumicraft-2015-alumicraft-class-10-race-car",
@@ -309,7 +341,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Alumicraft",
+      "carTypeCn": "无限制沙滩车"
     },
     {
       "id": "alumicraft-2021-alumicraft-122-class-1-buggy",
@@ -327,7 +361,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Alumicraft",
+      "carTypeCn": "无限制沙滩车"
     },
     {
       "id": "alumicraft-2022-alumicraft-6165-trick-truck",
@@ -345,7 +381,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Alumicraft",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "amg-transport-dynamics-2554-amg-transport-dynamics-m12s-warthog-cst",
@@ -363,7 +401,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "AMG Transport Dynamics",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "apollo-2019-apollo-intensa-emozione",
@@ -381,7 +421,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Apollo",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ariel-2013-ariel-atom-500-v8",
@@ -399,7 +441,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Ariel",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ariel-2016-ariel-nomad",
@@ -418,7 +462,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Ariel",
+      "carTypeCn": "无限制沙滩车"
     },
     {
       "id": "aston-martin-1964-aston-martin-db5",
@@ -435,7 +481,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "aston-martin-2016-aston-martin-vulcan",
@@ -454,7 +502,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "aston-martin-2017-aston-martin-db11",
@@ -472,7 +522,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "aston-martin-2017-aston-martin-vulcan-amr-pro",
@@ -490,7 +542,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "aston-martin-2019-aston-martin-dbs-superleggera",
@@ -508,7 +562,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "aston-martin-2019-aston-martin-valhalla-concept-car",
@@ -526,7 +582,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "aston-martin-2019-aston-martin-vantage",
@@ -543,7 +601,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "GT 赛车"
     },
     {
       "id": "aston-martin-2021-aston-martin-dbx",
@@ -560,7 +620,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "aston-martin-2022-aston-martin-valkyrie-amr-pro",
@@ -579,7 +641,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "aston-martin-2023-aston-martin-valkyrie",
@@ -597,7 +661,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "阿斯顿马丁",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "audi-1984-audi-sport-quattro",
@@ -615,7 +681,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "复古拉力赛车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-1986-audi-2-audi-sport-quattro-s1",
@@ -633,7 +701,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "拉力赛怪物",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2001-audi-rs-4-avant",
@@ -651,7 +721,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "复古超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2003-audi-rs-6",
@@ -669,7 +741,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "复古超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2006-audi-rs-4",
@@ -687,7 +761,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2009-audi-r8-lms",
@@ -705,7 +781,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "极限赛道玩具",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2009-audi-rs-6",
@@ -723,7 +801,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2010-audi-tt-rs-coup",
@@ -741,7 +821,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代跑车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2011-audi-rs-3-sportback",
@@ -759,7 +841,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "超高性能掀背车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2011-audi-rs-5-coup",
@@ -777,7 +861,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2013-audi-r8-coup-v10-plus-5-2-fsi-quattro",
@@ -795,7 +881,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级跑车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2013-audi-rs-4-avant",
@@ -813,7 +901,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2013-audi-rs-7-sportback",
@@ -831,7 +921,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2015-audi-rs-6-avant",
@@ -849,7 +941,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2015-audi-s1",
@@ -867,7 +961,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "高性能掀背车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2016-audi-r8-v10-plus",
@@ -885,7 +981,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级跑车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2018-audi-rs-4-avant",
@@ -903,7 +1001,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2020-audi-r8-v10-performance",
@@ -921,7 +1021,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级跑车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2020-audi-rs-3-sedan",
@@ -939,7 +1041,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2021-audi-rs-6-avant",
@@ -957,7 +1061,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2021-audi-rs-7-sportback",
@@ -975,7 +1081,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2021-audi-rs-e-tron-gt",
@@ -993,7 +1101,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级轿车",
+      "makeCn": "奥迪"
     },
     {
       "id": "audi-2023-audi-r8-coup-v10-gt-rwd",
@@ -1012,7 +1122,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "现代超级跑车",
+      "makeCn": "奥迪"
     },
     {
       "id": "austin-healey-1965-austin-healey-3000-mkiii",
@@ -1030,7 +1142,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Austin-Healey",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "autozam-1993-autozam-az-1",
@@ -1048,7 +1162,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Autozam",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "bac-2014-bac-mono",
@@ -1066,7 +1182,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "BAC",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "bentley-2016-bentley-bentayga",
@@ -1084,7 +1202,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宾利",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "bentley-2021-bentley-continental-gt-convertible",
@@ -1103,7 +1223,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宾利",
+      "carTypeCn": "GT 赛车"
     },
     {
       "id": "bmw-1957-bmw-isetta-300-export",
@@ -1121,7 +1243,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "bmw-1973-bmw-2002-turbo",
@@ -1139,7 +1263,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "bmw-1981-bmw-m1",
@@ -1156,7 +1282,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "bmw-1988-bmw-m3",
@@ -1174,7 +1302,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "bmw-1988-bmw-m5",
@@ -1192,7 +1322,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "bmw-1995-bmw-850csi",
@@ -1210,7 +1342,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "bmw-1995-bmw-m5",
@@ -1228,7 +1362,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "bmw-1997-bmw-m3",
@@ -1246,7 +1382,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "bmw-2003-bmw-m5",
@@ -1264,7 +1402,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "bmw-2005-bmw-m3",
@@ -1282,7 +1422,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "bmw-2008-bmw-m3",
@@ -1300,7 +1442,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "bmw-2008-bmw-z4-m-coup",
@@ -1318,7 +1462,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "bmw-2009-bmw-m5",
@@ -1336,7 +1482,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "bmw-2010-bmw-m3-gts",
@@ -1354,7 +1502,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "bmw-2011-bmw-x5-m",
@@ -1372,7 +1522,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "bmw-2012-bmw-m5",
@@ -1390,7 +1542,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "bmw-2014-bmw-m4-coup",
@@ -1408,7 +1562,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "bmw-2015-bmw-i8",
@@ -1426,7 +1582,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "bmw-2016-bmw-m4-gts",
@@ -1444,7 +1602,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "bmw-2019-bmw-z4-roadster",
@@ -1463,7 +1623,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "bmw-2020-bmw-m2-competition-coup",
@@ -1481,7 +1643,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "bmw-2020-bmw-m8-competition-coup",
@@ -1499,7 +1663,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "GT 赛车"
     },
     {
       "id": "bmw-2021-bmw-m4-competition-coup",
@@ -1517,7 +1683,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "bmw-2021-bmw-m4-competition-coup-welcome-pack",
@@ -1536,7 +1704,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "bmw-2022-bmw-ix-xdrive50",
@@ -1554,7 +1724,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "bmw-2022-bmw-m5-cs",
@@ -1572,7 +1744,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "bmw-2023-bmw-m2",
@@ -1590,7 +1764,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "bmw-2023-bmw-m2-forza-edition",
@@ -1608,7 +1784,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "bmw-2024-bmw-x6-m-competition",
@@ -1626,7 +1804,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "宝马",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "buick-1987-buick-regal-gnx",
@@ -1643,7 +1823,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "复古肌肉车",
+      "makeCn": "别克"
     },
     {
       "id": "cadillac-2013-cadillac-xts-limousine",
@@ -1661,7 +1843,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "凯迪拉克",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "cadillac-2016-cadillac-ats-v",
@@ -1679,7 +1863,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "凯迪拉克",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "cadillac-2016-cadillac-cts-v-sedan",
@@ -1697,7 +1883,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "凯迪拉克",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "cadillac-2022-cadillac-ct4-v-blackwing",
@@ -1715,7 +1903,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "凯迪拉克",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "cadillac-2022-cadillac-ct5-v-blackwing",
@@ -1733,7 +1923,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "凯迪拉克",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "can-am-2018-can-am-maverick-x-rs-turbo-r",
@@ -1751,7 +1943,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Can-Am",
+      "carTypeCn": "沙滩车"
     },
     {
       "id": "casey-currie-motorsports-2019-casey-currie-motorsports-4402-ultra-4-trophy-jeep",
@@ -1769,7 +1963,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Casey Currie Motorsports",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "chevrolet-1953-chevrolet-corvette",
@@ -1787,7 +1983,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "chevrolet-1955-chevrolet-150-utility-sedan",
@@ -1805,7 +2003,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "改装车和特制车"
     },
     {
       "id": "chevrolet-1957-chevrolet-bel-air",
@@ -1823,7 +2023,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "改装车和特制车"
     },
     {
       "id": "chevrolet-1960-chevrolet-corvette",
@@ -1841,7 +2043,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "chevrolet-1964-chevrolet-impala-super-sport-409",
@@ -1859,7 +2063,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "改装车和特制车"
     },
     {
       "id": "chevrolet-1967-chevrolet-corvette-stingray-427",
@@ -1877,7 +2083,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "chevrolet-1969-chevrolet-camaro-super-sport-coupe",
@@ -1895,7 +2103,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "chevrolet-1969-chevrolet-nova-super-sport-396",
@@ -1913,7 +2123,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "chevrolet-1970-chevrolet-camaro-z28",
@@ -1931,7 +2143,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "chevrolet-1970-chevrolet-chevelle-super-sport-454",
@@ -1949,7 +2163,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "chevrolet-1970-chevrolet-corvette-zr-1",
@@ -1967,7 +2183,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "chevrolet-1970-chevrolet-el-camino-super-sport-454",
@@ -1985,7 +2203,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "多功能英雄车"
     },
     {
       "id": "chevrolet-1972-chevrolet-k-10-custom",
@@ -2003,7 +2223,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "chevrolet-1979-chevrolet-camaro-z28",
@@ -2021,7 +2243,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "chevrolet-1988-chevrolet-monte-carlo-super-sport",
@@ -2039,7 +2263,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "复古肌肉车"
     },
     {
       "id": "chevrolet-1995-chevrolet-corvette-zr-1",
@@ -2057,7 +2283,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "复古肌肉车"
     },
     {
       "id": "chevrolet-1996-chevrolet-impala-super-sport",
@@ -2075,7 +2303,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "复古肌肉车"
     },
     {
       "id": "chevrolet-2002-chevrolet-corvette-z06",
@@ -2093,7 +2323,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "复古肌肉车"
     },
     {
       "id": "chevrolet-2009-chevrolet-corvette-zr1",
@@ -2111,7 +2343,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "chevrolet-2015-chevrolet-camaro-z-28",
@@ -2129,7 +2363,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "chevrolet-2015-chevrolet-corvette-z06",
@@ -2147,7 +2383,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "chevrolet-2017-chevrolet-camaro-zl1",
@@ -2165,7 +2403,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "chevrolet-2018-chevrolet-camaro-zl1-1le",
@@ -2183,7 +2423,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "chevrolet-2019-chevrolet-corvette-zr1",
@@ -2201,7 +2443,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "chevrolet-2020-chevrolet-corvette-stingray-coupe",
@@ -2219,7 +2463,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "chevrolet-2020-chevrolet-silverado-lt-trail-boss",
@@ -2237,7 +2483,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "chevrolet-2023-chevrolet-corvette-z06",
@@ -2255,7 +2503,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "chevrolet-2024-chevrolet-corvette-e-ray",
@@ -2274,7 +2524,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雪佛兰",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "datsun-1969-datsun-2000-roadster",
@@ -2291,7 +2543,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "达特桑",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "datsun-1970-datsun-510",
@@ -2309,7 +2563,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "达特桑",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "datsun-1972-datsun-269-attacking-the-clock-racing-240z-all-carbon-hill-climb-beast",
@@ -2328,7 +2584,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "达特桑",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "deberti-2013-deberti-jeep-wrangler-unlimited",
@@ -2346,7 +2604,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "DeBerti",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "deberti-2018-deberti-chevrolet-silverado-1500-drift-truck",
@@ -2364,7 +2624,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "DeBerti",
+      "carTypeCn": "漂移赛车"
     },
     {
       "id": "deberti-2019-deberti-ford-super-duty-f-250-lariat-transformer",
@@ -2382,7 +2644,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "DeBerti",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "deberti-2019-deberti-toyota-tacoma-trd-the-performance-truck",
@@ -2400,7 +2664,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "DeBerti",
+      "carTypeCn": "漂移赛车"
     },
     {
       "id": "delorean-1982-delorean-dmc-12",
@@ -2418,7 +2684,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "DeLorean",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "dodge-1968-dodge-dart-hemi-super-stock",
@@ -2436,7 +2704,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "dodge-1969-dodge-charger-daytona-hemi",
@@ -2455,7 +2725,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "dodge-1969-dodge-charger-r-t",
@@ -2472,7 +2744,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "dodge-1970-dodge-challenger-r-t",
@@ -2490,7 +2764,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "dodge-1970-dodge-coronet-super-bee",
@@ -2508,7 +2784,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "dodge-1999-dodge-viper-gts-acr",
@@ -2525,7 +2803,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "复古肌肉车"
     },
     {
       "id": "dodge-1999-dodge-viper-gts-acr-forza-edition",
@@ -2544,7 +2824,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "dodge-2006-dodge-ram-srt-10",
@@ -2561,7 +2843,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "dodge-2008-dodge-viper-srt-10-acr",
@@ -2579,7 +2863,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "dodge-2015-dodge-challenger-srt-hellcat",
@@ -2597,7 +2883,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "dodge-2015-dodge-charger-srt-hellcat",
@@ -2615,7 +2903,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "dodge-2016-dodge-viper-acr",
@@ -2633,7 +2923,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "dodge-2018-dodge-challenger-srt-demon",
@@ -2652,7 +2944,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "dodge-2021-dodge-durango-srt-hellcat",
@@ -2670,7 +2964,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "dodge-2022-dodge-challenger-srt-super-stock",
@@ -2688,7 +2984,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "道奇",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "ferrari-1962-ferrari-250-gt-berlinetta-lusso",
@@ -2706,7 +3004,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "ferrari-1962-ferrari-250-gto",
@@ -2724,7 +3024,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "ferrari-1967-ferrari-24-ferrari-spa-330-p4",
@@ -2742,7 +3044,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "ferrari-1967-ferrari-275-gtb4-spider",
@@ -2761,7 +3065,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "ferrari-1969-ferrari-dino-246-gt",
@@ -2779,7 +3085,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "ferrari-1970-ferrari-512-s",
@@ -2797,7 +3105,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "ferrari-1984-ferrari-288-gto",
@@ -2815,7 +3125,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "ferrari-1987-ferrari-f40",
@@ -2833,7 +3145,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "ferrari-1989-ferrari-f40-competizione",
@@ -2851,7 +3165,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "复古赛车"
     },
     {
       "id": "ferrari-1992-ferrari-512-tr",
@@ -2869,7 +3185,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "ferrari-1994-ferrari-f355-berlinetta",
@@ -2887,7 +3205,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "ferrari-1995-ferrari-f50",
@@ -2905,7 +3225,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "ferrari-1996-ferrari-f50-gt",
@@ -2923,7 +3245,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ferrari-2002-ferrari-enzo-ferrari",
@@ -2940,7 +3264,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "ferrari-2005-ferrari-fxx",
@@ -2958,7 +3284,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ferrari-2007-ferrari-430-scuderia",
@@ -2976,7 +3304,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "ferrari-2009-ferrari-458-italia",
@@ -2994,7 +3324,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "ferrari-2010-ferrari-599xx",
@@ -3012,7 +3344,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ferrari-2012-ferrari-599xx-evolution",
@@ -3030,7 +3364,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ferrari-2013-ferrari-458-speciale",
@@ -3048,7 +3384,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "ferrari-2013-ferrari-laferrari",
@@ -3066,7 +3404,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "ferrari-2014-ferrari-fxx-k",
@@ -3084,7 +3424,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ferrari-2015-ferrari-488-gtb",
@@ -3102,7 +3444,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "ferrari-2015-ferrari-f12tdf",
@@ -3120,7 +3464,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "ferrari-2017-ferrari-812-superfast",
@@ -3138,7 +3484,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "ferrari-2017-ferrari-j50",
@@ -3156,7 +3504,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "ferrari-2017-ferrari-j50-preorder-car",
@@ -3175,7 +3525,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "ferrari-2018-ferrari-fxx-k-evo",
@@ -3193,7 +3545,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ferrari-2018-ferrari-fxx-k-evo-welcome-pack",
@@ -3212,7 +3566,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ferrari-2018-ferrari-portofino",
@@ -3230,7 +3586,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "ferrari-2019-ferrari-488-pista",
@@ -3248,7 +3606,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "ferrari-2019-ferrari-f8-tributo",
@@ -3266,7 +3626,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "ferrari-2019-ferrari-monza-sp2",
@@ -3284,7 +3646,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "ferrari-2020-ferrari-roma",
@@ -3301,7 +3665,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "ferrari-2020-ferrari-sf90-stradale",
@@ -3319,7 +3685,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "ferrari-2022-ferrari-296-gtb",
@@ -3336,7 +3704,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "ferrari-2025-ferrari-f80",
@@ -3355,7 +3725,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "法拉利",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "ford-1932-ford-de-luxe-five-window-coupe",
@@ -3373,7 +3745,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "改装车和特制车"
     },
     {
       "id": "ford-1965-ford-mustang-gt-coupe",
@@ -3390,7 +3764,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "ford-1966-ford-2-gt40-mk-ii",
@@ -3408,7 +3784,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "ford-1968-ford-mustang-gt-2-2-fastback",
@@ -3426,7 +3804,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "ford-1968-ford-mustang-gt-2-2-fastback-forza-edition",
@@ -3444,7 +3824,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "漂移赛车"
     },
     {
       "id": "ford-1969-ford-mustang-boss-302",
@@ -3462,7 +3844,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "ford-1973-ford-capri-rs3100",
@@ -3480,7 +3864,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "ford-1973-ford-xb-falcon-gt",
@@ -3498,7 +3884,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "ford-1977-ford-5-escort-rs1800-mkii",
@@ -3516,7 +3904,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "经典拉力赛车"
     },
     {
       "id": "ford-1985-ford-rs200-evolution",
@@ -3533,7 +3923,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "ford-1986-ford-f-150-xlt-lariat",
@@ -3551,7 +3943,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "ford-1986-ford-f-150-xlt-lariat-forza-edition",
@@ -3569,7 +3963,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "漂移赛车"
     },
     {
       "id": "ford-1987-ford-sierra-cosworth-rs500",
@@ -3586,7 +3982,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "ford-1992-ford-escort-rs-cosworth",
@@ -3604,7 +4002,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "ford-1993-ford-mustang-svt-cobra-r",
@@ -3622,7 +4022,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "复古肌肉车"
     },
     {
       "id": "ford-1994-ford-supervan-3",
@@ -3640,7 +4042,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "ford-1999-ford-racing-puma",
@@ -3658,7 +4062,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "ford-2000-ford-mustang-svt-cobra-r",
@@ -3676,7 +4082,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "复古肌肉车"
     },
     {
       "id": "ford-2001-ford-4-ford-focus-rs",
@@ -3694,7 +4102,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "ford-2003-ford-f-150-svt-lightning",
@@ -3711,7 +4121,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "ford-2003-ford-focus-rs",
@@ -3729,7 +4141,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "ford-2005-ford-gt",
@@ -3746,7 +4160,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "ford-2009-ford-focus-rs",
@@ -3763,7 +4179,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "ford-2010-ford-crown-victoria-police-interceptor",
@@ -3781,7 +4199,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "复古肌肉车"
     },
     {
       "id": "ford-2011-ford-transit-supersportvan",
@@ -3799,7 +4219,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "多功能英雄车"
     },
     {
       "id": "ford-2013-ford-mustang-shelby-gt500",
@@ -3817,7 +4239,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "ford-2014-ford-11-rockstar-f-150-trophy-truck",
@@ -3835,7 +4259,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "ford-2014-ford-fpv-limited-edition-pursuit-ute",
@@ -3853,7 +4279,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "多功能英雄车"
     },
     {
       "id": "ford-2014-ford-ranger-t6-rally-raid",
@@ -3871,7 +4299,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "越野车"
     },
     {
       "id": "ford-2016-ford-mustang-shelby-gt350r",
@@ -3889,7 +4319,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "ford-2017-ford-14-rahal-letterman-lanigan-racing-fiesta",
@@ -3907,7 +4339,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "ford-2017-ford-25-brocky-ultra4-bronco-rtr",
@@ -3925,7 +4359,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "ford-2017-ford-focus-rs",
@@ -3943,7 +4379,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "ford-2017-ford-gt",
@@ -3961,7 +4399,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "ford-2017-ford-m-sport-fiesta-rs",
@@ -3979,7 +4419,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "ford-2018-ford-mustang-rtr-spec-5",
@@ -3997,7 +4439,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "ford-2020-ford-2069-ford-performance-bronco-r",
@@ -4015,7 +4459,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "越野车"
     },
     {
       "id": "ford-2020-ford-mustang-shelby-gt500",
@@ -4033,7 +4479,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "ford-2020-ford-super-duty-f-450-drw-platinum",
@@ -4051,7 +4499,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "ford-2020-ford-super-duty-f-450-drw-platinum-forza-edition",
@@ -4069,7 +4519,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "ford-2022-ford-bronco-raptor",
@@ -4087,7 +4539,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "ford-2022-ford-f-150-lightning",
@@ -4105,7 +4559,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "ford-2022-ford-focus-st",
@@ -4123,7 +4579,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "ford-2022-ford-supervan-4",
@@ -4141,7 +4599,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ford-2023-ford-f-150-raptor-r",
@@ -4159,7 +4619,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "ford-2023-ford-f-150-raptor-r-welcome-pack",
@@ -4178,7 +4640,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "ford-2023-ford-fiesta-st",
@@ -4196,7 +4660,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "ford-2024-ford-mustang-dark-horse",
@@ -4214,7 +4680,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "ford-2024-ford-mustang-gt",
@@ -4232,7 +4700,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "福特",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "formula-drift-1989-formula-drift-98-bmw-325i",
@@ -4250,7 +4720,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-1995-formula-drift-34-toyota-supra-mkiv",
@@ -4268,7 +4740,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-1997-formula-drift-777-nissan-240sx",
@@ -4286,7 +4760,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2006-formula-drift-43-dodge-viper-srt-10-acr",
@@ -4304,7 +4780,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2007-formula-drift-117-599-gtb-fiorano",
@@ -4322,7 +4800,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2009-formula-drift-99-mazda-rx-8",
@@ -4340,7 +4820,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2013-formula-drift-777-chevrolet-corvette",
@@ -4358,7 +4840,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2015-formula-drift-13-ford-mustang",
@@ -4376,7 +4860,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2016-formula-drift-530-hsv-maloo-gen-f",
@@ -4394,7 +4880,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2019-formula-drift-411-toyota-corolla-hatchback",
@@ -4412,7 +4900,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2020-formula-drift-151-toyota-gr-supra",
@@ -4430,7 +4920,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2020-formula-drift-91-bmw-m2",
@@ -4448,7 +4940,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "formula-drift-2023-formula-drift-64-forsberg-racing-nissan-z",
@@ -4466,7 +4960,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "漂移赛车",
+      "makeCn": "漂移方程式"
     },
     {
       "id": "funco-motorsports-2018-funco-motorsports-f9",
@@ -4484,7 +4980,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Funco Motorsports",
+      "carTypeCn": "无限制沙滩车"
     },
     {
       "id": "gmc-1970-gmc-jimmy",
@@ -4501,7 +4999,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "GMC",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "gmc-1991-gmc-syclone",
@@ -4519,7 +5019,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "GMC",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "gmc-1992-gmc-typhoon",
@@ -4537,7 +5039,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "GMC",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "gmc-2022-gmc-hummer-ev-pickup",
@@ -4555,7 +5059,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "GMC",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "gordon-murray-automotive-2020-gordon-murray-automotive-t-50",
@@ -4573,7 +5079,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Gordon Murray Automotive",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "gr-2025-gr-gt-prototype",
@@ -4591,7 +5099,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "超级豪华旅行车",
+      "makeCn": "GR"
     },
     {
       "id": "hennessey-2012-hennessey-venom-gt",
@@ -4609,7 +5119,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Hennessey",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "hennessey-2019-hennessey-ford-f-150-velociraptor-6x6",
@@ -4627,7 +5139,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Hennessey",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "hennessey-2021-hennessey-venom-f5",
@@ -4645,7 +5159,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Hennessey",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "holden-1977-holden-torana-a9x",
@@ -4663,7 +5179,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "霍顿",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "honda-1970-honda-s800",
@@ -4681,7 +5199,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "honda-1974-honda-civic-rs",
@@ -4699,7 +5219,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "honda-1984-honda-city-e-ii",
@@ -4718,7 +5240,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "honda-1984-honda-civic-crx-mugen",
@@ -4736,7 +5260,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "honda-1986-honda-civic-si",
@@ -4753,7 +5279,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "honda-1990-honda-19-101-motorsport-crx-wtac",
@@ -4772,7 +5300,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "honda-1991-honda-beat",
@@ -4791,7 +5321,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "honda-1991-honda-cr-x-sir",
@@ -4808,7 +5340,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "honda-1992-honda-21-hardrace-jdmyard-civic-wtac",
@@ -4827,7 +5361,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "honda-1992-honda-nsx-r",
@@ -4845,7 +5381,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "honda-1994-honda-acty",
@@ -4864,7 +5402,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "honda-1994-honda-prelude-si",
@@ -4883,7 +5423,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "honda-1997-honda-civic-type-r",
@@ -4901,7 +5443,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "honda-2001-honda-33-integra-wtac",
@@ -4920,7 +5464,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "honda-2003-honda-s2000",
@@ -4938,7 +5484,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "honda-2004-honda-52-evasive-motorsports-s2000-wtac",
@@ -4957,7 +5505,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "honda-2004-honda-civic-type-r",
@@ -4975,7 +5525,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "honda-2005-honda-nsx-r",
@@ -4993,7 +5545,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "honda-2005-honda-nsx-r-gt",
@@ -5010,7 +5564,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "honda-2007-honda-civic-type-r",
@@ -5028,7 +5584,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "honda-2008-honda-civic-type-r-fd2",
@@ -5047,7 +5605,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "honda-2015-honda-civic-type-r",
@@ -5065,7 +5625,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "honda-2015-honda-ridgeline-baja-trophy-truck",
@@ -5083,7 +5645,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "honda-2018-honda-civic-type-r",
@@ -5101,7 +5665,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "honda-2022-honda-e",
@@ -5119,7 +5685,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "honda-2023-honda-civic-type-r",
@@ -5138,7 +5706,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "本田",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "hsv-2014-hsv-gen-f-gts",
@@ -5156,7 +5726,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "HSV",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "hsv-2014-hsv-limited-edition-gen-f-gts-maloo",
@@ -5174,7 +5746,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "HSV",
+      "carTypeCn": "多功能英雄车"
     },
     {
       "id": "hyundai-2019-hyundai-veloster-n",
@@ -5192,7 +5766,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "现代",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "hyundai-2020-hyundai-i30-n",
@@ -5210,7 +5786,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "现代",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "hyundai-2021-hyundai-i20-n",
@@ -5228,7 +5806,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "现代",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "hyundai-2022-hyundai-n-vision-74",
@@ -5246,7 +5826,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "现代",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "hyundai-2023-hyundai-ioniq-5-n",
@@ -5264,7 +5846,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "现代",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "jaguar-1956-jaguar-d-type",
@@ -5282,7 +5866,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "捷豹",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "jaguar-1961-jaguar-e-type",
@@ -5300,7 +5886,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "捷豹",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "jaguar-1964-jaguar-lightweight-e-type",
@@ -5318,7 +5906,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "捷豹",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "jaguar-1991-jaguar-sport-xjr-15",
@@ -5336,7 +5926,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "捷豹",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "jaguar-1993-jaguar-xj220",
@@ -5354,7 +5946,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "捷豹",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "jaguar-1993-jaguar-xj220s-twr",
@@ -5372,7 +5966,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "捷豹",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "jaguar-2010-jaguar-c-x75",
@@ -5390,7 +5986,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "捷豹",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "jeep-2012-jeep-wrangler-rubicon",
@@ -5408,7 +6006,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Jeep",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "jeep-2016-jeep-trailcat",
@@ -5426,7 +6026,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Jeep",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "jeep-2018-jeep-grand-cherokee-trackhawk",
@@ -5444,7 +6046,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Jeep",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "jeep-2020-jeep-jt",
@@ -5462,7 +6066,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Jeep",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "jimco-2019-jimco-240-fastball-racing-class-6100-spec-trophy-truck",
@@ -5480,7 +6086,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Jimco",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "jimco-2020-jimco-179-hammerhead-class-1",
@@ -5498,7 +6106,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Jimco",
+      "carTypeCn": "无限制沙滩车"
     },
     {
       "id": "koenigsegg-2008-koenigsegg-ccgt",
@@ -5516,7 +6126,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "科尼塞格",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "koenigsegg-2011-koenigsegg-agera",
@@ -5534,7 +6146,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "科尼塞格",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "koenigsegg-2015-koenigsegg-one-1",
@@ -5552,7 +6166,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "科尼塞格",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "koenigsegg-2016-koenigsegg-regera",
@@ -5569,7 +6185,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "科尼塞格",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "koenigsegg-2017-koenigsegg-agera-rs",
@@ -5587,7 +6205,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "科尼塞格",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "koenigsegg-2020-koenigsegg-jesko",
@@ -5605,7 +6225,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "科尼塞格",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "koenigsegg-2024-koenigsegg-gemera",
@@ -5624,7 +6246,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "科尼塞格",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "ktm-2018-ktm-x-bow-gt4",
@@ -5642,7 +6266,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "KTM",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "lamborghini-1967-lamborghini-miura-p400",
@@ -5660,7 +6286,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "lamborghini-1988-lamborghini-countach-lp5000-qv",
@@ -5677,7 +6305,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "lamborghini-1997-lamborghini-diablo-sv",
@@ -5694,7 +6324,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "lamborghini-1999-lamborghini-diablo-gtr",
@@ -5712,7 +6344,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "lamborghini-2010-lamborghini-murci-lago-lp-670-4-sv",
@@ -5730,7 +6364,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "lamborghini-2011-lamborghini-sesto-elemento",
@@ -5748,7 +6384,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "lamborghini-2012-lamborghini-aventador-lp700-4",
@@ -5766,7 +6404,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "lamborghini-2012-lamborghini-gallardo-lp570-4-spyder-performante",
@@ -5784,7 +6424,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "lamborghini-2013-lamborghini-veneno",
@@ -5802,7 +6444,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "lamborghini-2014-lamborghini-hurac-n-lp-610-4",
@@ -5821,7 +6465,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "lamborghini-2016-lamborghini-centenario-lp-770-4",
@@ -5840,7 +6486,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "lamborghini-2018-lamborghini-aventador-svj",
@@ -5858,7 +6506,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "lamborghini-2019-lamborghini-urus",
@@ -5876,7 +6526,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "lamborghini-2020-lamborghini-essenza-scv12",
@@ -5894,7 +6546,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "lamborghini-2020-lamborghini-hurac-n-evo",
@@ -5911,7 +6565,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "lamborghini-2020-lamborghini-hurac-n-sto",
@@ -5929,7 +6585,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "lamborghini-2020-lamborghini-si-n-roadster",
@@ -5947,7 +6605,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "lamborghini-2021-lamborghini-countach-lpi-800-4",
@@ -5965,7 +6625,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "lamborghini-2022-lamborghini-aventador-lp-780-4-ultimae",
@@ -5982,7 +6644,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "lamborghini-2022-lamborghini-hurac-n-sterrato",
@@ -6000,7 +6664,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "lamborghini-2022-lamborghini-hurac-n-tecnica",
@@ -6018,7 +6684,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "lamborghini-2024-lamborghini-revuelto",
@@ -6036,7 +6704,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "兰博基尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "lancia-1974-lancia-stratos-hf-stradale",
@@ -6053,7 +6723,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "蓝旗亚",
+      "carTypeCn": "经典拉力赛车"
     },
     {
       "id": "lancia-1986-lancia-delta-s4",
@@ -6071,7 +6743,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "蓝旗亚",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "lancia-1992-lancia-delta-hf-integrale-evo",
@@ -6089,7 +6763,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "蓝旗亚",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "land-rover-2015-land-rover-range-rover-sport-svr",
@@ -6107,7 +6783,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "运动型多功能英雄车",
+      "makeCn": "路虎"
     },
     {
       "id": "land-rover-2020-land-rover-defender-110-x",
@@ -6124,7 +6802,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "运动型多功能英雄车",
+      "makeCn": "路虎"
     },
     {
       "id": "lexus-2010-lexus-lfa",
@@ -6141,7 +6821,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雷克萨斯",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "lexus-2010-lexus-lfa-forza-edition",
@@ -6159,7 +6841,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雷克萨斯",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "lexus-2015-lexus-rc-f",
@@ -6177,7 +6861,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雷克萨斯",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "lexus-2021-lexus-lc-500",
@@ -6195,7 +6881,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "雷克萨斯",
+      "carTypeCn": "GT 赛车"
     },
     {
       "id": "lincoln-1962-lincoln-continental",
@@ -6212,7 +6900,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "林肯",
+      "carTypeCn": "改装车和特制车"
     },
     {
       "id": "lotus-1997-lotus-elise-gt1",
@@ -6230,7 +6920,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "莲花",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "lotus-1999-lotus-elise-series-1-sport-190",
@@ -6248,7 +6940,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "莲花",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "lotus-2018-lotus-exige-cup-430",
@@ -6265,7 +6959,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "莲花",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "lotus-2018-lotus-scura-motorsports-exige-wtac",
@@ -6283,7 +6979,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "莲花",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "lotus-2020-lotus-evija",
@@ -6301,7 +6999,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "莲花",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "lotus-2020-lotus-evija-forza-edition",
@@ -6320,7 +7020,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "莲花",
+      "carTypeCn": "漂移赛车"
     },
     {
       "id": "lotus-2023-lotus-emira",
@@ -6337,7 +7039,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "莲花",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "lucid-2024-lucid-air-sapphire",
@@ -6355,7 +7059,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Lucid",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "maserati-1997-maserati-ghibli-cup",
@@ -6373,7 +7079,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "玛莎拉蒂",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "maserati-2004-maserati-mc12",
@@ -6390,7 +7098,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "玛莎拉蒂",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "maserati-2008-maserati-mc12-versione-corsa",
@@ -6408,7 +7118,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "玛莎拉蒂",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "maserati-2022-maserati-mc20",
@@ -6426,7 +7138,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "玛莎拉蒂",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "mazda-1972-mazda-cosmo-110s-series-ii",
@@ -6443,7 +7157,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "mazda-1973-mazda-rx-3",
@@ -6461,7 +7177,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "mazda-1973-mazda-rx-3-forza-edition",
@@ -6478,7 +7196,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "mazda-1974-mazda-123-mad-mike-808-wagon-fursty",
@@ -6497,7 +7217,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "漂移赛车"
     },
     {
       "id": "mazda-1985-mazda-rx-7-gsl-se",
@@ -6514,7 +7236,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "mazda-1990-mazda-savanna-rx-7",
@@ -6532,7 +7256,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "mazda-1991-mazda-55-mazda-787b",
@@ -6549,7 +7275,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "复古赛车"
     },
     {
       "id": "mazda-1992-mazda-rx-7-type-r",
@@ -6567,7 +7295,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "mazda-1994-mazda-mx-5-miata",
@@ -6585,7 +7315,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "mazda-1994-mazda-mx-5-miata-forza-edition",
@@ -6602,7 +7334,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "mazda-2005-mazda-mazdaspeed-mx-5",
@@ -6620,7 +7354,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "mazda-2008-mazda-furai",
@@ -6637,7 +7373,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "mazda-2010-mazda-mazdaspeed-3",
@@ -6655,7 +7393,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "mazda-2011-mazda-rx-8-r3",
@@ -6673,7 +7413,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "mazda-2013-mazda-mx-5",
@@ -6691,7 +7433,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "mazda-2016-mazda-mx-5",
@@ -6708,7 +7452,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "mazda-2017-mazda-mx-5-cup",
@@ -6726,7 +7472,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "mazda-2022-mazda-mx-5-miata-rf",
@@ -6744,7 +7492,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "马自达",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "mclaren-1993-mclaren-f1",
@@ -6762,7 +7512,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "mclaren-1997-mclaren-f1-gt",
@@ -6780,7 +7532,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "mclaren-2011-mclaren-12c-coup",
@@ -6798,7 +7552,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "mclaren-2013-mclaren-p1",
@@ -6816,7 +7572,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "mclaren-2014-mclaren-650s-spider",
@@ -6834,7 +7592,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "mclaren-2015-mclaren-570s-coup",
@@ -6852,7 +7612,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "mclaren-2018-mclaren-600lt-coup",
@@ -6869,7 +7631,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "mclaren-2019-mclaren-speedtail",
@@ -6887,7 +7651,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "mclaren-2021-mclaren-620r",
@@ -6905,7 +7671,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "mclaren-2021-mclaren-765lt-coup",
@@ -6923,7 +7691,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "mclaren-2021-mclaren-sabre",
@@ -6940,7 +7710,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "mclaren-2023-mclaren-artura",
@@ -6958,7 +7730,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "迈凯伦",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "mercedes-amg-2015-mercedes-amg-gt-s",
@@ -6976,7 +7750,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "mercedes-amg-2016-mercedes-amg-c-63-s-coup",
@@ -6994,7 +7770,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "mercedes-amg-2017-mercedes-amg-gt-r",
@@ -7011,7 +7789,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "mercedes-amg-2018-mercedes-amg-e-63-s",
@@ -7029,7 +7809,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "mercedes-amg-2018-mercedes-amg-gt-4-door-coup",
@@ -7047,7 +7829,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "mercedes-amg-2020-mercedes-amg-gt-black-series",
@@ -7065,7 +7849,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "mercedes-amg-2020-mercedes-amg-gt-black-series-welcome-pack",
@@ -7084,7 +7870,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "mercedes-amg-2020-mercedes-amg-slc-43-final-edition",
@@ -7102,7 +7890,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "mercedes-amg-2021-mercedes-amg-mercedes-amg-one",
@@ -7120,7 +7910,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "mercedes-amg-2021-mercedes-amg-sl-63",
@@ -7138,7 +7930,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-AMG",
+      "carTypeCn": "GT 赛车"
     },
     {
       "id": "mercedes-benz-1954-mercedes-benz-300-sl-coup",
@@ -7156,7 +7950,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "mercedes-benz-1955-mercedes-benz-300-slr",
@@ -7174,7 +7970,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "mercedes-benz-1987-mercedes-benz-amg-hammer-coupe",
@@ -7192,7 +7990,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "mercedes-benz-1990-mercedes-benz-190-e-2-5-16-evolution-ii",
@@ -7209,7 +8009,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "mercedes-benz-1990-mercedes-benz-190-e-2-5-16-evolution-ii-forza-edition",
@@ -7227,7 +8029,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "mercedes-benz-1998-mercedes-benz-amg-clk-gtr",
@@ -7245,7 +8049,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "mercedes-benz-2009-mercedes-benz-sl-65-amg-black-series",
@@ -7263,7 +8069,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "超级豪华旅行车"
     },
     {
       "id": "mercedes-benz-2012-mercedes-benz-c-63-amg-coup-black-series",
@@ -7280,7 +8088,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "mercedes-benz-2013-mercedes-benz-a-45-amg",
@@ -7298,7 +8108,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "mercedes-benz-2013-mercedes-benz-g-65-amg",
@@ -7316,7 +8128,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "mercedes-benz-2014-mercedes-benz-g-63-amg-6x6",
@@ -7334,7 +8148,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "mercedes-benz-2014-mercedes-benz-unimog-u5023",
@@ -7352,7 +8168,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "越野车"
     },
     {
       "id": "mercedes-benz-2018-mercedes-benz-x-class",
@@ -7370,7 +8188,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "梅赛德斯-奔驰",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "meyers-1971-meyers-manx",
@@ -7388,7 +8208,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Meyers",
+      "carTypeCn": "沙滩车"
     },
     {
       "id": "meyers-2023-meyers-manx-2-0",
@@ -7406,7 +8228,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Meyers",
+      "carTypeCn": "沙滩车"
     },
     {
       "id": "mg-1986-mg-metro-6r4",
@@ -7425,7 +8249,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "拉力赛怪物",
+      "makeCn": "MG"
     },
     {
       "id": "mini-1965-mini-cooper-s",
@@ -7443,7 +8269,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "MINI",
+      "carTypeCn": "经典拉力赛车"
     },
     {
       "id": "mini-2012-mini-john-cooper-works-gp",
@@ -7461,7 +8289,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "MINI",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "mini-2013-mini-x-raid-all4-racing-countryman",
@@ -7479,7 +8309,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "MINI",
+      "carTypeCn": "越野车"
     },
     {
       "id": "mini-2018-mini-x-raid-john-cooper-works-buggy",
@@ -7497,7 +8329,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "MINI",
+      "carTypeCn": "越野车"
     },
     {
       "id": "mini-2021-mini-john-cooper-works-gp",
@@ -7514,7 +8348,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "MINI",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "mitsubishi-1990-mitsubishi-269-attacking-the-clock-racing-minicab-time-attack",
@@ -7533,7 +8369,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "mitsubishi-1992-mitsubishi-galant-vr-4",
@@ -7551,7 +8389,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "mitsubishi-1995-mitsubishi-eclipse-gsx",
@@ -7569,7 +8409,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "mitsubishi-1995-mitsubishi-lancer-evolution-iii-gsr",
@@ -7586,7 +8428,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "mitsubishi-1995-mitsubishi-montero-exceed-2800-td",
@@ -7604,7 +8448,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "mitsubishi-1997-mitsubishi-gto",
@@ -7622,7 +8468,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "mitsubishi-1997-mitsubishi-montero-evolution",
@@ -7639,7 +8487,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "mitsubishi-2001-mitsubishi-lancer-evolution-vi-gsr-tm-edition",
@@ -7656,7 +8506,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "mitsubishi-2004-mitsubishi-lancer-evolution-viii-mr",
@@ -7674,7 +8526,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "mitsubishi-2004-mitsubishi-lancer-evolution-viii-mr-welcome-pack",
@@ -7693,7 +8547,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "mitsubishi-2005-mitsubishi-1-sierra-sierra-enterprises-lancer-evolution-time-attack",
@@ -7710,7 +8566,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "mitsubishi-2006-mitsubishi-lancer-evolution-ix-mr",
@@ -7727,7 +8585,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "mitsubishi-2008-mitsubishi-lancer-evolution-x-gsr",
@@ -7745,7 +8605,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "三菱",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "nissan-1969-nissan-fairlady-z-432",
@@ -7763,7 +8625,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "nissan-1971-nissan-skyline-2000gt-r",
@@ -7780,7 +8644,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "nissan-1973-nissan-skyline-h-t-2000gt-r",
@@ -7798,7 +8664,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "nissan-1983-nissan-11-tomica-skyline-turbo-super-silhouette",
@@ -7815,7 +8683,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古赛车"
     },
     {
       "id": "nissan-1985-nissan-safari-turbo",
@@ -7832,7 +8702,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "nissan-1987-nissan-be-1",
@@ -7849,7 +8721,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "nissan-1987-nissan-skyline-gts-r",
@@ -7866,7 +8740,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-1989-nissan-pao",
@@ -7883,7 +8759,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "nissan-1989-nissan-s-cargo",
@@ -7901,7 +8779,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "nissan-1989-nissan-s-cargo-forza-edition",
@@ -7919,7 +8799,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "nissan-1989-nissan-silvia-k-s",
@@ -7936,7 +8818,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-1990-nissan-12-skyline-gt-r-bnr32-gr-a-jtc",
@@ -7955,7 +8839,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古赛车"
     },
     {
       "id": "nissan-1990-nissan-pulsar-gti-r",
@@ -7973,7 +8859,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "nissan-1991-nissan-figaro",
@@ -7990,7 +8878,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "nissan-1992-nissan-skyline-gt-r",
@@ -8008,7 +8898,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-1993-nissan-32-skyline-wtac-xtreme-gtr",
@@ -8027,7 +8919,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "nissan-1993-nissan-240sx",
@@ -8045,7 +8939,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-1994-nissan-fairlady-z-version-s-twin-turbo",
@@ -8062,7 +8958,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-1994-nissan-silvia-k-s",
@@ -8080,7 +8978,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-1995-nissan-gloria-gran-turismo",
@@ -8098,7 +8998,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "nissan-1995-nissan-nismo-gt-r-lm",
@@ -8116,7 +9018,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-1997-nissan-skyline-gt-r-v-spec",
@@ -8133,7 +9037,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-1997-nissan-stagea-rs-four-v",
@@ -8151,7 +9057,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "nissan-1998-nissan-23-pennzoil-nismo-skyline-gt-r",
@@ -8168,7 +9076,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古赛车"
     },
     {
       "id": "nissan-1998-nissan-r390-gt1",
@@ -8185,7 +9095,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "nissan-1998-nissan-silvia-k-s-aero",
@@ -8203,7 +9115,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-1998-nissan-skyline-gt-r-40th-anniversary",
@@ -8222,7 +9136,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-2000-nissan-36-dream-project-s15-silvia-wtac",
@@ -8241,7 +9157,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "nissan-2000-nissan-skyline-gt-r-v-spec-ii",
@@ -8259,7 +9177,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-2002-nissan-silvia-spec-r",
@@ -8277,7 +9197,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-2003-nissan-fairlady-z",
@@ -8295,7 +9217,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "nissan-2010-nissan-370z",
@@ -8312,7 +9236,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "nissan-2012-nissan-gt-r-black-edition-r35",
@@ -8330,7 +9256,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "nissan-2012-nissan-gt-r-black-edition-r35-forza-edition",
@@ -8348,7 +9276,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "nissan-2017-nissan-gt-r-r35",
@@ -8366,7 +9296,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "nissan-2019-nissan-370z-nismo",
@@ -8384,7 +9316,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "nissan-2020-nissan-gt-r-nismo-r35",
@@ -8402,7 +9336,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "nissan-2024-nissan-gt-r-nismo",
@@ -8420,7 +9356,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "nissan-2024-nissan-z-nismo",
@@ -8438,7 +9376,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "日产",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "noble-2010-noble-m600",
@@ -8456,7 +9396,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Noble",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "opel-1984-opel-manta-400",
@@ -8474,7 +9416,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "欧宝",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "pagani-2009-pagani-zonda-r",
@@ -8492,7 +9436,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "帕加尼",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "pagani-2010-pagani-zonda-cinque-roadster",
@@ -8509,7 +9455,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "帕加尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "pagani-2016-pagani-huayra-bc-coupe",
@@ -8527,7 +9475,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "帕加尼",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "pagani-2021-pagani-huayra-r",
@@ -8544,7 +9494,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "帕加尼",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "peel-1962-peel-p50",
@@ -8562,7 +9514,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Peel",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "peel-1962-peel-p50-trolli-edition",
@@ -8581,7 +9535,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Peel",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "penhall-2011-penhall-the-cholla",
@@ -8599,7 +9555,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Penhall",
+      "carTypeCn": "无限制沙滩车"
     },
     {
       "id": "peugeot-1984-peugeot-205-turbo-16",
@@ -8616,7 +9574,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "标致",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "peugeot-1991-peugeot-205-rallye",
@@ -8634,7 +9594,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "标致",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "peugeot-2007-peugeot-207-super-2000",
@@ -8651,7 +9613,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "标致",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "plymouth-1958-plymouth-fury",
@@ -8669,7 +9633,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Plymouth",
+      "carTypeCn": "改装车和特制车"
     },
     {
       "id": "plymouth-1968-plymouth-barracuda-formula-s",
@@ -8687,7 +9653,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Plymouth",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "plymouth-1971-plymouth-cuda-426-hemi",
@@ -8705,7 +9673,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Plymouth",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "polaris-2021-polaris-rzr-pro-xp-factory-racing-limited-edition",
@@ -8723,7 +9693,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "沙滩车",
+      "makeCn": "北极星"
     },
     {
       "id": "polaris-2021-polaris-rzr-pro-xp-ultimate",
@@ -8741,7 +9713,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "沙滩车",
+      "makeCn": "北极星"
     },
     {
       "id": "pontiac-1977-pontiac-firebird-trans-am",
@@ -8759,7 +9733,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "庞蒂亚克",
+      "carTypeCn": "经典肌肉车"
     },
     {
       "id": "pontiac-1987-pontiac-firebird-trans-am-gta",
@@ -8777,7 +9753,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "庞蒂亚克",
+      "carTypeCn": "复古肌肉车"
     },
     {
       "id": "porsche-1970-porsche-3-917-lh",
@@ -8795,7 +9773,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "porsche-1970-porsche-3-917-lh-forza-edition",
@@ -8813,7 +9793,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "porsche-1973-porsche-911-carrera-rs",
@@ -8831,7 +9813,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "porsche-1982-porsche-911-turbo-3-3",
@@ -8848,7 +9832,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "porsche-1985-porsche-185-959-prodrive-rally-raid",
@@ -8866,7 +9852,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "porsche-1987-porsche-959",
@@ -8883,7 +9871,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "porsche-1989-porsche-944-turbo",
@@ -8901,7 +9891,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "porsche-1993-porsche-911-turbo-s-leichtbau",
@@ -8918,7 +9910,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "porsche-1993-porsche-928-gts",
@@ -8936,7 +9930,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "porsche-1993-porsche-968-turbo-s",
@@ -8954,7 +9950,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "porsche-1995-porsche-911-gt2",
@@ -8972,7 +9970,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "porsche-1997-porsche-911-gt1-strassenversion",
@@ -8990,7 +9990,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "porsche-2003-porsche-carrera-gt",
@@ -9008,7 +10010,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "porsche-2004-porsche-911-gt3",
@@ -9026,7 +10030,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "porsche-2005-porsche-cayman-gt3-wtac",
@@ -9044,7 +10050,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "porsche-2012-porsche-911-gt3-rs-4-0",
@@ -9062,7 +10070,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "porsche-2014-porsche-918-spyder",
@@ -9080,7 +10090,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "porsche-2018-porsche-718-cayman-gts",
@@ -9098,7 +10110,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "porsche-2018-porsche-911-gt2-rs",
@@ -9116,7 +10130,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "porsche-2018-porsche-cayenne-turbo",
@@ -9134,7 +10150,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "porsche-2018-porsche-macan-lpr-rally-raid",
@@ -9152,7 +10170,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "越野车"
     },
     {
       "id": "porsche-2019-porsche-70-porsche-motorsport-935",
@@ -9170,7 +10190,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "porsche-2019-porsche-911-carrera-s",
@@ -9188,7 +10210,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "porsche-2019-porsche-911-gt3-rs",
@@ -9206,7 +10230,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "porsche-2020-porsche-taycan-turbo-s",
@@ -9224,7 +10250,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "porsche-2021-porsche-911-gt3",
@@ -9242,7 +10270,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "porsche-2021-porsche-mission-r",
@@ -9260,7 +10290,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "porsche-2022-porsche-718-cayman-gt4-rs",
@@ -9278,7 +10310,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "porsche-2023-porsche-911-gt3-rs",
@@ -9296,7 +10330,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "porsche-2023-porsche-911-rallye",
@@ -9313,7 +10349,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "porsche-2023-porsche-911-turbo-s",
@@ -9331,7 +10369,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "保时捷",
+      "carTypeCn": "现代超级跑车"
     },
     {
       "id": "radical-2015-radical-rxc-turbo",
@@ -9349,7 +10389,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Radical",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "ram-2024-ram-1500-trx",
@@ -9366,7 +10408,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Ram",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "reliant-1972-reliant-supervan-iii",
@@ -9384,7 +10428,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Reliant",
+      "carTypeCn": "多功能英雄车"
     },
     {
       "id": "renault-1967-renault-8-gordini",
@@ -9401,7 +10447,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "经典拉力赛车",
+      "makeCn": "雷诺"
     },
     {
       "id": "renault-1980-renault-5-turbo",
@@ -9419,7 +10467,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "复古拉力赛车",
+      "makeCn": "雷诺"
     },
     {
       "id": "renault-1993-renault-clio-williams",
@@ -9437,7 +10487,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "复古高性能掀背车",
+      "makeCn": "雷诺"
     },
     {
       "id": "renault-2008-renault-m-gane-r26-r",
@@ -9455,7 +10507,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "高性能掀背车",
+      "makeCn": "雷诺"
     },
     {
       "id": "renault-2010-renault-megane-rs-250",
@@ -9473,7 +10527,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "超高性能掀背车",
+      "makeCn": "雷诺"
     },
     {
       "id": "renault-2018-renault-megane-r-s",
@@ -9491,7 +10547,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "超高性能掀背车",
+      "makeCn": "雷诺"
     },
     {
       "id": "rimac-2021-rimac-nevera",
@@ -9509,7 +10567,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Rimac",
+      "carTypeCn": "顶级超跑"
     },
     {
       "id": "rivian-2022-rivian-r1t",
@@ -9527,7 +10587,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "皮卡和四轮驱动车",
+      "makeCn": "RIVIAN"
     },
     {
       "id": "rj-anderson-2016-rj-anderson-37-polaris-rzr-pro-2-truck",
@@ -9545,7 +10607,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "RJ Anderson",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "rj-anderson-2021-rj-anderson-37-polaris-rzr-pro-4-truck",
@@ -9563,7 +10627,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "RJ Anderson",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "saleen-2017-saleen-s7-lm",
@@ -9580,7 +10646,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "carTypeCn": "极限赛道玩具",
+      "makeCn": "赛麟"
     },
     {
       "id": "schuppan-1993-schuppan-962cr",
@@ -9597,7 +10665,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Schuppan",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "shelby-1965-shelby-cobra-427-s-c",
@@ -9615,7 +10685,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Shelby",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "shelby-1965-shelby-cobra-daytona-coupe",
@@ -9633,7 +10705,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Shelby",
+      "carTypeCn": "经典赛车"
     },
     {
       "id": "sierra-cars-2020-sierra-cars-23-yokohama-alpha",
@@ -9651,7 +10725,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "SIERRA Cars",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "sierra-cars-2021-sierra-cars-700r",
@@ -9669,7 +10745,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "SIERRA Cars",
+      "carTypeCn": "沙滩车"
     },
     {
       "id": "sierra-cars-2021-sierra-cars-rx3",
@@ -9687,7 +10765,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "SIERRA Cars",
+      "carTypeCn": "沙滩车"
     },
     {
       "id": "srt-2013-srt-viper-gts",
@@ -9706,7 +10786,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "SRT",
+      "carTypeCn": "现代肌肉车"
     },
     {
       "id": "subaru-1980-subaru-brat-gl",
@@ -9724,7 +10806,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "多功能英雄车"
     },
     {
       "id": "subaru-1990-subaru-legacy-rs",
@@ -9742,7 +10826,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "subaru-1994-subaru-vivio-rx-r",
@@ -9760,7 +10846,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "subaru-1994-subaru-vivio-rx-r-forza-edition",
@@ -9778,7 +10866,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "subaru-1996-subaru-svx",
@@ -9796,7 +10886,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "subaru-1998-subaru-impreza-22b-sti-version",
@@ -9814,7 +10906,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "subaru-2004-subaru-impreza-wrx-sti",
@@ -9832,7 +10926,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "subaru-2005-subaru-impreza-wrx-sti",
@@ -9850,7 +10946,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "subaru-2005-subaru-legacy-b4-2-0-gt",
@@ -9868,7 +10966,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "subaru-2008-subaru-impreza-wrx-sti",
@@ -9886,7 +10986,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "subaru-2011-subaru-wrx-sti",
@@ -9904,7 +11006,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "subaru-2013-subaru-brz",
@@ -9922,7 +11026,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "subaru-2015-subaru-wrx-sti",
@@ -9940,7 +11046,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "subaru-2018-subaru-wrx-sti-arx-supercar",
@@ -9957,7 +11065,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "subaru-2019-subaru-sti-s209",
@@ -9974,7 +11084,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "subaru-2022-subaru-brz",
@@ -9992,7 +11104,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "subaru-2022-subaru-brz-forza-edition",
@@ -10009,7 +11123,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "subaru-2022-subaru-wrx",
@@ -10027,7 +11143,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "斯巴鲁",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "toyota-1965-toyota-sports-800",
@@ -10046,7 +11164,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "toyota-1965-toyota-sports-800-fanta-edition",
@@ -10065,7 +11185,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "toyota-1969-toyota-2000gt",
@@ -10082,7 +11204,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "稀有经典车"
     },
     {
       "id": "toyota-1974-toyota-corolla-sr5",
@@ -10099,7 +11223,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "经典跑车"
     },
     {
       "id": "toyota-1979-toyota-fj40",
@@ -10117,7 +11243,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "toyota-1985-toyota-sprinter-trueno-gt-apex",
@@ -10135,7 +11263,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "toyota-1985-toyota-sprinter-trueno-gt-apex-forza-edition",
@@ -10153,7 +11283,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "toyota-1989-toyota-mr2-sc",
@@ -10170,7 +11302,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "toyota-1991-toyota-chaser-gt-twin-turbo",
@@ -10188,7 +11322,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "toyota-1991-toyota-sera",
@@ -10206,7 +11342,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "toyota-1992-toyota-celica-gt-four-rc-st185",
@@ -10223,7 +11361,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "toyota-1992-toyota-supra-2-0-gt",
@@ -10241,7 +11381,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "toyota-1993-toyota-1-t100-baja-truck",
@@ -10259,7 +11401,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "无限制越野车"
     },
     {
       "id": "toyota-1994-toyota-celica-gt-four-st205",
@@ -10277,7 +11421,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "toyota-1995-toyota-j-and-j-motorsport-supra-wtac",
@@ -10296,7 +11442,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "toyota-1995-toyota-mr2-gt",
@@ -10314,7 +11462,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "toyota-1996-toyota-starlet-glanza-v",
@@ -10331,7 +11481,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "toyota-1997-toyota-chaser-2-5-tourer-v",
@@ -10349,7 +11501,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "toyota-1997-toyota-soarer-2-5-gt-t",
@@ -10368,7 +11522,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "toyota-1998-toyota-supra-rz",
@@ -10387,7 +11543,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "toyota-1999-toyota-altezza-rs200-z-edition",
@@ -10404,7 +11562,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "toyota-2003-toyota-celica-sport-specialty-ii",
@@ -10422,7 +11582,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "toyota-2005-toyota-crown-super-deluxe-taxi",
@@ -10440,7 +11602,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "复古超级轿车"
     },
     {
       "id": "toyota-2013-toyota-86",
@@ -10458,7 +11622,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "toyota-2013-toyota-86-stories",
@@ -10476,7 +11642,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "toyota-2016-toyota-land-cruiser-arctic-trucks-at37",
@@ -10493,7 +11661,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "toyota-2017-toyota-jpn-taxi",
@@ -10511,7 +11681,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "toyota-2019-toyota-4runner-trd-pro",
@@ -10529,7 +11701,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "toyota-2019-toyota-tacoma-trd-pro",
@@ -10547,7 +11721,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "皮卡和四轮驱动车"
     },
     {
       "id": "toyota-2019-toyota-tacoma-trd-pro-forza-edition",
@@ -10566,7 +11742,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "toyota-2020-toyota-gr-supra",
@@ -10585,7 +11763,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "toyota-2021-toyota-gr-yaris",
@@ -10603,7 +11783,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "现代拉力赛车"
     },
     {
       "id": "toyota-2022-toyota-gr86",
@@ -10621,7 +11803,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "toyota-2023-toyota-camry-trd",
@@ -10638,7 +11822,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "现代超级轿车"
     },
     {
       "id": "toyota-2023-toyota-gr-corolla",
@@ -10657,7 +11843,9 @@
       ],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "toyota-2025-toyota-land-cruiser",
@@ -10675,7 +11863,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "丰田",
+      "carTypeCn": "运动型多功能英雄车"
     },
     {
       "id": "tvr-1998-tvr-cerbera-speed-12",
@@ -10692,7 +11882,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "TVR",
+      "carTypeCn": "复古超级跑车"
     },
     {
       "id": "tvr-2005-tvr-sagaris",
@@ -10710,7 +11902,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "TVR",
+      "carTypeCn": "复古跑车"
     },
     {
       "id": "tvr-2018-tvr-griffith",
@@ -10727,7 +11921,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "TVR",
+      "carTypeCn": "现代跑车"
     },
     {
       "id": "ultima-2015-ultima-evolution-coupe-1020",
@@ -10745,7 +11941,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Ultima",
+      "carTypeCn": "极限赛道玩具"
     },
     {
       "id": "volkswagen-1963-volkswagen-beetle",
@@ -10763,7 +11961,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "volkswagen-1963-volkswagen-type-2-de-luxe",
@@ -10781,7 +11981,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "世界经典车"
     },
     {
       "id": "volkswagen-1969-volkswagen-class-5-1600-baja-bug",
@@ -10799,7 +12001,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "沙滩车"
     },
     {
       "id": "volkswagen-1982-volkswagen-pickup-lx",
@@ -10817,7 +12021,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "多功能英雄车"
     },
     {
       "id": "volkswagen-1983-volkswagen-golf-gti",
@@ -10835,7 +12041,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "volkswagen-1989-volkswagen-rallye-golf",
@@ -10852,7 +12060,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "复古拉力赛车"
     },
     {
       "id": "volkswagen-1992-volkswagen-golf-gti-16v-mk2",
@@ -10870,7 +12080,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "volkswagen-1995-volkswagen-corrado-vr6",
@@ -10888,7 +12100,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "复古高性能掀背车"
     },
     {
       "id": "volkswagen-2010-volkswagen-golf-r",
@@ -10906,7 +12120,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "volkswagen-2011-volkswagen-scirocco-r",
@@ -10924,7 +12140,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "volkswagen-2014-volkswagen-golf-r",
@@ -10942,7 +12160,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "volkswagen-2017-volkswagen-34-andretti-rally-cross-beetle",
@@ -10960,7 +12180,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "拉力赛怪物"
     },
     {
       "id": "volkswagen-2021-volkswagen-golf-r",
@@ -10978,7 +12200,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "volkswagen-2022-volkswagen-golf-r",
@@ -10996,7 +12220,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "大众",
+      "carTypeCn": "超高性能掀背车"
     },
     {
       "id": "volvo-1983-volvo-242-turbo-evolution",
@@ -11014,7 +12240,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "沃尔沃",
+      "carTypeCn": "经典拉力赛车"
     },
     {
       "id": "wuling-2013-wuling-sunshine-s",
@@ -11032,7 +12260,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "五菱",
+      "carTypeCn": "多功能英雄车"
     },
     {
       "id": "wuling-2013-wuling-sunshine-s-forza-edition",
@@ -11050,7 +12280,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "五菱",
+      "carTypeCn": "赛道玩具"
     },
     {
       "id": "wuling-2022-wuling-hongguang-mini-ev",
@@ -11068,7 +12300,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "五菱",
+      "carTypeCn": "高性能掀背车"
     },
     {
       "id": "zenvo-2019-zenvo-tsr-s",
@@ -11086,7 +12320,9 @@
       "addOns": [],
       "sourceIds": [
         "forza_official_fh6_car_list"
-      ]
+      ],
+      "makeCn": "Zenvo",
+      "carTypeCn": "顶级超跑"
     }
   ]
 }

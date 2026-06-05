@@ -20,13 +20,16 @@ import {
   createDiagnosticSession,
   createEmptyBuild,
   findGoalRules,
+  getCarTypeHints,
+  getBaselineTuneHints,
   getMissingCapabilitiesForStep,
   getRelevantDependencies,
   getSymptom,
+  safeUUID,
   startSymptomSession,
   summarizeGoalPlan,
 } from "./lib/ruleEngine";
-import { labelOf, rules, starterSamples } from "./lib/ruleData";
+import { labelOf, rules, carCatalog, categoryLabels, categoryOrder } from "./lib/ruleData";
 import {
   exportWorkspace,
   loadBuildCards,
@@ -37,6 +40,7 @@ import {
 } from "./lib/storage";
 import type {
   BuildCardData,
+  CarCatalogEntry,
   DiagnosticSessionState,
   FeedbackType,
   GoalRule,
@@ -56,31 +60,36 @@ const views: { key: ViewKey; label: string; icon: typeof Home }[] = [
 ];
 
 const eventOptions = [
-  { value: "road", label: "公路" },
-  { value: "street", label: "街头" },
-  { value: "touge", label: "山路 Touge" },
+  { value: "road_racing", label: "公路竞速赛" },
+  { value: "dirt_racing", label: "泥地竞速赛" },
+  { value: "cross_country", label: "越野竞速赛" },
+  { value: "touge", label: "峠道竞速赛" },
+  { value: "street_racing", label: "街头竞速赛" },
+  { value: "drag_racing", label: "直线加速赛" },
+  { value: "time_attack", label: "计时赛" },
+  { value: "speed_traps", label: "测速照相" },
+  { value: "speed_zones", label: "测速区间" },
+  { value: "danger_signs", label: "危险标志" },
+  { value: "drift_zones", label: "漂移区域" },
+  { value: "trailblazers", label: "拓荒者" },
 ];
 
-const classOptions = ["A", "S1"];
+const classOptions = ["D", "C", "B", "A", "S1", "S2", "R"];
 const drivetrainOptions = ["RWD", "AWD"];
 const preferenceOptions = [
-  { value: "stable", label: "稳定优先" },
+  { value: "speed", label: "速度优先" },
   { value: "balanced", label: "均衡" },
-  { value: "rotation", label: "更愿意转向" },
+  { value: "handling", label: "操控优先" },
 ];
 
 export default function App() {
   const [view, setView] = useState<ViewKey>("home");
+  const [showCarPicker, setShowCarPicker] = useState(false);
+  const [carPickerTarget, setCarPickerTarget] = useState<"new" | string>("new");
   const [builds, setBuilds] = useState<BuildCardData[]>(() => {
     const stored = loadBuildCards();
     if (stored.length > 0) return stored;
-    const now = new Date().toISOString();
-    return starterSamples.sampleBuilds.map((build) => ({
-      ...build,
-      id: crypto.randomUUID(),
-      createdAt: now,
-      updatedAt: now,
-    })) as BuildCardData[];
+    return [];
   });
   const [activeBuildId, setActiveBuildId] = useState<string | undefined>(builds[0]?.id);
   const [session, setSession] = useState<DiagnosticSessionState | null>(() => loadDiagnosticSession());
@@ -105,6 +114,44 @@ export default function App() {
     setBuilds((items) => [next, ...items]);
     setActiveBuildId(next.id);
     setView("build");
+  }
+
+  function addBuildFromCar(car: CarCatalogEntry) {
+    const now = new Date().toISOString();
+    const targetClass = inferTargetClass(car.initialClass, car.initialPI);
+    const next: BuildCardData = {
+      id: safeUUID(),
+      carName: car.makeCn ? `${car.makeCn} ${car.carName}` : car.carName,
+      carType: car.carType,
+      currentPI: car.rawClass,
+      targetClass,
+      eventType: "road_racing",
+      drivetrain: "RWD",
+      drivingPreference: "balanced",
+      installedParts: [],
+      observations: {},
+      notes: `原厂等级：${car.rawClass} · 类型：${car.carTypeCn ?? car.carType} · 国家：${car.country}`,
+      createdAt: now,
+      updatedAt: now,
+    };
+    if (carPickerTarget === "new") {
+      setBuilds((items) => [next, ...items]);
+      setActiveBuildId(next.id);
+      setView("build");
+    } else {
+      updateBuild(carPickerTarget, {
+        carName: next.carName,
+        currentPI: next.currentPI,
+        targetClass: next.targetClass,
+        notes: next.notes,
+      });
+    }
+    setShowCarPicker(false);
+  }
+
+  function openCarPicker(target: "new" | string) {
+    setCarPickerTarget(target);
+    setShowCarPicker(true);
   }
 
   function deleteBuild(id: string) {
@@ -180,9 +227,8 @@ export default function App() {
         <section className="min-w-0">
           {view === "home" && (
             <HomePanel
-              onBuild={() => {
-                addBuild();
-              }}
+              onBuildFromCatalog={() => openCarPicker("new")}
+              onBuildBlank={addBuild}
               onDiagnose={() => {
                 setView("diagnostic");
                 setSession((current) => current ?? createDiagnosticSession());
@@ -196,6 +242,8 @@ export default function App() {
               activeBuildId={activeBuild?.id}
               onSelect={setActiveBuildId}
               onAdd={addBuild}
+              onAddFromCatalog={() => openCarPicker("new")}
+              onFillFromCatalog={(buildId) => openCarPicker(buildId)}
               onDelete={deleteBuild}
               onUpdate={updateBuild}
             />
@@ -212,6 +260,14 @@ export default function App() {
           {view === "parts" && <PartsEncyclopedia />}
         </section>
       </div>
+
+      {showCarPicker && (
+        <CarPickerModal
+          onSelect={addBuildFromCar}
+          onClose={() => setShowCarPicker(false)}
+          onBlank={carPickerTarget === "new" ? addBuild : undefined}
+        />
+      )}
     </main>
   );
 }
@@ -289,11 +345,13 @@ function JsonTools({
 }
 
 function HomePanel({
-  onBuild,
+  onBuildFromCatalog,
+  onBuildBlank,
   onDiagnose,
   onParts,
 }: {
-  onBuild: () => void;
+  onBuildFromCatalog: () => void;
+  onBuildBlank: () => void;
   onDiagnose: () => void;
   onParts: () => void;
 }) {
@@ -307,7 +365,7 @@ function HomePanel({
               面向 FH6 新手和轻中度玩家的规则驱动调车教练。它不假装拥有完整数据库，只帮你把当前手感问题拆成可测试的下一步。
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <button className="primary-button" onClick={onBuild}>
+              <button className="primary-button" onClick={onBuildFromCatalog}>
                 <Car size={18} />
                 我要改一台车
               </button>
@@ -345,6 +403,8 @@ function BuildCardPanel({
   activeBuildId,
   onSelect,
   onAdd,
+  onAddFromCatalog,
+  onFillFromCatalog,
   onDelete,
   onUpdate,
 }: {
@@ -352,6 +412,8 @@ function BuildCardPanel({
   activeBuildId?: string;
   onSelect: (id: string) => void;
   onAdd: () => void;
+  onAddFromCatalog: () => void;
+  onFillFromCatalog: (buildId: string) => void;
   onDelete: (id: string) => void;
   onUpdate: (id: string, patch: Partial<BuildCardData>) => void;
 }) {
@@ -362,9 +424,11 @@ function BuildCardPanel({
       <div className="panel p-4">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="font-bold">车辆卡片</h2>
-          <button className="icon-button" title="新增" onClick={onAdd}>
-            <Car size={17} />
-          </button>
+          <div className="flex gap-1">
+            <button className="icon-button" title="从车型库选择" onClick={onAddFromCatalog}>
+              <Car size={17} />
+            </button>
+          </div>
         </div>
         <div className="space-y-2">
           {builds.map((build) => (
@@ -388,10 +452,16 @@ function BuildCardPanel({
         <div className="panel p-5">
           <div className="mb-5 flex items-center justify-between gap-3">
             <h2 className="text-xl font-bold">当前改装卡片</h2>
-            <button className="secondary-button text-signal" onClick={() => onDelete(active.id)}>
-              <Trash2 size={16} />
-              删除
-            </button>
+            <div className="flex gap-2">
+              <button className="secondary-button" onClick={() => onFillFromCatalog(active.id)}>
+                <Car size={16} />
+                从车型库填充
+              </button>
+              <button className="secondary-button text-signal" onClick={() => onDelete(active.id)}>
+                <Trash2 size={16} />
+                删除
+              </button>
+            </div>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
@@ -403,7 +473,7 @@ function BuildCardPanel({
             </Field>
             <Field label="目标等级">
               <select className="field" value={active.targetClass} onChange={(e) => onUpdate(active.id, { targetClass: e.target.value })}>
-                {classOptions.map((option) => <option key={option}>{option}</option>)}
+                {classOptions.map((option) => <option key={option} value={option}>{labelOf(option)}</option>)}
               </select>
             </Field>
             <Field label="赛事类型">
@@ -424,24 +494,49 @@ function BuildCardPanel({
           </div>
 
           <div className="mt-5">
-            <p className="mb-2 text-sm font-semibold">已安装关键部件</p>
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {rules.partRules.map((part) => (
-                <label key={part.id} className="flex items-center gap-2 rounded-md border border-line bg-paper px-3 py-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={active.installedParts.includes(part.id)}
-                    onChange={(e) => {
-                      const installedParts = e.target.checked
-                        ? [...active.installedParts, part.id]
-                        : active.installedParts.filter((id) => id !== part.id);
-                      onUpdate(active.id, { installedParts });
-                    }}
-                  />
-                  {part.name}
-                </label>
-              ))}
-            </div>
+            <p className="mb-2 text-sm font-semibold">已安装升级部件</p>
+            {categoryOrder.map((cat) => {
+              const parts = rules.partRules.filter((p) => p.category === cat);
+              if (parts.length === 0) return null;
+              return (
+                <PartCategoryGroup
+                  key={cat}
+                  category={cat}
+                  parts={parts}
+                  installedParts={active.installedParts}
+                  onChange={(installedParts) => onUpdate(active.id, { installedParts })}
+                />
+              );
+            })}
+          </div>
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <Field label="车重（kg）" hint="从游戏调校界面读取">
+              <input
+                type="number"
+                className="field"
+                placeholder="如 1450"
+                value={active.weightKg ?? ""}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  onUpdate(active.id, { weightKg: v === "" ? undefined : Number(v) });
+                }}
+              />
+            </Field>
+            <Field label="前轴重量分配（%）" hint="如 55 表示 55/45">
+              <input
+                type="number"
+                className="field"
+                placeholder="如 55"
+                min={40}
+                max={70}
+                value={active.weightDistribution ?? ""}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  onUpdate(active.id, { weightDistribution: v === "" ? undefined : Number(v) });
+                }}
+              />
+            </Field>
           </div>
 
           <Field label="自定义备注" className="mt-5">
@@ -466,11 +561,11 @@ function GoalWizard({
   build?: BuildCardData;
   onApplyBuild: (id: string, patch: Partial<BuildCardData>) => void;
 }) {
-  const [eventType, setEventType] = useState(build?.eventType ?? "road");
+  const [eventType, setEventType] = useState(build?.eventType ?? "road_racing");
   const [targetClass, setTargetClass] = useState(build?.targetClass ?? "A");
   const [drivetrain, setDrivetrain] = useState(build?.drivetrain ?? "RWD");
-  const [drivingPreference, setDrivingPreference] = useState(build?.drivingPreference ?? "stable");
-  const matches = useMemo(() => findGoalRules({ eventType, targetClass, drivetrain }), [eventType, targetClass, drivetrain]);
+  const [drivingPreference, setDrivingPreference] = useState(build?.drivingPreference ?? "balanced");
+  const matches = useMemo(() => findGoalRules({ eventType, targetClass, drivetrain, carType: build?.carType, weightKg: build?.weightKg, drivingPreference }), [eventType, targetClass, drivetrain, build?.carType, build?.weightKg, drivingPreference]);
   const primary = matches[0];
   const summary = summarizeGoalPlan(primary, build);
 
@@ -497,7 +592,7 @@ function GoalWizard({
           </Field>
           <Field label="目标等级">
             <select className="field" value={targetClass} onChange={(e) => setTargetClass(e.target.value)}>
-              {classOptions.map((option) => <option key={option}>{option}</option>)}
+              {classOptions.map((option) => <option key={option} value={option}>{labelOf(option)}</option>)}
             </select>
           </Field>
           <Field label="驱动形式">
@@ -580,20 +675,38 @@ function GoalRulePanel({
       <section className="panel p-5">
         <h3 className="mb-4 text-lg font-bold">基础改装路线</h3>
         <div className="space-y-4">
-          {summary.upgradeStatuses.map(({ step, installedParts, missingParts, missingQuestions, status }) => (
-            <article key={step.id} className="rounded-lg border border-line bg-paper p-4">
+          {summary.upgradeStatuses.map(({ step, installedParts, missingParts, missingQuestions, status }) => {
+            const isMisc = step.phase.includes("其他升级建议");
+            return (
+            <article key={step.id} className={`rounded-lg border p-4 ${isMisc ? "border-dashed border-slate-300 bg-slate-50/50" : "border-line bg-paper"}`}>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <p className="font-bold">{step.phase}</p>
+                  <p className="font-bold">{isMisc && "📎 "}{step.phase}</p>
                   <p className="mt-1 text-sm leading-6 text-asphalt/70">{step.reason}</p>
                 </div>
-                <span className="tag">{status === "complete" ? "已具备" : status === "partial" ? "部分具备" : "待确认"}</span>
+                <span className="tag">{status === "complete" ? "已具备" : status === "partial" ? "部分具备" : isMisc ? "按需选择" : "待确认"}</span>
               </div>
-              <div className="mt-3 grid gap-3 lg:grid-cols-3">
-                <ListBlock title="候选部件" items={step.candidateParts} />
-                <ListBlock title="预期收益" items={step.expectedBenefits} mapItem={labelOf} />
-                <ListBlock title="需要权衡" items={step.expectedCosts ?? []} mapItem={labelOf} />
-              </div>
+              {isMisc && step.partDetails?.length ? (
+                <div className="mt-3 space-y-2">
+                  {step.partDetails.map((pd) => {
+                    const isInstalled = installedParts.includes(pd.partId);
+                    return (
+                      <div key={pd.partId} className={`flex items-start gap-2 rounded-md border px-3 py-2 text-sm ${isInstalled ? "border-signal/30 bg-signal/5" : "border-line bg-white"}`}>
+                        <span className="shrink-0 font-semibold text-asphalt/80">{labelOf(pd.partId)}</span>
+                        <span className="text-asphalt/60">—</span>
+                        <span className="text-asphalt/70">{pd.benefit}</span>
+                        {pd.cost && <span className="ml-auto shrink-0 text-amber-600/80 text-xs">⚠ {pd.cost}</span>}
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="mt-3 grid gap-3 lg:grid-cols-3">
+                  <ListBlock title="候选部件" items={step.candidateParts} />
+                  <ListBlock title="预期收益" items={step.expectedBenefits} mapItem={labelOf} />
+                  <ListBlock title="需要权衡" items={step.expectedCosts ?? []} mapItem={labelOf} />
+                </div>
+              )}
               <div className="mt-3 flex flex-wrap gap-2">
                 {installedParts.map((part) => <span className="tag" key={part}>已装：{labelOf(part)}</span>)}
                 {missingParts.map((part) => (
@@ -612,6 +725,13 @@ function GoalRulePanel({
                 ))}
                 {(step.grantsCapabilities ?? []).map((capability) => <span className="tag" key={capability}>获得：{capabilityLabel(capability)}</span>)}
               </div>
+              {getCarTypeHints(build?.carType, step.candidateParts, build?.weightKg, build?.weightDistribution, build?.drivetrain).map((hint, i) => (
+                <p key={i} className={`mt-2 rounded-md border px-3 py-2 text-sm ${
+                  hint.level === "warning" ? "border-red-300 bg-red-50 text-red-800" :
+                  hint.level === "important" ? "border-amber-300 bg-amber-50 text-amber-800" :
+                  "border-slate-200 bg-slate-50 text-slate-700"
+                }`}>{hint.level === "warning" ? "⚠️" : hint.level === "important" ? "💡" : "ℹ️"} {hint.text}</p>
+              ))}
               {build && missingQuestions.length > 0 && (
                 <ObservationQuestions
                   build={build}
@@ -631,30 +751,94 @@ function GoalRulePanel({
                 </div>
               )}
             </article>
-          ))}
+            );
+          })}
         </div>
       </section>
 
       <section className="panel p-5">
         <h3 className="mb-4 text-lg font-bold">基础调校路线</h3>
+        {build && (
+          <div className="mb-4 grid gap-4 sm:grid-cols-2">
+            <Field label="车重（kg）" hint="改装后请更新">
+              <input type="number" className="field" placeholder="如 1450"
+                value={build.weightKg ?? ""}
+                onChange={(e) => { const v = e.target.value; onApplyBuild(build.id, { weightKg: v === "" ? undefined : Number(v) }); }}
+              />
+            </Field>
+            <Field label="前轴重量分配（%）" hint="如 55 表示 55/45">
+              <input type="number" className="field" placeholder="如 55" min={40} max={70}
+                value={build.weightDistribution ?? ""}
+                onChange={(e) => { const v = e.target.value; onApplyBuild(build.id, { weightDistribution: v === "" ? undefined : Number(v) }); }}
+              />
+            </Field>
+          </div>
+        )}
         <div className="grid gap-4 lg:grid-cols-2">
-          {summary.tuneStatuses.map(({ step, missingCapabilities }) => (
+          {summary.tuneStatuses.filter(({ missingCapabilities }) => missingCapabilities.length === 0).map(({ step }) => (
             <article key={step.id} className="rounded-lg border border-line bg-paper p-4">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <h4 className="font-bold">{step.title}</h4>
-                <span className="tag">{missingCapabilities.length === 0 ? "可执行" : "先补能力"}</span>
+                <span className="tag">可执行</span>
               </div>
               <p className="mt-2 text-sm leading-6 text-asphalt/70">{step.purpose}</p>
               <InfoBlock title="基线动作" text={step.baselineAction} />
               {step.safeRange && <InfoBlock title="安全幅度" text={step.safeRange} />}
-              {missingCapabilities.length > 0 && (
-                <ListBlock title="缺少调校能力" items={missingCapabilities} mapItem={capabilityLabel} />
+              {(step.tuningArea === "springs" || step.tuningArea === "spring_rate") && build && (
+                <div className="mt-3">
+                  <p className="mb-2 text-sm font-semibold">弹簧刚度范围（kgf/mm）<span className="font-normal text-asphalt/60">— 从游戏调校界面读取滑块两端数值</span></p>
+                  <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
+                    <Field label="前最小">
+                      <input type="number" className="field" placeholder="如 5.0" step="0.1"
+                        value={build.frontSpringMinKgf ?? ""}
+                        onChange={(e) => { const v = e.target.value; onApplyBuild(build.id, { frontSpringMinKgf: v === "" ? undefined : Number(v) }); }}
+                      />
+                    </Field>
+                    <Field label="前最大">
+                      <input type="number" className="field" placeholder="如 40.0" step="0.1"
+                        value={build.frontSpringMaxKgf ?? ""}
+                        onChange={(e) => { const v = e.target.value; onApplyBuild(build.id, { frontSpringMaxKgf: v === "" ? undefined : Number(v) }); }}
+                      />
+                    </Field>
+                    <Field label="后最小">
+                      <input type="number" className="field" placeholder="如 5.0" step="0.1"
+                        value={build.rearSpringMinKgf ?? ""}
+                        onChange={(e) => { const v = e.target.value; onApplyBuild(build.id, { rearSpringMinKgf: v === "" ? undefined : Number(v) }); }}
+                      />
+                    </Field>
+                    <Field label="后最大">
+                      <input type="number" className="field" placeholder="如 40.0" step="0.1"
+                        value={build.rearSpringMaxKgf ?? ""}
+                        onChange={(e) => { const v = e.target.value; onApplyBuild(build.id, { rearSpringMaxKgf: v === "" ? undefined : Number(v) }); }}
+                      />
+                    </Field>
+                  </div>
+                </div>
               )}
+              {getBaselineTuneHints(step.tuningArea, build?.weightKg, build?.weightDistribution, build?.drivetrain, build?.frontSpringMinKgf, build?.frontSpringMaxKgf, build?.rearSpringMinKgf, build?.rearSpringMaxKgf, build?.eventType, build?.targetClass).map((hint, i) => (
+                <p key={i} className={`mt-2 rounded-md border px-3 py-2 text-sm ${
+                  hint.level === "warning" ? "border-red-300 bg-red-50 text-red-800" :
+                  hint.level === "important" ? "border-amber-300 bg-amber-50 text-amber-800" :
+                  "border-slate-200 bg-slate-50 text-slate-700"
+                }`}>{hint.level === "warning" ? "⚠️" : hint.level === "important" ? "💡" : "ℹ️"} {hint.text}</p>
+              ))}
               <ListBlock title="先别急着做" items={step.doNotOptimizeYet ?? []} />
               <ListBlock title="这些问题后续再细调" items={step.handoffSymptoms ?? []} mapItem={(item) => getSymptom(item)?.name ?? item} />
             </article>
           ))}
         </div>
+        {summary.tuneStatuses.some(({ missingCapabilities }) => missingCapabilities.length > 0) && (
+          <div className="mt-4 rounded-md border border-slate-200 bg-slate-50 px-4 py-3">
+            <p className="text-sm font-semibold text-slate-700">🔒 尚未解锁的调校项目</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {summary.tuneStatuses.filter(({ missingCapabilities }) => missingCapabilities.length > 0).map(({ step, missingCapabilities }) => (
+                <span key={step.id} className="tag" title={`需要安装：${missingCapabilities.map(capabilityLabel).join("、")}`}>
+                  {step.title}（需{missingCapabilities.map(capabilityLabel).join("、")}）
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="panel p-5">
@@ -887,18 +1071,29 @@ function PartsEncyclopedia() {
     <div className="grid gap-5 xl:grid-cols-[280px_1fr]">
       <div className="panel p-4">
         <h2 className="mb-3 font-bold">部件百科</h2>
-        <div className="space-y-2">
-          {rules.partRules.map((part) => (
-            <button
-              key={part.id}
-              className={`w-full rounded-md border px-3 py-2 text-left text-sm transition ${
-                selected.id === part.id ? "border-asphalt bg-asphalt text-white" : "border-line bg-white hover:bg-paper"
-              }`}
-              onClick={() => setSelectedId(part.id)}
-            >
-              {part.name}
-            </button>
-          ))}
+        <div className="space-y-3">
+          {categoryOrder.map((cat) => {
+            const parts = rules.partRules.filter((p) => p.category === cat);
+            if (parts.length === 0) return null;
+            return (
+              <div key={cat}>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-asphalt/50">{categoryLabels[cat]}</p>
+                <div className="space-y-1">
+                  {parts.map((part) => (
+                    <button
+                      key={part.id}
+                      className={`w-full rounded-md border px-3 py-1.5 text-left text-sm transition ${
+                        selected.id === part.id ? "border-asphalt bg-asphalt text-white" : "border-line bg-white hover:bg-paper"
+                      }`}
+                      onClick={() => setSelectedId(part.id)}
+                    >
+                      {part.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -918,10 +1113,22 @@ function PartDetail({
     <div className="panel p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
+          <div className="mb-1 flex items-center gap-2">
+            <span className="rounded bg-slate-100 px-2 py-0.5 text-xs text-asphalt/60">{categoryLabels[part.category] ?? part.category}</span>
+            {part.exclusiveGroup && <span className="rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-700">互斥选项</span>}
+          </div>
           <h2 className="text-2xl font-bold">{part.name}</h2>
           <p className="mt-2 text-sm leading-6 text-asphalt/72">{part.summary}</p>
         </div>
       </div>
+      {part.grantsCapabilities?.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-2">
+          <span className="text-sm font-semibold text-asphalt/60">解锁调校：</span>
+          {part.grantsCapabilities.map((cap) => (
+            <span key={cap} className="tag">{labelOf(cap)}</span>
+          ))}
+        </div>
+      )}
       <div className="mt-5 grid gap-4 lg:grid-cols-2">
         <ListBlock title="影响什么" items={part.effects} />
         <ListBlock title="什么时候适合升级" items={part.goodFor ?? []} mapItem={(item) => symptomNamesByToken.get(item) ?? labelOf(item)} />
@@ -934,12 +1141,101 @@ function PartDetail({
   );
 }
 
+function PartCategoryGroup({
+  category,
+  parts,
+  installedParts,
+  onChange,
+}: {
+  category: string;
+  parts: PartRule[];
+  installedParts: string[];
+  onChange: (installedParts: string[]) => void;
+}) {
+  const [open, setOpen] = useState(true);
+  const installedCount = parts.filter((p) => installedParts.includes(p.id)).length;
+
+  function togglePart(part: PartRule, checked: boolean) {
+    let next = checked
+      ? [...installedParts, part.id]
+      : installedParts.filter((id) => id !== part.id);
+    // Handle exclusive groups: if this part belongs to an exclusive group,
+    // uncheck other parts in the same group when checking this one
+    if (checked && part.exclusiveGroup) {
+      const siblings = parts.filter(
+        (p) => p.exclusiveGroup === part.exclusiveGroup && p.id !== part.id,
+      );
+      next = next.filter((id) => !siblings.some((s) => s.id === id));
+    }
+    onChange(next);
+  }
+
+  return (
+    <div className="mb-3">
+      <button
+        className="flex w-full items-center gap-2 rounded-t-md border border-b-0 border-line bg-slate-50 px-3 py-2 text-left text-sm font-semibold hover:bg-slate-100"
+        onClick={() => setOpen(!open)}
+      >
+        <span className={`transition-transform ${open ? "rotate-90" : ""}`}>▶</span>
+        {categoryLabels[category] ?? category}
+        {installedCount > 0 && (
+          <span className="ml-auto rounded-full bg-signal/20 px-2 py-0.5 text-xs font-medium text-signal">
+            {installedCount}/{parts.length}
+          </span>
+        )}
+      </button>
+      {open && (
+        <div className="grid gap-1.5 rounded-b-md border border-line bg-paper p-2 sm:grid-cols-2 lg:grid-cols-3">
+          {parts.map((part) => {
+            const checked = installedParts.includes(part.id);
+            const exclusiveConflict =
+              !checked &&
+              part.exclusiveGroup &&
+              parts.some(
+                (p) =>
+                  p.exclusiveGroup === part.exclusiveGroup &&
+                  p.id !== part.id &&
+                  installedParts.includes(p.id),
+              );
+            return (
+              <label
+                key={part.id}
+                className={`flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition ${
+                  checked
+                    ? "border-signal/40 bg-signal/5"
+                    : exclusiveConflict
+                      ? "border-line bg-paper opacity-50"
+                      : "border-line bg-paper hover:border-asphalt/30"
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={(e) => togglePart(part, e.target.checked)}
+                />
+                <span>{part.name}</span>
+                {part.grantsCapabilities?.length > 0 && (
+                  <span className="ml-auto text-[10px] text-asphalt/40" title="解锁调校">
+                    🔧
+                  </span>
+                )}
+              </label>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Field({
   label,
+  hint,
   children,
   className = "",
 }: {
   label: string;
+  hint?: string;
   children: React.ReactNode;
   className?: string;
 }) {
@@ -947,6 +1243,7 @@ function Field({
     <label className={`block ${className}`}>
       <span className="mb-1 block text-sm font-semibold">{label}</span>
       {children}
+      {hint && <span className="mt-1 block text-xs text-asphalt/50">{hint}</span>}
     </label>
   );
 }
@@ -1052,9 +1349,9 @@ function InfoBlock({ title, text }: { title: string; text: string }) {
 function NoRuleMessage() {
   return (
     <div className="panel p-5">
-      <h3 className="font-bold">暂时没有匹配规则</h3>
+      <h3 className="font-bold">暂时没有精确匹配的规则</h3>
       <p className="mt-2 text-sm leading-6 text-asphalt/70">
-        当前 MVP 只覆盖公路 / 街头 / 山路、A / S1、RWD / AWD、抓地稳定向构建。可以继续扩展 goalRules.json 来支持更多场景。
+        当前规则覆盖公路/街头/峠道、A/S1、RWD/AWD、抓地稳定向。其他赛事类型会回退到最接近的公路规则作为参考。后续可扩展 goalRules.json 来支持更多场景。
       </p>
     </div>
   );
@@ -1080,4 +1377,110 @@ function capabilityLabel(capability: string) {
     adjustable_gearing: "可调齿比",
   };
   return labels[capability] ?? capability;
+}
+
+function inferTargetClass(initialClass: string, initialPI: number): string {
+  if (initialClass === "R") return "R";
+  if (initialClass === "S2") return "S2";
+  if (initialClass === "S1" || initialPI >= 800) return "S1";
+  if (initialPI >= 500) return "A";
+  if (initialPI >= 400) return "B";
+  if (initialPI >= 300) return "C";
+  return "D";
+}
+
+function CarPickerModal({
+  onSelect,
+  onClose,
+  onBlank,
+}: {
+  onSelect: (car: CarCatalogEntry) => void;
+  onClose: () => void;
+  onBlank?: () => void;
+}) {
+  const [search, setSearch] = useState("");
+  const [classFilter, setClassFilter] = useState<string>("all");
+  const [makeFilter, setMakeFilter] = useState<string>("all");
+
+  const makes = useMemo(() => {
+    const map = new Map<string, string>();
+    carCatalog.forEach((c) => {
+      if (!map.has(c.make)) map.set(c.make, c.makeCn ?? c.make);
+    });
+    return Array.from(map.entries()).sort((a, b) => a[1].localeCompare(b[1], 'zh'));
+  }, []);
+
+  const filtered = useMemo(() => {
+    const q = search.toLowerCase().trim();
+    return carCatalog.filter((car) => {
+      if (classFilter !== "all" && car.initialClass !== classFilter) return false;
+      if (makeFilter !== "all" && car.make !== makeFilter) return false;
+      if (q && !car.carName.toLowerCase().includes(q) && !car.make.toLowerCase().includes(q) && !(car.makeCn ?? '').includes(q)) return false;
+      return true;
+    });
+  }, [search, classFilter, makeFilter]);
+
+  const classOptions = ["all", "D", "C", "B", "A", "S1", "S2", "R"];
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-asphalt/50 p-4 backdrop-blur-sm" onClick={onClose}>
+      <div className="w-full max-w-3xl rounded-lg bg-white shadow-xl" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between border-b border-line p-5">
+          <h2 className="text-xl font-bold">选择原厂车型</h2>
+          <button className="icon-button" onClick={onClose}>✕</button>
+        </div>
+
+        <div className="border-b border-line p-5">
+          <div className="grid gap-3 md:grid-cols-3">
+            <input
+              className="field md:col-span-1"
+              placeholder="搜索车型或品牌..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              autoFocus
+            />
+            <select className="field" value={classFilter} onChange={(e) => setClassFilter(e.target.value)}>
+              {classOptions.map((c) => <option key={c} value={c}>{c === "all" ? "所有等级" : `${c} 级`}</option>)}
+            </select>
+            <select className="field" value={makeFilter} onChange={(e) => setMakeFilter(e.target.value)}>
+              <option value="all">所有品牌</option>
+              {makes.map(([en, cn]) => <option key={en} value={en}>{cn}</option>)}
+            </select>
+          </div>
+          <p className="mt-2 text-xs text-asphalt/60">共 {filtered.length} 台车</p>
+        </div>
+
+        <div className="max-h-[55vh] overflow-y-auto p-3">
+          {filtered.length === 0 ? (
+            <p className="py-8 text-center text-sm text-asphalt/60">没有匹配的车型</p>
+          ) : (
+            <div className="grid gap-2 sm:grid-cols-2">
+              {filtered.map((car) => (
+                <button
+                  key={car.id}
+                  className="rounded-md border border-line bg-paper p-3 text-left transition hover:border-asphalt hover:bg-white"
+                  onClick={() => onSelect(car)}
+                >
+                  <span className="block font-semibold text-sm">{car.makeCn ? `${car.makeCn} ` : ''}{car.carName}</span>
+                  <span className="mt-1 flex flex-wrap gap-1.5">
+                    <span className="tag text-xs">{car.rawClass}</span>
+                    <span className="tag text-xs">{car.carTypeCn ?? car.carType}</span>
+                    <span className="tag text-xs">{car.country}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {onBlank && (
+          <div className="border-t border-line p-4">
+            <button className="secondary-button w-full" onClick={onBlank}>
+              跳过选车，手动创建空白卡片
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
